@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: "Delphi"
-description: "The Delphi nude dystopian aesthetic blends monochromatic earth tones, brutalist minimalism, and industrial decay. It creates a stark, beautiful world of sand, bone, and concrete.Perfectly captures this style through its vast deserts, huge stone buildings, and quiet, lonely mood we will do the same for manthropomorphism within our theme exploting the dark contrast between natural warm flesh and cold clinical, unemotional, binard, stone like, AI technology .
+description: "The Delphi nude dystopian aesthetic blends monochromatic earth tones, brutalist minimalism, and industrial decay. It creates a stark, beautiful world of sand, bone, and concrete.Perfectly captures this style through its vast deserts, huge stone buildings, and quiet, lonely mood we will do the same for anthropomorphism within our theme exploting the dark contrast between natural warm flesh and cold clinical, unemotional, binary, stone like, AI technology .
 colors:
   nav-surface: "#fcf5ed"
   surface-base: "#fdf6ee"

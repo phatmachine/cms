@@ -77,18 +77,15 @@ export interface Config {
     forms: Form;
     'form-submissions': FormSubmission;
     search: Search;
+    'plugin-ai-instructions': PluginAiInstruction;
+    'plugin-ai-ai-jobs': PluginAiAiJob;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
-    'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'media';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -100,9 +97,10 @@ export interface Config {
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
+    'plugin-ai-instructions': PluginAiInstructionsSelect<false> | PluginAiInstructionsSelect<true>;
+    'plugin-ai-ai-jobs': PluginAiAiJobsSelect<false> | PluginAiAiJobsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
-    'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -114,10 +112,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'ai-settings': AiSetting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'ai-settings': AiSettingsSelect<false> | AiSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -314,23 +314,7 @@ export interface Post {
  */
 export interface Media {
   id: string;
-  alt?: string | null;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  folder?: (string | null) | FolderInterface;
+  alt: string;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -342,90 +326,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    square?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    small?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    medium?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    large?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    xlarge?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-folders".
- */
-export interface FolderInterface {
-  id: string;
-  name: string;
-  folder?: (string | null) | FolderInterface;
-  documentsAndFolders?: {
-    docs?: (
-      | {
-          relationTo?: 'payload-folders';
-          value: string | FolderInterface;
-        }
-      | {
-          relationTo?: 'media';
-          value: string | Media;
-        }
-    )[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  folderType?: 'media'[] | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -457,7 +357,6 @@ export interface Category {
  */
 export interface User {
   id: string;
-  name?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1129,6 +1028,139 @@ export interface Search {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plugin-ai-instructions".
+ */
+export interface PluginAiInstruction {
+  id: string;
+  /**
+   * Please don't change this unless you're sure of what you're doing
+   */
+  'schema-path'?: string | null;
+  /**
+   * Please don't change this unless you're sure of what you're doing
+   */
+  'field-type'?: ('text' | 'textarea' | 'upload' | 'richText') | null;
+  'relation-to'?: string | null;
+  'model-id'?: ('text' | 'richtext' | 'image' | 'tts') | null;
+  /**
+   * Please reload your collection after applying the changes
+   */
+  disabled?: boolean | null;
+  /**
+   * Click 'Compose' to run this custom prompt and generate content
+   */
+  prompt?: string | null;
+  images?:
+    | {
+        /**
+         * Please make sure the image is publicly accessible.
+         */
+        image?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  system?: string | null;
+  layout?: string | null;
+  'text-settings'?: {
+    provider?: string | null;
+    model?: string | null;
+    maxTokens?: number | null;
+    temperature?: number | null;
+    extractAttachments?: boolean | null;
+    /**
+     * Provider-specific options. Defaults are inherited from AI Settings.
+     */
+    providerOptions?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  'richtext-settings'?: {
+    provider?: string | null;
+    model?: string | null;
+    maxTokens?: number | null;
+    temperature?: number | null;
+    extractAttachments?: boolean | null;
+    /**
+     * Provider-specific options. Defaults are inherited from AI Settings.
+     */
+    providerOptions?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  'image-settings'?: {
+    provider?: string | null;
+    model?: string | null;
+    /**
+     * Provider-specific options. Defaults are inherited from AI Settings.
+     */
+    providerOptions?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  'tts-settings'?: {
+    provider?: string | null;
+    model?: string | null;
+    voice?: string | null;
+    /**
+     * Provider-specific options. Defaults are inherited from AI Settings.
+     */
+    providerOptions?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plugin-ai-ai-jobs".
+ */
+export interface PluginAiAiJob {
+  id: string;
+  instructionId: string | PluginAiInstruction;
+  task_id: string;
+  status?: ('queued' | 'running' | 'completed' | 'failed' | 'canceled') | null;
+  progress?: number | null;
+  result_id?: string | null;
+  error?: string | null;
+  meta?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -1284,8 +1316,12 @@ export interface PayloadLockedDocument {
         value: string | Search;
       } | null)
     | ({
-        relationTo: 'payload-folders';
-        value: string | FolderInterface;
+        relationTo: 'plugin-ai-instructions';
+        value: string | PluginAiInstruction;
+      } | null)
+    | ({
+        relationTo: 'plugin-ai-ai-jobs';
+        value: string | PluginAiAiJob;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1651,8 +1687,6 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  caption?: T;
-  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1664,80 +1698,6 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        square?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        small?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        medium?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        large?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        xlarge?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        og?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1787,7 +1747,6 @@ export interface SlidesSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1999,6 +1958,78 @@ export interface SearchSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plugin-ai-instructions_select".
+ */
+export interface PluginAiInstructionsSelect<T extends boolean = true> {
+  'schema-path'?: T;
+  'field-type'?: T;
+  'relation-to'?: T;
+  'model-id'?: T;
+  disabled?: T;
+  prompt?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  system?: T;
+  layout?: T;
+  'text-settings'?:
+    | T
+    | {
+        provider?: T;
+        model?: T;
+        maxTokens?: T;
+        temperature?: T;
+        extractAttachments?: T;
+        providerOptions?: T;
+      };
+  'richtext-settings'?:
+    | T
+    | {
+        provider?: T;
+        model?: T;
+        maxTokens?: T;
+        temperature?: T;
+        extractAttachments?: T;
+        providerOptions?: T;
+      };
+  'image-settings'?:
+    | T
+    | {
+        provider?: T;
+        model?: T;
+        providerOptions?: T;
+      };
+  'tts-settings'?:
+    | T
+    | {
+        provider?: T;
+        model?: T;
+        voice?: T;
+        providerOptions?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plugin-ai-ai-jobs_select".
+ */
+export interface PluginAiAiJobsSelect<T extends boolean = true> {
+  instructionId?: T;
+  task_id?: T;
+  status?: T;
+  progress?: T;
+  result_id?: T;
+  error?: T;
+  meta?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -2033,18 +2064,6 @@ export interface PayloadJobsSelect<T extends boolean = true> {
   queue?: T;
   waitUntil?: T;
   processing?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-folders_select".
- */
-export interface PayloadFoldersSelect<T extends boolean = true> {
-  name?: T;
-  folder?: T;
-  documentsAndFolders?: T;
-  folderType?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2155,6 +2174,513 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ai-settings".
+ */
+export interface AiSetting {
+  id: string;
+  /**
+   * Configure which AI providers to use and their settings
+   */
+  providers: (
+    | {
+        enabled?: boolean | null;
+        /**
+         * Optional. If empty, @ai-sdk/openai will use the OPENAI_API_KEY environment variable.
+         */
+        apiKey?: string | null;
+        /**
+         * Optional. Override default API endpoint (defaults to https://api.openai.com/v1).
+         */
+        baseURL?: string | null;
+        /**
+         * Optional. OpenAI organization ID for billing and access control.
+         */
+        organization?: string | null;
+        /**
+         * Optional. OpenAI project ID for organization-level access.
+         */
+        project?: string | null;
+        /**
+         * Optional. Extra headers to send with every request, for example routing through a proxy.
+         */
+        headers?:
+          | {
+              key: string;
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Available voices for Text-to-Speech models. You can add custom voices here.
+         */
+        voices?:
+          | {
+              id: string | null;
+              name: string;
+              enabled?: boolean | null;
+            }[]
+          | null;
+        /**
+         * Default provider options for TTS models. Users can override these per field.
+         */
+        ttsProviderOptions?: {
+          speed?: number | null;
+          response_format?: ('mp3' | 'opus' | 'aac' | 'flac' | 'wav' | 'pcm') | null;
+          instructions?: string | null;
+        };
+        /**
+         * Default provider options for image generation models.
+         */
+        imageProviderOptions?: {
+          quality?: ('standard' | 'hd') | null;
+          style?: ('vivid' | 'natural') | null;
+        };
+        /**
+         * Default provider options for text generation models.
+         */
+        textProviderOptions?: {
+          temperature?: number | null;
+          max_tokens?: number | null;
+          top_p?: number | null;
+          frequency_penalty?: number | null;
+          presence_penalty?: number | null;
+          seed?: number | null;
+          /**
+           * Modify likelihood of tokens (JSON object mapping token IDs to bias).
+           */
+          logitBias?:
+            | {
+                [k: string]: unknown;
+              }
+            | unknown[]
+            | string
+            | number
+            | boolean
+            | null;
+        };
+        /**
+         * Keep this list short. Enable only the models you actually use.
+         */
+        models?:
+          | {
+              id: string | null;
+              name: string;
+              useCase?: ('text' | 'image' | 'tts' | 'embedding') | null;
+              /**
+               * Output capabilities of this model
+               */
+              responseModalities?: ('TEXT' | 'IMAGE' | 'AUDIO')[] | null;
+              enabled?: boolean | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'openai';
+      }
+    | {
+        enabled?: boolean | null;
+        /**
+         * Your Anthropic API key. Will be encrypted in the database.
+         */
+        apiKey: string;
+        /**
+         * Default provider options for text generation models.
+         */
+        textProviderOptions?: {
+          temperature?: number | null;
+          max_tokens?: number | null;
+          top_p?: number | null;
+          top_k?: number | null;
+        };
+        models?:
+          | {
+              id: string | null;
+              name: string;
+              useCase?: 'text' | null;
+              /**
+               * Output capabilities of this model
+               */
+              responseModalities?: ('TEXT' | 'IMAGE' | 'AUDIO')[] | null;
+              enabled?: boolean | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'anthropic';
+      }
+    | {
+        enabled?: boolean | null;
+        /**
+         * Optional. If empty, @ai-sdk/google will use the GOOGLE_GENERATIVE_AI_API_KEY environment variable.
+         */
+        apiKey?: string | null;
+        /**
+         * Optional. Override default API endpoint (defaults to https://generativelanguage.googleapis.com/v1beta).
+         */
+        baseURL?: string | null;
+        /**
+         * Optional. Extra headers to send with every request, for example routing through a proxy.
+         */
+        headers?:
+          | {
+              key: string;
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Available voices for Gemini TTS models.
+         */
+        voices?:
+          | {
+              id: string | null;
+              name: string;
+              enabled?: boolean | null;
+            }[]
+          | null;
+        /**
+         * Default provider options for TTS models.
+         */
+        ttsProviderOptions?: {
+          speed?: number | null;
+          volumeGainDb?: number | null;
+        };
+        /**
+         * Default provider options for image generation models.
+         */
+        imageProviderOptions?: {
+          aspectRatio?: ('1:1' | '16:9' | '9:16' | '4:3' | '3:4') | null;
+          personGeneration?: ('allow_adult' | 'allow_all' | 'dont_allow') | null;
+          addWatermark?: boolean | null;
+        };
+        /**
+         * Default provider options for text generation models.
+         */
+        textProviderOptions?: {
+          temperature?: number | null;
+          maxOutputTokens?: number | null;
+          topP?: number | null;
+          topK?: number | null;
+          /**
+           * Safety filter settings
+           */
+          safetySettings?:
+            | {
+                category:
+                  | 'HARM_CATEGORY_HARASSMENT'
+                  | 'HARM_CATEGORY_HATE_SPEECH'
+                  | 'HARM_CATEGORY_SEXUALLY_EXPLICIT'
+                  | 'HARM_CATEGORY_DANGEROUS_CONTENT';
+                threshold: 'BLOCK_NONE' | 'BLOCK_LOW_AND_ABOVE' | 'BLOCK_MEDIUM_AND_ABOVE' | 'BLOCK_ONLY_HIGH';
+                id?: string | null;
+              }[]
+            | null;
+        };
+        /**
+         * Keep this list short. Enable only the models you actually use.
+         */
+        models?:
+          | {
+              id: string | null;
+              name: string;
+              useCase?: ('text' | 'image' | 'tts' | 'embedding') | null;
+              /**
+               * Output capabilities of this model
+               */
+              responseModalities?: ('TEXT' | 'IMAGE' | 'AUDIO')[] | null;
+              enabled?: boolean | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'google';
+      }
+    | {
+        enabled?: boolean | null;
+        /**
+         * Your xAI API key. Will be encrypted in the database.
+         */
+        apiKey: string;
+        /**
+         * Default provider options for text generation models.
+         */
+        textProviderOptions?: {
+          temperature?: number | null;
+          max_tokens?: number | null;
+          top_p?: number | null;
+          frequency_penalty?: number | null;
+          presence_penalty?: number | null;
+        };
+        models?:
+          | {
+              id: string | null;
+              name: string;
+              useCase: 'text' | 'image';
+              /**
+               * Output capabilities of this model
+               */
+              responseModalities?: ('TEXT' | 'IMAGE' | 'AUDIO')[] | null;
+              enabled?: boolean | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'xai';
+      }
+    | {
+        enabled?: boolean | null;
+        /**
+         * Your ElevenLabs API key. Will be encrypted in the database. Get yours at elevenlabs.io
+         */
+        apiKey: string;
+        /**
+         * Optional. Override default API endpoint (defaults to https://api.elevenlabs.io/v1).
+         */
+        baseURL?: string | null;
+        /**
+         * Optional. Custom headers to send with every request.
+         */
+        headers?:
+          | {
+              key: string;
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Use the "Fetch Voices" button above to populate this list from your ElevenLabs account.
+         */
+        voices?:
+          | {
+              id: string | null;
+              name: string;
+              enabled?: boolean | null;
+              category?: ('premade' | 'cloned' | 'professional' | 'generated') | null;
+              preview_url?: string | null;
+              /**
+               * Voice attributes like gender, age, accent (JSON object). Example: {"gender": "female", "age": "young", "accent": "american"}
+               */
+              labels?:
+                | {
+                    [k: string]: unknown;
+                  }
+                | unknown[]
+                | string
+                | number
+                | boolean
+                | null;
+            }[]
+          | null;
+        /**
+         * Default provider options for ElevenLabs TTS.
+         */
+        ttsProviderOptions?: {
+          voice_settings?: {
+            stability?: number | null;
+            similarity_boost?: number | null;
+            style?: number | null;
+            use_speaker_boost?: boolean | null;
+          };
+          seed?: number | null;
+          apply_text_normalization?: ('auto' | 'on' | 'off') | null;
+          language_code?: string | null;
+        };
+        /**
+         * Configure TTS models. Use the Voices and Provider Options tabs for detailed settings.
+         */
+        models?:
+          | {
+              id: string | null;
+              name: string;
+              useCase?: 'tts' | null;
+              /**
+               * Output capabilities of this model
+               */
+              responseModalities?: ('TEXT' | 'AUDIO')[] | null;
+              enabled?: boolean | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'elevenlabs';
+      }
+    | {
+        enabled?: boolean | null;
+        /**
+         * Your Fal API key. Will be encrypted in the database.
+         */
+        apiKey: string;
+        /**
+         * Secret for webhook verification (optional)
+         */
+        webhookSecret?: string | null;
+        /**
+         * Default provider options for image generation models.
+         */
+        imageProviderOptions?: {
+          num_inference_steps?: number | null;
+          guidance_scale?: number | null;
+          /**
+           * Random seed for reproducible results
+           */
+          seed?: number | null;
+          image_size?:
+            ('square' | 'square_hd' | 'portrait_4_3' | 'portrait_16_9' | 'landscape_4_3' | 'landscape_16_9') | null;
+          enable_safety_checker?: boolean | null;
+        };
+        /**
+         * Default provider options for video generation models.
+         */
+        videoProviderOptions?: {
+          duration?: number | null;
+          aspect_ratio?: ('16:9' | '9:16' | '1:1') | null;
+        };
+        models?:
+          | {
+              id: string | null;
+              name: string;
+              useCase: 'image' | 'video';
+              enabled?: boolean | null;
+              /**
+               * Output capabilities of this model
+               */
+              responseModalities?: ('TEXT' | 'IMAGE' | 'AUDIO' | 'VIDEO')[] | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'fal';
+      }
+    | {
+        /**
+         * Display name for this custom provider (e.g., "Ollama", "Together AI")
+         */
+        providerName: string;
+        enabled?: boolean | null;
+        /**
+         * API key for this provider (if required)
+         */
+        apiKey: string;
+        /**
+         * OpenAI-compatible API endpoint (e.g., http://localhost:11434/v1)
+         */
+        baseURL: string;
+        /**
+         * Default provider options for text generation models.
+         */
+        textProviderOptions?: {
+          temperature?: number | null;
+          max_tokens?: number | null;
+          top_p?: number | null;
+          frequency_penalty?: number | null;
+          presence_penalty?: number | null;
+        };
+        /**
+         * Default provider options for image generation models.
+         */
+        imageProviderOptions?: {
+          quality?: ('standard' | 'hd') | null;
+          style?: ('vivid' | 'natural') | null;
+        };
+        /**
+         * Default provider options for TTS models.
+         */
+        ttsProviderOptions?: {
+          speed?: number | null;
+          response_format?: ('mp3' | 'opus' | 'aac' | 'flac' | 'wav') | null;
+        };
+        models?:
+          | {
+              id: string | null;
+              name: string;
+              useCase: 'text' | 'image' | 'video' | 'tts';
+              enabled?: boolean | null;
+              /**
+               * Output capabilities of this model
+               */
+              responseModalities?: ('TEXT' | 'IMAGE' | 'AUDIO')[] | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'openai-compatible';
+      }
+  )[];
+  /**
+   * Default provider/model behavior for each use case
+   */
+  defaults?: {
+    text?: {
+      provider?: string | null;
+      model?: string | null;
+      /**
+       * Default options for this model (global)
+       */
+      options?:
+        | {
+            [k: string]: unknown;
+          }
+        | unknown[]
+        | string
+        | number
+        | boolean
+        | null;
+    };
+    image?: {
+      provider?: string | null;
+      model?: string | null;
+      /**
+       * Default options for this model (global)
+       */
+      options?:
+        | {
+            [k: string]: unknown;
+          }
+        | unknown[]
+        | string
+        | number
+        | boolean
+        | null;
+    };
+    video?: {
+      provider?: string | null;
+      model?: string | null;
+      /**
+       * Default options for this model (global)
+       */
+      options?:
+        | {
+            [k: string]: unknown;
+          }
+        | unknown[]
+        | string
+        | number
+        | boolean
+        | null;
+    };
+    tts?: {
+      provider?: string | null;
+      model?: string | null;
+      voice?: string | null;
+      /**
+       * Default options for this model (global)
+       */
+      options?:
+        | {
+            [k: string]: unknown;
+          }
+        | unknown[]
+        | string
+        | number
+        | boolean
+        | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2206,6 +2732,344 @@ export interface FooterSelect<T extends boolean = true> {
       };
   copyrightText?: T;
   tagline?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ai-settings_select".
+ */
+export interface AiSettingsSelect<T extends boolean = true> {
+  providers?:
+    | T
+    | {
+        openai?:
+          | T
+          | {
+              enabled?: T;
+              apiKey?: T;
+              baseURL?: T;
+              organization?: T;
+              project?: T;
+              headers?:
+                | T
+                | {
+                    key?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              voices?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    enabled?: T;
+                  };
+              ttsProviderOptions?:
+                | T
+                | {
+                    speed?: T;
+                    response_format?: T;
+                    instructions?: T;
+                  };
+              imageProviderOptions?:
+                | T
+                | {
+                    quality?: T;
+                    style?: T;
+                  };
+              textProviderOptions?:
+                | T
+                | {
+                    temperature?: T;
+                    max_tokens?: T;
+                    top_p?: T;
+                    frequency_penalty?: T;
+                    presence_penalty?: T;
+                    seed?: T;
+                    logitBias?: T;
+                  };
+              models?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    useCase?: T;
+                    responseModalities?: T;
+                    enabled?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        anthropic?:
+          | T
+          | {
+              enabled?: T;
+              apiKey?: T;
+              textProviderOptions?:
+                | T
+                | {
+                    temperature?: T;
+                    max_tokens?: T;
+                    top_p?: T;
+                    top_k?: T;
+                  };
+              models?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    useCase?: T;
+                    responseModalities?: T;
+                    enabled?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        google?:
+          | T
+          | {
+              enabled?: T;
+              apiKey?: T;
+              baseURL?: T;
+              headers?:
+                | T
+                | {
+                    key?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              voices?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    enabled?: T;
+                  };
+              ttsProviderOptions?:
+                | T
+                | {
+                    speed?: T;
+                    volumeGainDb?: T;
+                  };
+              imageProviderOptions?:
+                | T
+                | {
+                    aspectRatio?: T;
+                    personGeneration?: T;
+                    addWatermark?: T;
+                  };
+              textProviderOptions?:
+                | T
+                | {
+                    temperature?: T;
+                    maxOutputTokens?: T;
+                    topP?: T;
+                    topK?: T;
+                    safetySettings?:
+                      | T
+                      | {
+                          category?: T;
+                          threshold?: T;
+                          id?: T;
+                        };
+                  };
+              models?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    useCase?: T;
+                    responseModalities?: T;
+                    enabled?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        xai?:
+          | T
+          | {
+              enabled?: T;
+              apiKey?: T;
+              textProviderOptions?:
+                | T
+                | {
+                    temperature?: T;
+                    max_tokens?: T;
+                    top_p?: T;
+                    frequency_penalty?: T;
+                    presence_penalty?: T;
+                  };
+              models?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    useCase?: T;
+                    responseModalities?: T;
+                    enabled?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        elevenlabs?:
+          | T
+          | {
+              enabled?: T;
+              apiKey?: T;
+              baseURL?: T;
+              headers?:
+                | T
+                | {
+                    key?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              voices?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    enabled?: T;
+                    category?: T;
+                    preview_url?: T;
+                    labels?: T;
+                  };
+              ttsProviderOptions?:
+                | T
+                | {
+                    voice_settings?:
+                      | T
+                      | {
+                          stability?: T;
+                          similarity_boost?: T;
+                          style?: T;
+                          use_speaker_boost?: T;
+                        };
+                    seed?: T;
+                    apply_text_normalization?: T;
+                    language_code?: T;
+                  };
+              models?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    useCase?: T;
+                    responseModalities?: T;
+                    enabled?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        fal?:
+          | T
+          | {
+              enabled?: T;
+              apiKey?: T;
+              webhookSecret?: T;
+              imageProviderOptions?:
+                | T
+                | {
+                    num_inference_steps?: T;
+                    guidance_scale?: T;
+                    seed?: T;
+                    image_size?: T;
+                    enable_safety_checker?: T;
+                  };
+              videoProviderOptions?:
+                | T
+                | {
+                    duration?: T;
+                    aspect_ratio?: T;
+                  };
+              models?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    useCase?: T;
+                    enabled?: T;
+                    responseModalities?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'openai-compatible'?:
+          | T
+          | {
+              providerName?: T;
+              enabled?: T;
+              apiKey?: T;
+              baseURL?: T;
+              textProviderOptions?:
+                | T
+                | {
+                    temperature?: T;
+                    max_tokens?: T;
+                    top_p?: T;
+                    frequency_penalty?: T;
+                    presence_penalty?: T;
+                  };
+              imageProviderOptions?:
+                | T
+                | {
+                    quality?: T;
+                    style?: T;
+                  };
+              ttsProviderOptions?:
+                | T
+                | {
+                    speed?: T;
+                    response_format?: T;
+                  };
+              models?:
+                | T
+                | {
+                    id?: T;
+                    name?: T;
+                    useCase?: T;
+                    enabled?: T;
+                    responseModalities?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  defaults?:
+    | T
+    | {
+        text?:
+          | T
+          | {
+              provider?: T;
+              model?: T;
+              options?: T;
+            };
+        image?:
+          | T
+          | {
+              provider?: T;
+              model?: T;
+              options?: T;
+            };
+        video?:
+          | T
+          | {
+              provider?: T;
+              model?: T;
+              options?: T;
+            };
+        tts?:
+          | T
+          | {
+              provider?: T;
+              model?: T;
+              voice?: T;
+              options?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

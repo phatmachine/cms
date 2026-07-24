@@ -1,0 +1,18 @@
+@font-face{font-family:"Questrial";src:url("../assets/fonts/Questrial-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/Figtree-Variable.ttf") format("truetype-variations");font-weight:300 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/Figtree-Italic-Variable.ttf") format("truetype-variations");font-weight:300 900;font-style:italic;font-display:swap}
+/* Static per-weight fallback for engines without variable-font support */
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-LightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-Italic.ttf") format("truetype");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-MediumItalic.ttf") format("truetype");font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-SemiBoldItalic.ttf") format("truetype");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-BoldItalic.ttf") format("truetype");font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-ExtraBold.ttf") format("truetype");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-ExtraBoldItalic.ttf") format("truetype");font-weight:800;font-style:italic;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-Black.ttf") format("truetype");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url("../assets/fonts/static/Figtree-BlackItalic.ttf") format("truetype");font-weight:900;font-style:italic;font-display:swap}

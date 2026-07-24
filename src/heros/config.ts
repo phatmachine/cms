@@ -1,0 +1,150 @@
+import type { Field } from 'payload'
+
+import {
+  FixedToolbarFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
+
+import { linkGroup } from '@/fields/linkGroup'
+
+export const hero: Field = {
+  name: 'hero',
+  type: 'group',
+  fields: [
+    {
+      name: 'type',
+      type: 'select',
+      defaultValue: 'lowImpact',
+      label: 'Type',
+      options: [
+        {
+          label: 'None',
+          value: 'none',
+        },
+        {
+          label: 'High Impact',
+          value: 'highImpact',
+        },
+        {
+          label: 'Medium Impact',
+          value: 'mediumImpact',
+        },
+        {
+          label: 'Low Impact',
+          value: 'lowImpact',
+        },
+        {
+          label: 'Signal Carousel (campaign homepage)',
+          value: 'signalCarousel',
+        },
+      ],
+      required: true,
+    },
+    {
+      name: 'richText',
+      type: 'richText',
+      admin: {
+        condition: (_, { type } = {}) => type !== 'signalCarousel',
+      },
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+          ]
+        },
+      }),
+      label: false,
+    },
+    linkGroup({
+      overrides: {
+        maxRows: 2,
+        admin: {
+          condition: (_, { type } = {}) => type !== 'signalCarousel',
+        },
+      },
+    }),
+    {
+      name: 'media',
+      type: 'upload',
+      admin: {
+        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+      },
+      relationTo: 'media',
+      required: true,
+    },
+    {
+      name: 'carousel',
+      type: 'group',
+      label: 'Carousel settings',
+      admin: {
+        condition: (_, { type } = {}) => type === 'signalCarousel',
+      },
+      fields: [
+        {
+          name: 'slides',
+          type: 'relationship',
+          relationTo: 'slides',
+          hasMany: true,
+          label: 'Slides',
+          admin: {
+            description: 'Choose and order the slides shown in the carousel.',
+          },
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'autoAdvanceSeconds',
+              type: 'number',
+              label: 'Auto-advance (seconds)',
+              defaultValue: 7,
+              min: 3,
+              max: 15,
+              admin: { width: '50%' },
+            },
+            {
+              name: 'showThumbnails',
+              type: 'checkbox',
+              label: 'Show thumbnail strip',
+              defaultValue: true,
+              admin: { width: '50%' },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'overlayStrength',
+              type: 'number',
+              label: 'Scrim overlay strength',
+              defaultValue: 0.5,
+              min: 0,
+              max: 1,
+              admin: { step: 0.05, width: '50%' },
+            },
+            {
+              name: 'backdropPattern',
+              type: 'select',
+              label: 'Backdrop pattern',
+              defaultValue: 'points',
+              options: [
+                { label: 'Points', value: 'points' },
+                { label: 'Grid', value: 'grid' },
+                { label: 'Lines', value: 'lines' },
+                { label: 'None', value: 'none' },
+              ],
+              admin: { width: '50%' },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  label: false,
+}

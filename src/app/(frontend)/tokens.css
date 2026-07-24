@@ -1,0 +1,155 @@
+/*
+  Design tokens for the "Rethink the Machine" campaign homepage.
+  Ported from design_handoff/tokens/*.css — values are final, do not hardcode
+  hex/px equivalents elsewhere, reference these custom properties instead.
+*/
+:root {
+  /* --- Base neutrals: sand / bone / concrete, light to dark --- */
+  --n-bone: #ede7db;
+  --n-sand-100: #e4dac7;
+  --n-sand-200: #d3c3a6;
+  --n-sand-300: #beaa87;
+  --n-clay: #9c8a70;
+  --n-stone: #736657;
+  --n-concrete: #514a41;
+  --n-charcoal: #332f29;
+  --n-graphite: #211e1a;
+  --n-void: #131210;
+
+  /* --- Warm flesh tones: the "human" half of the contrast --- */
+  --flesh-blush: #d9b7a4;
+  --flesh-rose: #b98874;
+  --flesh-terra: #a26650;
+  --flesh-sienna: #7b4e41;
+  --flesh-umber: #5d2b25;
+
+  /* --- Cold clinical / machine tones: the "AI" half of the contrast --- */
+  --cold-white: #f2f4f3;
+  --cold-steel-100: #c7cdcc;
+  --cold-steel-300: #8c9694;
+  --cold-steel-500: #5b6564;
+  --cold-binary: #0a0b0b;
+
+  /* --- Single accent: spice / rust ember --- */
+  --accent-ember: #c1552e;
+  --accent-ember-dim: #8c3e22;
+  --accent-dune-amber: #e8a23a;
+
+  /* --- Tissue / skin palette --- */
+  --tissue-pearl: #f3e9e2;
+  --tissue-blush: #e9cfc3;
+  --tissue-rose: #ddb6a9;
+  --tissue-vein: #b98f7d;
+
+  /* --- Signal: deep teal-black dark theme --- */
+  --signal-bg: #162426;
+  --signal-panel: #1f3234;
+  --signal-fog: #93a8a6;
+  --signal-line: #6b7a78;
+
+  /* --- Semantic aliases --- */
+  --surface-page: var(--n-bone);
+  --surface-raised: #f5f0e6;
+  --surface-sunken: var(--n-sand-100);
+  --surface-inverse: var(--n-graphite);
+  --surface-clinical: var(--cold-white);
+  --surface-clinical-dark: var(--cold-binary);
+
+  --text-primary: var(--n-graphite);
+  --text-secondary: var(--n-concrete);
+  --text-muted: var(--n-clay);
+  --text-inverse: var(--n-bone);
+  --text-clinical: var(--cold-steel-500);
+
+  --border-subtle: var(--n-sand-200);
+  --border-strong: var(--n-clay);
+  --border-clinical: var(--cold-steel-100);
+
+  --action-primary: var(--accent-ember);
+  --action-primary-hover: var(--accent-ember-dim);
+  --action-on-primary: var(--cold-white);
+
+  --focus-ring: var(--cold-steel-500);
+
+  /* --- Typography (font families point at next/font variables, see layout.tsx) --- */
+  --font-display: var(--font-questrial), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display-hero: 400 96px/0.98 var(--font-display);
+  --ls-display-hero: -3px;
+  --text-display-1: 400 64px/1.02 var(--font-display);
+  --ls-display-1: -2px;
+  --text-display-2: 400 44px/1.08 var(--font-display);
+  --ls-display-2: -1px;
+  --text-display-3: 400 30px/1.2 var(--font-display);
+  --ls-display-3: -0.4px;
+
+  --text-heading-1: 600 32px/1.2 var(--font-body);
+  --text-heading-2: 600 24px/1.28 var(--font-body);
+  --text-heading-3: 600 20px/1.3 var(--font-body);
+
+  --text-body-lg: 400 18px/1.55 var(--font-body);
+  --text-body: 400 16px/1.55 var(--font-body);
+  --text-body-sm: 400 14px/1.5 var(--font-body);
+
+  --text-label: 600 13px/1.2 var(--font-body);
+  --ls-label: 0.08em;
+  --text-caption: 400 12px/1.4 var(--font-body);
+  --ls-caption: 0.02em;
+
+  /* --- Spacing --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 160px;
+
+  /* --- Radius / shadow / motion --- */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  --border-w: 1px;
+  --shadow-flat: none;
+  --shadow-raised: 0 1px 0 var(--border-subtle);
+  --shadow-modal: 0 24px 64px -16px rgba(19, 18, 16, 0.45);
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+
+  /* --- Layout: sitewide transparent header height, so hero sections can sit underneath it --- */
+  --header-height: 120px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: 80px;
+  }
+}
+
+/* Signal theme: dark, soft, moody counterpart to the default Stone (light/sharp) theme.
+   Apply data-theme="signal" on a container to switch registers. */
+[data-theme='signal'] {
+  --surface-page: var(--signal-bg);
+  --surface-raised: var(--signal-panel);
+  --surface-sunken: #122022;
+  --surface-inverse: var(--n-bone);
+  --text-primary: var(--cold-white);
+  --text-secondary: var(--signal-fog);
+  --text-muted: var(--signal-line);
+  --text-inverse: var(--n-graphite);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --action-primary: var(--cold-white);
+  --action-primary-hover: var(--tissue-pearl);
+  --action-on-primary: var(--signal-bg);
+  --focus-ring: var(--accent-dune-amber);
+}

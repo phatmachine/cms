@@ -1,0 +1,87 @@
+:root{
+/* --- Base neutrals: sand / bone / concrete, light to dark --- */
+--n-bone:#EDE7DB;
+--n-sand-100:#E4DAC7;
+--n-sand-200:#D3C3A6;
+--n-sand-300:#BEAA87;
+--n-clay:#9C8A70;
+--n-stone:#736657;
+--n-concrete:#514A41;
+--n-charcoal:#332F29;
+--n-graphite:#211E1A;
+--n-void:#131210;
+
+/* --- Warm flesh tones: the "human" half of the contrast --- */
+--flesh-blush:#D9B7A4;
+--flesh-rose:#B98874;
+--flesh-terra:#A26650;
+--flesh-sienna:#7B4E41;
+--flesh-umber:#5D2B25;
+
+/* --- Cold clinical / machine tones: the "AI" half of the contrast --- */
+--cold-white:#F2F4F3;
+--cold-steel-100:#C7CDCC;
+--cold-steel-300:#8C9694;
+--cold-steel-500:#5B6564;
+--cold-binary:#0A0B0B;
+
+/* --- Single accent: spice / rust ember --- */
+--accent-ember:#C1552E;
+--accent-ember-dim:#8C3E22;
+--accent-dune-amber:#E8A23A;
+
+/* --- Tissue / skin palette: sampled from bioengineered-tissue reference imagery --- */
+--tissue-pearl:#F3E9E2;
+--tissue-blush:#E9CFC3;
+--tissue-rose:#DDB6A9;
+--tissue-vein:#B98F7D;
+
+/* --- Signal: deep teal-black dark theme (moody AI-companion register) --- */
+--signal-bg:#162426;
+--signal-panel:#1F3234;
+--signal-fog:#93A8A6;
+--signal-line:#6B7A78;
+
+/* --- Semantic aliases --- */
+--surface-page:var(--n-bone);
+--surface-raised:#F5F0E6;
+--surface-sunken:var(--n-sand-100);
+--surface-inverse:var(--n-graphite);
+--surface-clinical:var(--cold-white);
+--surface-clinical-dark:var(--cold-binary);
+
+--text-primary:var(--n-graphite);
+--text-secondary:var(--n-concrete);
+--text-muted:var(--n-clay);
+--text-inverse:var(--n-bone);
+--text-clinical:var(--cold-steel-500);
+
+--border-subtle:var(--n-sand-200);
+--border-strong:var(--n-clay);
+--border-clinical:var(--cold-steel-100);
+
+--action-primary:var(--accent-ember);
+--action-primary-hover:var(--accent-ember-dim);
+--action-on-primary:var(--cold-white);
+
+--focus-ring:var(--cold-steel-500);
+}
+
+/* --- Signal theme: dark, soft, moody counterpart to the default Stone (light/sharp) theme.
+     Apply data-theme="signal" on a container to switch registers. --- */
+[data-theme="signal"]{
+--surface-page:var(--signal-bg);
+--surface-raised:var(--signal-panel);
+--surface-sunken:#122022;
+--surface-inverse:var(--n-bone);
+--text-primary:var(--cold-white);
+--text-secondary:var(--signal-fog);
+--text-muted:var(--signal-line);
+--text-inverse:var(--n-graphite);
+--border-subtle:rgba(255,255,255,0.08);
+--border-strong:rgba(255,255,255,0.18);
+--action-primary:var(--cold-white);
+--action-primary-hover:var(--tissue-pearl);
+--action-on-primary:var(--signal-bg);
+--focus-ring:var(--accent-dune-amber);
+}

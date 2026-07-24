@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 680px;
+  margin-bottom: var(--space-8);
+}
+
+.centered {
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  font: var(--text-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--action-primary);
+}
+
+.heading {
+  margin: 0;
+  font: var(--text-display-2);
+  letter-spacing: var(--ls-display-2);
+  color: var(--text-primary);
+  text-wrap: pretty;
+}
+
+@media (max-width: 640px) {
+  .heading {
+    font: var(--text-display-3);
+    letter-spacing: var(--ls-display-3);
+  }
+}
+
+.intro {
+  margin: 0;
+  font: var(--text-body-lg);
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}

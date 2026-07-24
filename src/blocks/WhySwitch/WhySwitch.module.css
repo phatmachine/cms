@@ -1,0 +1,48 @@
+.section {
+  padding: var(--space-10) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: var(--border-w) solid var(--border-subtle);
+  border-radius: var(--radius-none);
+}
+
+.cardIndex {
+  font: var(--text-caption);
+  letter-spacing: var(--ls-caption);
+  color: var(--text-muted);
+}
+
+.cardTitle {
+  margin: 0;
+  font: var(--text-heading-2);
+  color: var(--text-primary);
+}
+
+.cardDescription {
+  margin: 0;
+  font: var(--text-body);
+  color: var(--text-secondary);
+}

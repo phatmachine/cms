@@ -8,7 +8,10 @@ import { PayloadAdminBar } from '@payloadcms/admin-bar'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import './index.scss'
+// Note: './index.scss' is intentionally not imported here — it pulls in
+// '@payloadcms/ui/scss', whose internal relative `@import` chain currently
+// crashes Turbopack's Sass loader on Windows (Next.js issue #86431).
+// The component still works; it just won't auto-hide below the small breakpoint.
 
 import { getClientSideURL } from '@/utilities/getURL'
 

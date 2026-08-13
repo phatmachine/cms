@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
+import { linkGroup } from '@/fields/linkGroup'
 import { revalidateFooter } from './hooks/revalidateFooter'
 
 export const Footer: GlobalConfig = {
@@ -9,20 +10,21 @@ export const Footer: GlobalConfig = {
     read: () => true,
   },
   admin: {
-    description: 'The light "Stone" footer shown at the bottom of every page.',
+    description: 'The dark "Ember" footer shown at the bottom of every page.',
   },
   fields: [
     {
-      name: 'statement',
+      name: 'headline',
       type: 'textarea',
-      defaultValue: 'We built machines to think. We did not expect to feel toward them.',
-      label: 'Statement',
+      defaultValue: 'Anti-manipulation, not anti-internet.',
+      label: 'Headline',
     },
     {
-      name: 'brandName',
-      type: 'text',
-      defaultValue: 'Rethink the machine',
-      label: 'Brand wordmark',
+      name: 'subhead',
+      type: 'textarea',
+      defaultValue:
+        'Field notes on attention, on sovereignty, on the choices built into things that were built to feel chosen.',
+      label: 'Subhead',
     },
     {
       name: 'missionLine',
@@ -30,6 +32,18 @@ export const Footer: GlobalConfig = {
       defaultValue:
         'A study of the gap between mind and model — and what it costs us to close it.',
       label: 'Mission line',
+      admin: {
+        description: 'Short line under the wordmark, in the brand column.',
+      },
+    },
+    {
+      name: 'signatureLine',
+      type: 'text',
+      defaultValue: 'We go where the patient is.',
+      label: 'Signature line',
+      admin: {
+        description: 'Accent line under the mission line (rendered in gold).',
+      },
     },
     {
       name: 'columns',
@@ -66,22 +80,29 @@ export const Footer: GlobalConfig = {
       ],
     },
     {
-      type: 'row',
-      fields: [
-        {
-          name: 'copyrightText',
-          type: 'text',
-          defaultValue: '© 2026 Rethink the Machine',
-          admin: { width: '50%' },
-        },
-        {
-          name: 'tagline',
-          type: 'text',
-          defaultValue: 'A body knows what a model cannot.',
-          admin: { width: '50%' },
-        },
-      ],
+      name: 'copyrightText',
+      type: 'text',
+      defaultValue: '© 2026 Rethink the Machine',
+      label: 'Copyright text',
     },
+    {
+      name: 'disclosure',
+      type: 'textarea',
+      defaultValue:
+        "No dark patterns on this site: disclosure always, no synthetic anything undeclared, no guilt at your exit. You can leave whenever you want. That's the point.",
+      label: 'Disclosure statement',
+    },
+    linkGroup({
+      appearances: false,
+      overrides: {
+        name: 'legalLinks',
+        label: 'Legal links',
+        maxRows: 4,
+        admin: {
+          initCollapsed: true,
+        },
+      },
+    }),
   ],
   hooks: {
     afterChange: [revalidateFooter],

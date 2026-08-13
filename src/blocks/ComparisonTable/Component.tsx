@@ -7,12 +7,10 @@ import React from 'react'
 import { Reveal } from '@/components/Reveal'
 import { SectionHeader } from '@/components/SectionHeader'
 
-import styles from './ComparisonTable.module.css'
-
 const statusIcon: Record<string, React.ReactNode> = {
-  no: <X aria-label="No" className={styles.iconNo} size={16} />,
-  partial: <Minus aria-label="Partial" className={styles.iconPartial} size={16} />,
-  yes: <Check aria-label="Yes" className={styles.iconYes} size={16} />,
+  no: <X aria-label="No" className="text-ink-muted opacity-60" size={16} />,
+  partial: <Minus aria-label="Partial" className="text-ink-muted" size={16} />,
+  yes: <Check aria-label="Yes" className="text-action" size={16} />,
 }
 
 export const ComparisonTableBlock: React.FC<ComparisonTableBlockProps> = ({
@@ -24,18 +22,21 @@ export const ComparisonTableBlock: React.FC<ComparisonTableBlockProps> = ({
   if (!columns || columns.length === 0 || !rows || rows.length === 0) return null
 
   return (
-    <div className={styles.section}>
+    <div className="py-32">
       <div className="container">
         <SectionHeader eyebrow={eyebrow} heading={heading} />
 
-        <Reveal className={styles.tableWrap}>
-          <table className={styles.table}>
+        <Reveal className="overflow-x-auto border border-hairline">
+          <table className="w-full min-w-[560px] border-collapse">
             <thead>
               <tr>
-                <th className={styles.featureHeader} scope="col" />
+                <th className="min-w-[200px]" scope="col" />
                 {columns.map((column, index) => (
                   <th
-                    className={cn(styles.columnHeader, column.isFeatured && styles.featured)}
+                    className={cn(
+                      'py-4 px-6 text-left text-rtm-label font-rtm-body tracking-label text-ink-secondary uppercase border-b border-l border-hairline',
+                      column.isFeatured && 'text-action bg-surface-raised',
+                    )}
                     key={index}
                     scope="col"
                   >
@@ -47,7 +48,10 @@ export const ComparisonTableBlock: React.FC<ComparisonTableBlockProps> = ({
             <tbody>
               {rows.map((row, rowIndex) => (
                 <tr key={rowIndex}>
-                  <th className={styles.featureCell} scope="row">
+                  <th
+                    className="py-4 px-6 text-left text-rtm-body-sm font-rtm-body font-semibold text-ink border-b border-hairline whitespace-nowrap"
+                    scope="row"
+                  >
                     {row.feature}
                   </th>
                   {columns.map((column, colIndex) => {
@@ -55,13 +59,20 @@ export const ComparisonTableBlock: React.FC<ComparisonTableBlockProps> = ({
 
                     return (
                       <td
-                        className={cn(styles.cell, column.isFeatured && styles.featured)}
+                        className={cn(
+                          'py-4 px-6 border-b border-l border-hairline',
+                          column.isFeatured && 'bg-surface-raised',
+                        )}
                         key={colIndex}
                       >
                         {cell ? (
-                          <div className={styles.cellContent}>
+                          <div className="flex items-center gap-2">
                             {statusIcon[cell.status || 'yes']}
-                            {cell.note && <span className={styles.note}>{cell.note}</span>}
+                            {cell.note && (
+                              <span className="text-rtm-caption font-rtm-body text-ink-muted">
+                                {cell.note}
+                              </span>
+                            )}
                           </div>
                         ) : null}
                       </td>

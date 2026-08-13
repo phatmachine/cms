@@ -204,6 +204,84 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
+
+  /* Rethink the Machine brand aliases — source of truth is ./tokens.css */
+  --color-ink: var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-muted: var(--text-muted);
+  --color-hairline: var(--border-subtle);
+  --color-hairline-strong: var(--border-strong);
+  --color-surface-raised: var(--surface-raised);
+  --color-action: var(--action-primary);
+  --color-action-on: var(--action-on-primary);
+  --color-dune-amber: var(--accent-dune-amber);
+  --color-cold-white: var(--cold-white);
+  --color-blush: var(--flesh-blush);
+  --color-signal-bg: var(--signal-bg);
+  --color-signal-panel: var(--signal-panel);
+  --color-signal-fog: var(--signal-fog);
+  --color-signal-line: var(--signal-line);
+
+  /* Nebula Ramp — the raw palette. Prefer the semantic aliases above for
+     components; reach for these directly when composing new pages/blocks. */
+  --color-cosmos-void: var(--cosmos-void);
+  --color-cosmos-900: var(--cosmos-900);
+  --color-cosmos-800: var(--cosmos-800);
+  --color-cosmos-700: var(--cosmos-700);
+  --color-cosmos-600: var(--cosmos-600);
+  --color-drift-olive: var(--drift-olive);
+  --color-drift-khaki: var(--drift-khaki);
+  --color-drift-bronze: var(--drift-bronze);
+  --color-drift-brass: var(--drift-brass);
+  --color-gold-700: var(--gold-700);
+  --color-gold-600: var(--gold-600);
+  --color-gold-500: var(--gold-500);
+  --color-gold-400: var(--gold-400);
+  --color-gold-300: var(--gold-300);
+  --color-star-200: var(--star-200);
+  --color-star-100: var(--star-100);
+  --color-star-50: var(--star-50);
+  --color-ember-500: var(--ember-500);
+  --color-ember-600: var(--ember-600);
+  --color-ember-700: var(--ember-700);
+  --color-ember-800: var(--ember-800);
+  --color-ember-900: var(--ember-900);
+
+  /* Signature gradients — full-bleed atmosphere behind hero content only,
+     never a button or card fill. */
+  --background-image-nebula: var(--grad-nebula);
+  --background-image-dawn: var(--grad-dawn);
+  --background-image-dust: var(--grad-dust);
+
+  --font-rtm-display: var(--font-display);
+  --font-rtm-body: var(--font-body);
+
+  --text-rtm-display-1: 64px;
+  --text-rtm-display-1--line-height: 1.02;
+  --text-rtm-display-2: 44px;
+  --text-rtm-display-2--line-height: 1.08;
+  --text-rtm-display-3: 30px;
+  --text-rtm-display-3--line-height: 1.2;
+  --text-rtm-heading-2: 24px;
+  --text-rtm-heading-2--line-height: 1.28;
+  --text-rtm-heading-3: 20px;
+  --text-rtm-heading-3--line-height: 1.3;
+  --text-rtm-body-lg: 18px;
+  --text-rtm-body-lg--line-height: 1.55;
+  --text-rtm-body: 16px;
+  --text-rtm-body--line-height: 1.55;
+  --text-rtm-body-sm: 14px;
+  --text-rtm-body-sm--line-height: 1.5;
+  --text-rtm-label: 13px;
+  --text-rtm-label--line-height: 1.2;
+  --text-rtm-caption: 12px;
+  --text-rtm-caption--line-height: 1.4;
+
+  --tracking-display-1: -2px;
+  --tracking-display-2: -1px;
+  --tracking-display-3: -0.4px;
+  --tracking-label: 0.08em;
+  --tracking-caption: 0.02em;
 }
 
 @layer base {
@@ -222,4 +300,13 @@ html {
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

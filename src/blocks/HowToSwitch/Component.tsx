@@ -8,8 +8,6 @@ import { cn } from '@/utilities/ui'
 import { useStepScrollSync } from '@/utilities/useScrollReveal'
 import React from 'react'
 
-import styles from './HowToSwitch.module.css'
-
 export const HowToSwitchBlock: React.FC<HowToSwitchBlockProps> = ({
   eyebrow,
   heading,
@@ -21,25 +19,40 @@ export const HowToSwitchBlock: React.FC<HowToSwitchBlockProps> = ({
   const activeStep = steps?.[activeIndex]
 
   return (
-    <div className={styles.section}>
+    <div className="py-32">
       <div className="container">
         <SectionHeader eyebrow={eyebrow} heading={heading} intro={intro} />
 
         {steps && steps.length > 0 && (
-          <div className={styles.layout}>
-            <ol className={styles.steps}>
+          <div className="grid grid-cols-2 gap-24 items-start max-[900px]:grid-cols-1">
+            <ol className="m-0 p-0 flex flex-col list-none">
               {steps.map((step, index) => (
                 <li
-                  className={cn(styles.step, index === activeIndex && styles.stepActive)}
+                  className={cn(
+                    'flex gap-4 py-8 border-t border-hairline transition-opacity duration-200 ease-in-out last:border-b',
+                    index === activeIndex ? 'opacity-100' : 'opacity-50',
+                    'max-[900px]:opacity-100',
+                  )}
                   key={index}
                   ref={setStepRef(index)}
                 >
-                  <span className={styles.stepIndex}>{String(index + 1).padStart(2, '0')}</span>
-                  <div className={styles.stepBody}>
-                    <h3 className={styles.stepTitle}>{step.title}</h3>
-                    <p className={styles.stepDescription}>{step.description}</p>
+                  <span
+                    className={cn(
+                      'min-w-[40px] text-rtm-heading-3 font-rtm-body text-ink-muted',
+                      index === activeIndex && 'text-action',
+                    )}
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="m-0 text-rtm-heading-2 font-rtm-body font-semibold text-ink">
+                      {step.title}
+                    </h3>
+                    <p className="m-0 text-rtm-body font-rtm-body text-ink-secondary">
+                      {step.description}
+                    </p>
                     {step.media && (
-                      <div className={styles.stepMediaMobile}>
+                      <div className="hidden max-[900px]:block mt-3 border border-hairline">
                         <Media resource={step.media} />
                       </div>
                     )}
@@ -48,12 +61,14 @@ export const HowToSwitchBlock: React.FC<HowToSwitchBlockProps> = ({
               ))}
             </ol>
 
-            <div className={styles.panel}>
-              <div className={styles.panelSticky}>
+            <div className="relative max-[900px]:hidden">
+              <div className="sticky top-[calc(var(--header-height)+var(--space-6))] border border-hairline bg-surface-raised aspect-[4/3] overflow-hidden flex items-center justify-center [&_img]:w-full [&_img]:h-full [&_img]:object-cover [&_video]:w-full [&_video]:h-full [&_video]:object-cover">
                 {activeStep?.media ? (
                   <Media key={activeIndex} resource={activeStep.media} />
                 ) : (
-                  <div className={styles.panelPlaceholder}>{activeStep?.title}</div>
+                  <div className="text-rtm-body font-rtm-body text-ink-muted p-8 text-center">
+                    {activeStep?.title}
+                  </div>
                 )}
               </div>
             </div>

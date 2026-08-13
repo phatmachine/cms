@@ -8,11 +8,12 @@ import type { Header } from '@/payload-types'
 
 import { cn } from '@/utilities/ui'
 import { MenuPanel } from './MenuPanel'
-import styles from './Header.module.css'
 
 interface HeaderClientProps {
   data: Header
 }
+
+const barClass = 'absolute left-0 w-[26px] h-[1.5px] bg-current origin-center [transition:transform_220ms_ease]'
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   /* Storing the value in a useState to avoid hydration errors */
@@ -34,24 +35,39 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className={styles.header}
+      className="relative z-30 flex items-center justify-between px-12 py-6 max-sm:px-5 max-sm:py-4 min-h-[var(--header-height)] bg-transparent text-ink"
       {...(theme === 'dark' ? { 'data-theme': 'signal' } : {})}
     >
-      <Link className={styles.logoLink} href="/">
-        <img alt="Rethink the Machine" className={styles.logo} src="/rethink-logo.png" />
+      <Link className="flex items-center" href="/">
+        <img
+          alt="Rethink the Machine"
+          className={cn(
+            'w-[72px] h-[72px] max-sm:w-12 max-sm:h-12 object-contain block',
+            theme !== 'dark' && 'invert',
+          )}
+          src="/rethink-logo.png"
+        />
       </Link>
       <button
         aria-label="Menu"
-        className={styles.menuButton}
+        className="bg-transparent border-0 cursor-pointer p-3 -m-3 text-current flex"
         onClick={() => setMenuOpen((open) => !open)}
         type="button"
       >
-        <span className={styles.iconWrap}>
+        <span className="relative w-[26px] h-5 block">
           <span
-            className={cn(styles.bar, styles.barTop, menuOpen && styles.barTopOpen)}
+            className={cn(
+              barClass,
+              'top-[5px]',
+              menuOpen && '[transform:translateY(4.5px)_rotate(20deg)]',
+            )}
           />
           <span
-            className={cn(styles.bar, styles.barBottom, menuOpen && styles.barBottomOpen)}
+            className={cn(
+              barClass,
+              'top-[14px]',
+              menuOpen && '[transform:translateY(-4.5px)_rotate(-20deg)]',
+            )}
           />
         </span>
       </button>

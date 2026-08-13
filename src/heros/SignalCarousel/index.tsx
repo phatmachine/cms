@@ -9,16 +9,26 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 
-import styles from './SignalCarousel.module.css'
-
 type SignalCarouselHeroProps = Page['hero']
 
-const patternClass = {
-  points: styles.patternPoints,
-  grid: styles.patternGrid,
-  lines: styles.patternLines,
-  none: null,
-} as const
+const patternStyle: Record<'points' | 'grid' | 'lines', React.CSSProperties> = {
+  points: {
+    backgroundImage: 'radial-gradient(rgba(242, 244, 243, 0.13) 1px, transparent 1.5px)',
+    backgroundSize: '26px 26px',
+  },
+  grid: {
+    backgroundImage:
+      'linear-gradient(rgba(242, 244, 243, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(242, 244, 243, 0.07) 1px, transparent 1px)',
+    backgroundSize: '80px 80px',
+  },
+  lines: {
+    backgroundImage: 'linear-gradient(90deg, rgba(242, 244, 243, 0.08) 1px, transparent 1px)',
+    backgroundSize: '12.5% 100%',
+  },
+}
+
+const mediaFillClass =
+  'absolute inset-0 [&_picture]:block [&_picture]:w-full [&_picture]:h-full [&_video]:block [&_video]:w-full [&_video]:h-full [&_video]:object-cover [&_img]:block [&_img]:w-full [&_img]:h-full [&_img]:object-cover'
 
 const hasResolvableLink = (link: Slide['link']): boolean => {
   if (!link) return false
@@ -81,9 +91,12 @@ export const SignalCarouselHero: React.FC<SignalCarouselHeroProps> = ({ carousel
 
   if (slides.length === 0) {
     return (
-      <div className={styles.hero} data-theme="signal">
-        <div className={styles.empty}>
-          <p className={styles.emptyText}>
+      <div
+        className="relative min-h-screen overflow-hidden flex flex-col bg-signal-bg text-cold-white mt-[calc(var(--header-height)*-1)]"
+        data-theme="signal"
+      >
+        <div className="relative z-20 flex-1 flex items-center justify-center px-12 py-16 text-center">
+          <p className="text-rtm-body font-rtm-body text-signal-fog max-w-[420px]">
             No slides yet. Add slides in the admin panel (Collections → Carousel Slides), then
             select and order them on this page&apos;s Hero tab.
           </p>
@@ -93,30 +106,33 @@ export const SignalCarouselHero: React.FC<SignalCarouselHeroProps> = ({ carousel
   }
 
   const overlayMid = 0.15 + 0.5 * overlayStrength
-  const pattern = patternClass[backdropPattern] || patternClass.points
+  const pattern = backdropPattern === 'none' ? null : patternStyle[backdropPattern] || patternStyle.points
   const current = slides[active]!
 
   return (
-    <div className={styles.hero} data-theme="signal">
+    <div
+      className="relative min-h-screen overflow-hidden flex flex-col bg-signal-bg text-cold-white mt-[calc(var(--header-height)*-1)]"
+      data-theme="signal"
+    >
       {slides.map((slide, i) => (
         <div
-          className={styles.bgLayer}
+          className="absolute inset-0 [transition:opacity_900ms_ease]"
           key={slide.id}
           style={{ opacity: i === active ? 1 : 0, pointerEvents: i === active ? 'auto' : 'none' }}
         >
-          <div className={styles.mediaFill}>
+          <div className={mediaFillClass}>
             {slide.background ? (
               <Media fill htmlElement={null} priority={i === active} resource={slide.background} />
             ) : (
-              <div className={styles.bgPlaceholder}>
-                <span className={styles.bgPlaceholderText}>
+              <div className="absolute inset-0 bg-signal-panel flex items-center justify-center text-center p-12">
+                <span className="text-rtm-label font-rtm-body tracking-label text-signal-line uppercase">
                   Background — {slide.title} ({slide.category})
                 </span>
               </div>
             )}
           </div>
           <div
-            className={styles.scrim}
+            className="absolute inset-0 pointer-events-none"
             style={{
               background: `linear-gradient(180deg, rgba(10,11,11,0.55) 0%, rgba(22,36,38,${overlayMid}) 45%, rgba(10,11,11,0.85) 100%)`,
             }}
@@ -124,28 +140,46 @@ export const SignalCarouselHero: React.FC<SignalCarouselHeroProps> = ({ carousel
         </div>
       ))}
 
-      {pattern && <div className={pattern} />}
+      {pattern && <div className="absolute inset-0 z-10 pointer-events-none" style={pattern} />}
 
-      <div className={styles.content}>
-        <div className={styles.textBlock} key={current.id}>
-          <div className={styles.eyebrowRow}>
-            <span className={styles.category}>{current.category}</span>
-            <span className={styles.hairline} />
-            <span className={styles.brand}>{current.brand}</span>
+      <div className="relative z-20 flex-1 flex flex-col justify-end pt-[var(--header-height)]">
+        <div
+          className="pt-14 px-12 pb-16 max-sm:pt-8 max-sm:px-5 max-sm:pb-10 flex flex-col gap-[18px] pointer-events-none [animation:fadeIn_500ms_ease]"
+          key={current.id}
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-rtm-label font-rtm-body tracking-label text-dune-amber uppercase">
+              {current.category}
+            </span>
+            <span className="w-8 h-px bg-hairline-strong" />
+            <span className="text-rtm-label font-rtm-body tracking-label text-signal-fog uppercase">
+              {current.brand}
+            </span>
           </div>
-          <h1 className={styles.title}>{current.title}</h1>
-          <p className={styles.line}>{current.line}</p>
-          <div className={styles.ctaRow}>
+          <h1 className="m-0 text-rtm-display-3 tracking-display-3 min-[481px]:text-rtm-display-2 min-[481px]:tracking-display-2 min-[901px]:text-rtm-display-1 min-[901px]:tracking-display-1 font-rtm-display font-normal text-cold-white max-w-[900px] text-pretty">
+            {current.title}
+          </h1>
+          <p className="m-0 text-rtm-body-lg font-rtm-body text-signal-fog max-w-[520px] text-pretty">
+            {current.line}
+          </p>
+          <div className="pointer-events-auto flex items-center gap-6 mt-1 flex-wrap">
             {hasResolvableLink(current.link) ? (
-              <CMSLink {...current.link} appearance="inline" className={styles.ctaLink}>
+              <CMSLink
+                {...current.link}
+                appearance="inline"
+                className="text-rtm-label font-rtm-body tracking-label text-cold-white uppercase border-b border-hairline-strong pb-1.5"
+              >
                 Read the study
               </CMSLink>
             ) : (
-              <span aria-disabled="true" className={styles.ctaLinkDisabled}>
+              <span
+                aria-disabled="true"
+                className="text-rtm-label font-rtm-body tracking-label text-signal-fog uppercase border-b border-hairline pb-1.5 opacity-60"
+              >
                 Read the study
               </span>
             )}
-            <span className={styles.counter}>
+            <span className="text-rtm-caption font-rtm-body tracking-caption text-ink-muted">
               {String(active + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
             </span>
           </div>
@@ -153,37 +187,53 @@ export const SignalCarouselHero: React.FC<SignalCarouselHeroProps> = ({ carousel
 
         {showThumbnails && (
           <div
-            className={styles.stripWrap}
+            className="relative z-[25] px-12 pb-7 max-sm:px-5 max-sm:pb-5"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className={styles.progressTrack}>
-              <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+            <div className="relative h-px bg-hairline mb-4">
+              <div
+                className="absolute left-0 top-0 h-px bg-dune-amber"
+                style={{ width: `${progress}%` }}
+              />
             </div>
-            <div className={styles.strip} ref={stripRef}>
+            <div
+              className="flex gap-3 overflow-x-auto overflow-y-hidden pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              ref={stripRef}
+            >
               {slides.map((slide, i) => (
                 <button
-                  className={styles.card}
+                  className="flex-none w-[340px] max-sm:w-[220px] cursor-pointer bg-transparent border-0 p-0 text-left [transition:opacity_160ms_ease]"
                   key={slide.id}
                   onClick={() => select(i)}
                   style={{ opacity: i === active ? 1 : 0.55 }}
                   type="button"
                 >
                   <div
-                    className={cn(styles.cardThumb, i === active && styles.cardThumbActive)}
+                    className={cn(
+                      'relative w-[340px] h-[573px] max-sm:w-[220px] max-sm:h-[371px] border bg-signal-panel overflow-hidden',
+                      i === active ? 'border-dune-amber' : 'border-hairline',
+                    )}
                   >
                     {slide.thumbnail ? (
-                      <div className={styles.mediaFill}>
+                      <div className={mediaFillClass}>
                         <Media fill htmlElement={null} resource={slide.thumbnail} />
                       </div>
                     ) : (
-                      <div className={styles.cardThumbPlaceholder}>{slide.title}</div>
+                      <div className="absolute inset-0 flex items-center justify-center p-4 text-center text-rtm-body-sm font-rtm-body text-signal-line">
+                        {slide.title}
+                      </div>
                     )}
                   </div>
-                  <div className={styles.cardMeta}>
-                    <span className={styles.cardNum}>{String(i + 1).padStart(2, '0')}</span>
+                  <div className="flex items-baseline gap-2 mt-2">
+                    <span className="text-rtm-caption font-rtm-body text-ink-muted">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                     <span
-                      className={cn(styles.cardTitle, i === active && styles.cardTitleActive)}
+                      className={cn(
+                        'text-rtm-body-sm font-rtm-body font-semibold truncate',
+                        i === active ? 'text-cold-white' : 'text-signal-fog',
+                      )}
                     >
                       {slide.title}
                     </span>

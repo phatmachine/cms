@@ -2131,16 +2131,23 @@ export interface Header {
   createdAt?: string | null;
 }
 /**
- * The light "Stone" footer shown at the bottom of every page.
+ * The dark "Ember" footer shown at the bottom of every page.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer".
  */
 export interface Footer {
   id: string;
-  statement?: string | null;
-  brandName?: string | null;
+  headline?: string | null;
+  subhead?: string | null;
+  /**
+   * Short line under the wordmark, in the brand column.
+   */
   missionLine?: string | null;
+  /**
+   * Accent line under the mission line (rendered in gold).
+   */
+  signatureLine?: string | null;
   columns?:
     | {
         heading: string;
@@ -2168,7 +2175,27 @@ export interface Footer {
       }[]
     | null;
   copyrightText?: string | null;
-  tagline?: string | null;
+  disclosure?: string | null;
+  legalLinks?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2707,9 +2734,10 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  statement?: T;
-  brandName?: T;
+  headline?: T;
+  subhead?: T;
   missionLine?: T;
+  signatureLine?: T;
   columns?:
     | T
     | {
@@ -2731,7 +2759,21 @@ export interface FooterSelect<T extends boolean = true> {
         id?: T;
       };
   copyrightText?: T;
-  tagline?: T;
+  disclosure?: T;
+  legalLinks?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

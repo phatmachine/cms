@@ -1,75 +1,133 @@
 /*
   Design tokens for the "Rethink the Machine" campaign homepage.
-  Ported from design_handoff/tokens/*.css — values are final, do not hardcode
-  hex/px equivalents elsewhere, reference these custom properties instead.
+  Synced from the Claude Design system "Rethink The Machine Design System"
+  (claude.ai/design/p/1d73c2e2-eb77-4a9e-ba64-dda9fe1eebea) — values are final,
+  do not hardcode hex/px equivalents elsewhere, reference these custom
+  properties instead.
 */
 :root {
-  /* --- Base neutrals: sand / bone / concrete, light to dark --- */
-  --n-bone: #ede7db;
-  --n-sand-100: #e4dac7;
-  --n-sand-200: #d3c3a6;
-  --n-sand-300: #beaa87;
-  --n-clay: #9c8a70;
-  --n-stone: #736657;
-  --n-concrete: #514a41;
-  --n-charcoal: #332f29;
-  --n-graphite: #211e1a;
-  --n-void: #131210;
+  /* ============================================================
+     NEBULA RAMP — sampled top-to-bottom from the reference sky:
+     cold star-field void → olive drift → brass → gold → pale
+     starlight → ember dust → deep rust earth.
+     This single vertical gradient IS the palette. Everything else
+     below is an alias into it.
+     ============================================================ */
 
-  /* --- Warm flesh tones: the "human" half of the contrast --- */
-  --flesh-blush: #d9b7a4;
-  --flesh-rose: #b98874;
-  --flesh-terra: #a26650;
-  --flesh-sienna: #7b4e41;
-  --flesh-umber: #5d2b25;
+  /* --- Cosmos: the cold upper sky (star-field, dust, teal-black) --- */
+  --cosmos-void: #060e14;
+  --cosmos-900: #0e1b23;
+  --cosmos-800: #1d2d36;
+  --cosmos-700: #2b3537;
+  --cosmos-600: #37403d;
 
-  /* --- Cold clinical / machine tones: the "AI" half of the contrast --- */
-  --cold-white: #f2f4f3;
-  --cold-steel-100: #c7cdcc;
-  --cold-steel-300: #8c9694;
-  --cold-steel-500: #5b6564;
-  --cold-binary: #0a0b0b;
+  /* --- Drift: where cold sky turns to warm haze --- */
+  --drift-olive: #3f3f38;
+  --drift-khaki: #544a3b;
+  --drift-bronze: #725d41;
+  --drift-brass: #98764b;
 
-  /* --- Single accent: spice / rust ember --- */
-  --accent-ember: #c1552e;
-  --accent-ember-dim: #8c3e22;
-  --accent-dune-amber: #e8a23a;
+  /* --- Gold: the luminous core of the image --- */
+  --gold-700: #bc9560;
+  --gold-600: #deb87d;
+  --gold-500: #eccb88;
+  --gold-400: #f2d48c;
+  --gold-300: #f7e2af;
 
-  /* --- Tissue / skin palette --- */
-  --tissue-pearl: #f3e9e2;
-  --tissue-blush: #e9cfc3;
-  --tissue-rose: #ddb6a9;
-  --tissue-vein: #b98f7d;
+  /* --- Starlight: the palest highlights, warm not white --- */
+  --star-200: #f6ebce;
+  --star-100: #fbf4de;
+  --star-50: #fffbee;
 
-  /* --- Signal: deep teal-black dark theme --- */
-  --signal-bg: #162426;
-  --signal-panel: #1f3234;
-  --signal-fog: #93a8a6;
-  --signal-line: #6b7a78;
+  /* --- Ember: the rust horizon at the base of the frame --- */
+  --ember-500: #e1a55d;
+  --ember-600: #c96a28;
+  --ember-700: #8f2e02;
+  --ember-800: #5f260b;
+  --ember-900: #4e1b06;
 
-  /* --- Semantic aliases --- */
-  --surface-page: var(--n-bone);
-  --surface-raised: #f5f0e6;
-  --surface-sunken: var(--n-sand-100);
-  --surface-inverse: var(--n-graphite);
-  --surface-clinical: var(--cold-white);
-  --surface-clinical-dark: var(--cold-binary);
+  /* ============================================================
+     LEGACY ALIASES — old token names remapped onto the nebula ramp
+     so existing components keep resolving. Prefer the ramp above
+     or the semantic aliases below for new work.
+     ============================================================ */
+  --n-bone: var(--star-100);
+  --n-sand-100: var(--star-200);
+  --n-sand-200: var(--gold-300);
+  --n-sand-300: var(--gold-500);
+  --n-clay: var(--drift-brass);
+  --n-stone: var(--drift-bronze);
+  --n-concrete: var(--drift-khaki);
+  --n-charcoal: var(--cosmos-700);
+  --n-graphite: var(--cosmos-800);
+  --n-void: var(--cosmos-void);
 
-  --text-primary: var(--n-graphite);
-  --text-secondary: var(--n-concrete);
-  --text-muted: var(--n-clay);
-  --text-inverse: var(--n-bone);
-  --text-clinical: var(--cold-steel-500);
+  --flesh-blush: var(--gold-300);
+  --flesh-rose: var(--ember-500);
+  --flesh-terra: var(--ember-600);
+  --flesh-sienna: var(--ember-700);
+  --flesh-umber: var(--ember-900);
 
-  --border-subtle: var(--n-sand-200);
-  --border-strong: var(--n-clay);
-  --border-clinical: var(--cold-steel-100);
+  --cold-white: var(--star-50);
+  --cold-steel-100: var(--gold-300);
+  --cold-steel-300: var(--drift-brass);
+  --cold-steel-500: var(--cosmos-700);
+  --cold-binary: var(--cosmos-void);
 
-  --action-primary: var(--accent-ember);
-  --action-primary-hover: var(--accent-ember-dim);
-  --action-on-primary: var(--cold-white);
+  --tissue-pearl: var(--star-50);
+  --tissue-blush: var(--star-200);
+  --tissue-rose: var(--gold-400);
+  --tissue-vein: var(--drift-brass);
 
-  --focus-ring: var(--cold-steel-500);
+  --accent-ember: var(--ember-600);
+  --accent-ember-dim: var(--ember-700);
+  --accent-dune-amber: var(--gold-400);
+
+  --signal-bg: var(--cosmos-900);
+  --signal-panel: var(--cosmos-800);
+  --signal-fog: #9ba79f;
+  --signal-line: var(--cosmos-600);
+
+  /* --- Semantic aliases — default "Dusk" register: warm starlight paper --- */
+  --surface-page: var(--star-100);
+  --surface-raised: var(--star-50);
+  --surface-sunken: var(--star-200);
+  --surface-inverse: var(--cosmos-900);
+  --surface-clinical: var(--star-50);
+  --surface-clinical-dark: var(--cosmos-void);
+
+  --text-primary: var(--cosmos-900);
+  --text-secondary: var(--drift-khaki);
+  --text-muted: var(--drift-brass);
+  --text-inverse: var(--star-100);
+  --text-clinical: var(--cosmos-700);
+
+  --border-subtle: var(--gold-300);
+  --border-strong: var(--drift-brass);
+  --border-clinical: var(--gold-300);
+
+  --action-primary: var(--ember-600);
+  --action-primary-hover: var(--ember-700);
+  --action-on-primary: var(--star-50);
+
+  --focus-ring: var(--drift-bronze);
+
+  /* --- Signature gradient: the reference sky itself --- */
+  --grad-nebula: linear-gradient(
+    180deg,
+    #0e1b23 0%,
+    #2b3537 18%,
+    #3f3f38 27%,
+    #725d41 36%,
+    #bc9560 46%,
+    #f2d48c 57%,
+    #e7c37d 66%,
+    #e1a55d 74%,
+    #8f2e02 82%,
+    #4e1b06 100%
+  );
+  --grad-dawn: linear-gradient(180deg, var(--star-50) 0%, var(--gold-400) 60%, var(--ember-600) 100%);
+  --grad-dust: linear-gradient(180deg, var(--cosmos-900) 0%, var(--drift-bronze) 100%);
 
   /* --- Typography (font families point at next/font variables, see layout.tsx) --- */
   --font-display: var(--font-questrial), ui-sans-serif, system-ui, sans-serif;
@@ -135,21 +193,42 @@
   }
 }
 
-/* Signal theme: dark, soft, moody counterpart to the default Stone (light/sharp) theme.
-   Apply data-theme="signal" on a container to switch registers. */
+/* Signal theme: the cold top of the frame. Deep star-field ground, gold as
+   the only light source. Apply data-theme="signal" on a container to
+   switch registers. Used for product/tooling surfaces (the homepage hero). */
 [data-theme='signal'] {
-  --surface-page: var(--signal-bg);
-  --surface-raised: var(--signal-panel);
-  --surface-sunken: #122022;
-  --surface-inverse: var(--n-bone);
-  --text-primary: var(--cold-white);
-  --text-secondary: var(--signal-fog);
-  --text-muted: var(--signal-line);
-  --text-inverse: var(--n-graphite);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.18);
-  --action-primary: var(--cold-white);
-  --action-primary-hover: var(--tissue-pearl);
-  --action-on-primary: var(--signal-bg);
-  --focus-ring: var(--accent-dune-amber);
+  --surface-page: var(--cosmos-900);
+  --surface-raised: var(--cosmos-800);
+  --surface-sunken: var(--cosmos-void);
+  --surface-inverse: var(--star-100);
+  --text-primary: var(--star-100);
+  --text-secondary: #a9b2ae;
+  --text-muted: #7c8783;
+  --text-inverse: var(--cosmos-900);
+  --border-subtle: rgba(242, 212, 140, 0.12);
+  --border-strong: rgba(242, 212, 140, 0.28);
+  --action-primary: var(--gold-400);
+  --action-primary-hover: var(--gold-600);
+  --action-on-primary: var(--cosmos-900);
+  --focus-ring: var(--gold-400);
+}
+
+/* Ember theme: the rust horizon at the base of the frame. Warm, dense,
+   nostalgic — reserved for campaign pages, covers, and moments of weight,
+   never for sustained reading. Apply data-theme="ember" on a container. */
+[data-theme='ember'] {
+  --surface-page: var(--ember-900);
+  --surface-raised: var(--ember-800);
+  --surface-sunken: #3a1204;
+  --surface-inverse: var(--star-100);
+  --text-primary: var(--star-100);
+  --text-secondary: var(--gold-400);
+  --text-muted: #b98352;
+  --text-inverse: var(--ember-900);
+  --border-subtle: rgba(242, 212, 140, 0.14);
+  --border-strong: rgba(242, 212, 140, 0.32);
+  --action-primary: var(--gold-400);
+  --action-primary-hover: var(--star-200);
+  --action-on-primary: var(--ember-900);
+  --focus-ring: var(--gold-400);
 }

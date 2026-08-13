@@ -317,19 +317,23 @@ export const seed = async ({
         disableRevalidate: true,
       },
       data: {
-        statement: 'We built machines to think. We did not expect to feel toward them.',
-        brandName: 'Rethink the machine',
+        headline: 'Anti-manipulation, not anti-internet.',
+        subhead:
+          'Field notes on attention, on sovereignty, on the choices built into things that were built to feel chosen.',
         missionLine:
           'A study of the gap between mind and model — and what it costs us to close it.',
+        signatureLine: 'We go where the patient is.',
         copyrightText: '© 2026 Rethink the Machine',
-        tagline: 'A body knows what a model cannot.',
+        disclosure:
+          "No dark patterns on this site: disclosure always, no synthetic anything undeclared, no guilt at your exit. You can leave whenever you want. That's the point.",
         columns: [
           {
             heading: 'Navigate',
             links: [
               { link: { type: 'custom', label: 'Home', url: '/' } },
-              { link: { type: 'custom', label: 'The machines', url: '/posts' } },
               { link: { type: 'custom', label: 'Field notes', url: '#field-notes' } },
+              { link: { type: 'custom', label: 'The machines', url: '/posts' } },
+              { link: { type: 'custom', label: 'The protocol', url: '#protocol' } },
               { link: { type: 'custom', label: 'Manifesto', url: '#manifesto' } },
             ],
           },
@@ -337,6 +341,7 @@ export const seed = async ({
             heading: 'Inquiry',
             links: [
               { link: { type: 'custom', label: 'About', url: '#about' } },
+              { link: { type: 'custom', label: 'Method', url: '#method' } },
               {
                 link: {
                   type: 'reference',
@@ -350,10 +355,16 @@ export const seed = async ({
           {
             heading: 'Elsewhere',
             links: [
-              { link: { type: 'custom', label: 'Newsletter', url: '#newsletter' } },
+              { link: { type: 'custom', label: 'Notes by email', url: '#newsletter' } },
+              { link: { type: 'custom', label: 'TikTok', url: '#tiktok' } },
+              { link: { type: 'custom', label: 'Evidence shelf', url: '#evidence-shelf' } },
               { link: { type: 'custom', label: 'RSS', url: '/posts-sitemap.xml' } },
             ],
           },
+        ],
+        legalLinks: [
+          { link: { type: 'custom', label: 'Privacy', url: '/privacy' } },
+          { link: { type: 'custom', label: 'Terms', url: '/terms' } },
         ],
       },
     }),

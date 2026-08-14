@@ -17,25 +17,13 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { SlugField as SlugField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { ComposeField as ComposeField_c25bd927cd468b8e16d7bdb2cc282659 } from '@ai-stack/payloadcms/fields'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
-import { SelectField as SelectField_c25bd927cd468b8e16d7bdb2cc282659 } from '@ai-stack/payloadcms/fields'
-import { PromptEditorField as PromptEditorField_c25bd927cd468b8e16d7bdb2cc282659 } from '@ai-stack/payloadcms/fields'
-import { DynamicProviderSelect as DynamicProviderSelect_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
-import { DynamicModelSelect as DynamicModelSelect_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
-import { ProviderOptionsEditor as ProviderOptionsEditor_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
-import { DynamicVoiceSelect as DynamicVoiceSelect_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
-import { AIConfigDashboard as AIConfigDashboard_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
 import { RowLabel as RowLabel_ec255a65fa6fa8d1faeb09cf35284224 } from '@/Header/RowLabel'
 import { RowLabel as RowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from '@/Footer/RowLabel'
 import { ColumnRowLabel as ColumnRowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from '@/Footer/RowLabel'
-import { EncryptedTextField as EncryptedTextField_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
-import { ModelRowLabel as ModelRowLabel_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
-import { VoicesFetcher as VoicesFetcher_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
 import { default as default_1a7510af427896d367a49dbf838d2de6 } from '@/components/BeforeDashboard'
 import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@/components/BeforeLogin'
-import { InstructionsProvider as InstructionsProvider_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -59,24 +47,12 @@ export const importMap = {
   "@payloadcms/next/client#SlugField": SlugField_2b8867833a34864a02ddf429b0728a40,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@ai-stack/payloadcms/fields#ComposeField": ComposeField_c25bd927cd468b8e16d7bdb2cc282659,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
-  "@ai-stack/payloadcms/fields#SelectField": SelectField_c25bd927cd468b8e16d7bdb2cc282659,
-  "@ai-stack/payloadcms/fields#PromptEditorField": PromptEditorField_c25bd927cd468b8e16d7bdb2cc282659,
-  "@ai-stack/payloadcms/client#DynamicProviderSelect": DynamicProviderSelect_4490b89d4413c1ffaecdacfe72efaf73,
-  "@ai-stack/payloadcms/client#DynamicModelSelect": DynamicModelSelect_4490b89d4413c1ffaecdacfe72efaf73,
-  "@ai-stack/payloadcms/client#ProviderOptionsEditor": ProviderOptionsEditor_4490b89d4413c1ffaecdacfe72efaf73,
-  "@ai-stack/payloadcms/client#DynamicVoiceSelect": DynamicVoiceSelect_4490b89d4413c1ffaecdacfe72efaf73,
-  "@ai-stack/payloadcms/client#AIConfigDashboard": AIConfigDashboard_4490b89d4413c1ffaecdacfe72efaf73,
   "@/Header/RowLabel#RowLabel": RowLabel_ec255a65fa6fa8d1faeb09cf35284224,
   "@/Footer/RowLabel#RowLabel": RowLabel_1f6ff6ff633e3695d348f4f3c58f1466,
   "@/Footer/RowLabel#ColumnRowLabel": ColumnRowLabel_1f6ff6ff633e3695d348f4f3c58f1466,
-  "@ai-stack/payloadcms/client#EncryptedTextField": EncryptedTextField_4490b89d4413c1ffaecdacfe72efaf73,
-  "@ai-stack/payloadcms/client#ModelRowLabel": ModelRowLabel_4490b89d4413c1ffaecdacfe72efaf73,
-  "@ai-stack/payloadcms/client#VoicesFetcher": VoicesFetcher_4490b89d4413c1ffaecdacfe72efaf73,
   "@/components/BeforeDashboard#default": default_1a7510af427896d367a49dbf838d2de6,
   "@/components/BeforeLogin#default": default_8a7ab0eb7ab5c511aba12e68480bfe5e,
-  "@ai-stack/payloadcms/client#InstructionsProvider": InstructionsProvider_4490b89d4413c1ffaecdacfe72efaf73,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

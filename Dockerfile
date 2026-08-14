@@ -1,9 +1,10 @@
 FROM node:22.17.0-slim AS base
-ENV NODE_ENV=production
 WORKDIR /app
 
 FROM base AS deps
 COPY package.json package-lock.json* .npmrc* ./
+# NODE_ENV must NOT be "production" here - npm ci would skip devDependencies
+# (@tailwindcss/postcss, typescript, etc.) that the build step below needs.
 RUN npm ci
 
 FROM base AS builder

@@ -7,11 +7,16 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ComparisonTableBlock } from '@/blocks/ComparisonTable/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FAQBlock } from '@/blocks/FAQ/Component'
+import { FeatureGridBlock } from '@/blocks/FeatureGrid/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { HowToSwitchBlock } from '@/blocks/HowToSwitch/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { OptionsBlock } from '@/blocks/Options/Component'
+import { PostsCarouselBlock } from '@/blocks/PostsCarousel/Component'
+import { ProtocolCTABlock } from '@/blocks/ProtocolCTA/Component'
+import { StatsShelfBlock } from '@/blocks/StatsShelf/Component'
 import { TestimonialBlock } from '@/blocks/Testimonial/Component'
+import { ThesisBlock } from '@/blocks/Thesis/Component'
 import { WhySwitchBlock } from '@/blocks/WhySwitch/Component'
 
 const blockComponents = {
@@ -20,11 +25,16 @@ const blockComponents = {
   content: ContentBlock,
   cta: CallToActionBlock,
   faq: FAQBlock,
+  featureGrid: FeatureGridBlock,
   formBlock: FormBlock,
   howToSwitch: HowToSwitchBlock,
   mediaBlock: MediaBlock,
   options: OptionsBlock,
+  postsCarousel: PostsCarouselBlock,
+  protocolCta: ProtocolCTABlock,
+  statsShelf: StatsShelfBlock,
   testimonial: TestimonialBlock,
+  thesis: ThesisBlock,
   whySwitch: WhySwitchBlock,
 }
 

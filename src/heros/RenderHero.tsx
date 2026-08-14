@@ -5,12 +5,14 @@ import type { Page } from '@/payload-types'
 import { HighImpactHero } from '@/heros/HighImpact'
 import { LowImpactHero } from '@/heros/LowImpact'
 import { MediumImpactHero } from '@/heros/MediumImpact'
+import { NebulaHero } from '@/heros/Nebula'
 import { SignalCarouselHero } from '@/heros/SignalCarousel'
 
 const heroes = {
   highImpact: HighImpactHero,
   lowImpact: LowImpactHero,
   mediumImpact: MediumImpactHero,
+  nebula: NebulaHero,
   signalCarousel: SignalCarouselHero,
 }
 

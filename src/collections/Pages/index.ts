@@ -7,11 +7,16 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { ComparisonTable } from '../../blocks/ComparisonTable/config'
 import { Content } from '../../blocks/Content/config'
 import { FAQ } from '../../blocks/FAQ/config'
+import { FeatureGrid } from '../../blocks/FeatureGrid/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { HowToSwitch } from '../../blocks/HowToSwitch/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { Options } from '../../blocks/Options/config'
+import { PostsCarousel } from '../../blocks/PostsCarousel/config'
+import { ProtocolCTA } from '../../blocks/ProtocolCTA/config'
+import { StatsShelf } from '../../blocks/StatsShelf/config'
 import { Testimonial } from '../../blocks/Testimonial/config'
+import { Thesis } from '../../blocks/Thesis/config'
 import { WhySwitch } from '../../blocks/WhySwitch/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
@@ -90,6 +95,11 @@ export const Pages: CollectionConfig<'pages'> = {
                 HowToSwitch,
                 Testimonial,
                 FAQ,
+                Thesis,
+                FeatureGrid,
+                StatsShelf,
+                PostsCarousel,
+                ProtocolCTA,
               ],
               required: true,
               admin: {

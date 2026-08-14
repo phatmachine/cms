@@ -310,3 +310,27 @@ html[data-theme='light'] {
     opacity: 1;
   }
 }
+
+@keyframes rtm-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+  50% {
+    transform: translate3d(-3.5%, 1.5%, 0) scale(1.14);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+}
+
+@keyframes rtm-breathe {
+  0% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.28;
+  }
+}

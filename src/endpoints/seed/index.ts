@@ -275,7 +275,13 @@ export const seed = async ({
       context: {
         disableRevalidate: true,
       },
-      data: home({ metaImage: imageHomeDoc, slideIds: slideDocs.map((doc) => doc.id) }),
+      data: home({
+        heroImage: imageHomeDoc,
+        metaImage: imageHomeDoc,
+        protocolImage: image3Doc,
+        thesisImageA: image1Doc,
+        thesisImageB: image2Doc,
+      }),
     }),
     payload.create({
       collection: 'pages',
@@ -297,10 +303,13 @@ export const seed = async ({
       },
       data: {
         navItems: [
-          { link: { type: 'custom', label: 'The machines', url: '/posts' } },
-          { link: { type: 'custom', label: 'Field notes', url: '#field-notes' } },
-          { link: { type: 'custom', label: 'Manifesto', url: '#manifesto' } },
-          { link: { type: 'custom', label: 'Archive', url: '#archive' } },
+          { link: { type: 'custom', label: 'Field notes', url: '#field-notes' }, meta: 'Essays' },
+          { link: { type: 'custom', label: 'The machines', url: '/posts' }, meta: 'Receipts' },
+          { link: { type: 'custom', label: 'Evidence', url: '#evidence' }, meta: 'Sources' },
+          { link: { type: 'custom', label: 'The protocol', url: '#protocol' }, meta: 'Practice' },
+          { link: { type: 'custom', label: 'Manifesto', url: '#manifesto' }, meta: 'Position' },
+        ],
+        footerLinks: [
           {
             link: {
               type: 'reference',
@@ -308,7 +317,11 @@ export const seed = async ({
               reference: { relationTo: 'pages', value: contactPage.id },
             },
           },
+          { link: { type: 'custom', label: 'Press', url: '#press' } },
+          { link: { type: 'custom', label: 'RSS', url: '/posts-sitemap.xml' } },
+          { link: { type: 'custom', label: 'TikTok', url: '#tiktok' } },
         ],
+        footerNote: 'No guilt at your exit. Close this whenever you want.',
       },
     }),
     payload.updateGlobal({

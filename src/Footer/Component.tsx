@@ -2,19 +2,10 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import React from 'react'
 
 import { CMSLink } from '@/components/Link'
+import { Wordmark } from '@/components/Wordmark'
 
 const linkClasses =
   'no-underline hover:text-gold-400 [transition:color_var(--duration-base)_var(--ease-standard)]'
-
-const wordmarkSpans = [
-  { text: 'RET', className: 'tracking-[0.02em] text-star-100' },
-  { text: 'HIN', className: 'tracking-[0.10em] text-star-200' },
-  { text: 'K TH', className: 'tracking-[0.18em] text-gold-400' },
-  { text: 'E MA', className: 'tracking-[0.26em] text-gold-600' },
-  { text: 'CHI', className: 'tracking-[0.36em] text-gold-700' },
-  { text: 'N', className: 'tracking-[0.44em] text-drift-brass' },
-  { text: 'E', className: 'text-drift-bronze' },
-]
 
 export async function Footer() {
   const footerData = await getCachedGlobal('footer', 1)()
@@ -53,17 +44,7 @@ export async function Footer() {
 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-[clamp(32px,4vw,56px)] border-t border-hairline pt-[clamp(32px,4vw,48px)]">
           <div className="grid gap-3.5 content-start">
-            <span
-              role="img"
-              aria-label="Rethink the Machine"
-              className="inline-block whitespace-nowrap font-rtm-display text-[17px] leading-none"
-            >
-              {wordmarkSpans.map(({ text, className }, i) => (
-                <span aria-hidden="true" className={className} key={i}>
-                  {text}
-                </span>
-              ))}
-            </span>
+            <Wordmark className="text-[17px]" />
             {missionLine && (
               <p className="m-0 max-w-[32ch] text-pretty text-rtm-body-sm font-rtm-body text-ink-muted">
                 {missionLine}

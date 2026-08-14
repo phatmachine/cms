@@ -39,8 +39,20 @@ export const hero: Field = {
           label: 'Signal Carousel (campaign homepage)',
           value: 'signalCarousel',
         },
+        {
+          label: 'Nebula (narrative homepage)',
+          value: 'nebula',
+        },
       ],
       required: true,
+    },
+    {
+      name: 'eyebrow',
+      type: 'text',
+      admin: {
+        condition: (_, { type } = {}) => type === 'nebula',
+        description: 'Small label above the headline, e.g. "Field notes on a cold intelligence".',
+      },
     },
     {
       name: 'richText',
@@ -64,7 +76,7 @@ export const hero: Field = {
       overrides: {
         maxRows: 2,
         admin: {
-          condition: (_, { type } = {}) => type !== 'signalCarousel',
+          condition: (_, { type } = {}) => type !== 'signalCarousel' && type !== 'nebula',
         },
       },
     }),
@@ -72,7 +84,7 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'nebula'].includes(type),
       },
       relationTo: 'media',
       required: true,
@@ -142,6 +154,45 @@ export const hero: Field = {
               admin: { width: '50%' },
             },
           ],
+        },
+      ],
+    },
+    {
+      name: 'nebulaSettings',
+      type: 'group',
+      label: 'Nebula settings',
+      admin: {
+        condition: (_, { type } = {}) => type === 'nebula',
+      },
+      fields: [
+        {
+          name: 'stats',
+          type: 'array',
+          label: 'Stat tiles',
+          maxRows: 4,
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'figure',
+              type: 'text',
+              required: true,
+              admin: { description: 'e.g. "1,200"' },
+            },
+            {
+              name: 'caption',
+              type: 'text',
+              required: true,
+              admin: { description: 'e.g. "farewells audited"' },
+            },
+          ],
+        },
+        {
+          name: 'formButtonLabel',
+          type: 'text',
+          label: 'Email capture button label',
+          defaultValue: 'Notes by email',
         },
       ],
     },

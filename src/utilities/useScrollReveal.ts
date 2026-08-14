@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react'
 
 let scrollTriggerRegistered = false
 
-function ensureScrollTrigger() {
+export function ensureScrollTrigger() {
   if (!scrollTriggerRegistered) {
     gsap.registerPlugin(ScrollTrigger)
     scrollTriggerRegistered = true

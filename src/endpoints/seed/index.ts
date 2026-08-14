@@ -2,7 +2,6 @@ import type { CollectionSlug, Payload, PayloadRequest, File } from 'payload'
 
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
@@ -15,9 +14,6 @@ import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
 import { slides as slideSeeds } from './slides'
-
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -165,7 +161,7 @@ export const seed = async ({
   payload.logger.info(`— Seeding carousel slides...`)
 
   const slide1VideoBuffer = readLocalFile(
-    path.resolve(dirname, '../../../design_handoff/assets/video/slide-1.mp4'),
+    path.join(process.cwd(), 'public', 'media', 'slide-1.mp4'),
     'video/mp4',
   )
 

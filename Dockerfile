@@ -9,6 +9,10 @@ RUN npm ci
 
 FROM base AS builder
 WORKDIR /app
+# the in-memory mongod binary (see below) is dynamically linked against libcurl,
+# which the slim base image doesn't ship
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # next build statically renders pages that call getPayload(), which requires a secret

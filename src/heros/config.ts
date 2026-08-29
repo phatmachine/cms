@@ -89,8 +89,7 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) =>
-          ['highImpact', 'mediumImpact', 'nebula', 'paper'].includes(type),
+        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'nebula'].includes(type),
       },
       relationTo: 'media',
       required: true,
@@ -210,6 +209,25 @@ export const hero: Field = {
         condition: (_, { type } = {}) => type === 'paper',
       },
       fields: [
+        {
+          name: 'heroImages',
+          type: 'array',
+          label: 'Hero images',
+          minRows: 1,
+          maxRows: 3,
+          admin: {
+            description:
+              'Add up to 3 images. One is picked at random on every visit, so the homepage feels different each time someone lands on it.',
+          },
+          fields: [
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+          ],
+        },
         {
           name: 'metaLine',
           type: 'text',

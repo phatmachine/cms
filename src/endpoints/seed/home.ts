@@ -2,7 +2,7 @@ import type { RequiredDataFromCollectionSlug } from 'payload'
 import type { Media } from '@/payload-types'
 
 type HomeArgs = {
-  heroImage: Media
+  heroImages: Media[]
   metaImage: Media
   projectImageCommute: Media
   projectImageJump: Media
@@ -63,7 +63,7 @@ const statement = (before: string, emphasis: string, after: string) => ({
 })
 
 export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
-  heroImage,
+  heroImages,
   metaImage,
   projectImageCommute,
   projectImageJump,
@@ -90,8 +90,8 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
           version: 1,
         },
       },
-      media: heroImage.id,
       paperSettings: {
+        heroImages: heroImages.map((image) => ({ image: image.id })),
         metaLine: 'Est. 2026 / Attention & Sovereignty',
         sidebarLabel: 'Rethink the Machine // Attention, not capture // Est. 2026',
       },

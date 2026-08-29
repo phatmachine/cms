@@ -228,6 +228,15 @@ export interface Page {
     };
     paperSettings?: {
       /**
+       * Add up to 3 images. One is picked at random on every visit, so the homepage feels different each time someone lands on it.
+       */
+      heroImages?:
+        | {
+            image: string | Media;
+            id?: string | null;
+          }[]
+        | null;
+      /**
        * e.g. "Est. 2026 / Attention & Sovereignty"
        */
       metaLine?: string | null;
@@ -1483,6 +1492,12 @@ export interface PagesSelect<T extends boolean = true> {
         paperSettings?:
           | T
           | {
+              heroImages?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
               metaLine?: T;
               sidebarLabel?: T;
             };

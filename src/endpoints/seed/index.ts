@@ -346,7 +346,11 @@ export const seed = async ({
         disableRevalidate: true,
       },
       data: home({
-        heroImage: seedPhotoDocs.heroNotes,
+        heroImages: [
+          seedPhotoDocs.heroNotes,
+          seedPhotoDocs.undergroundCar,
+          seedPhotoDocs.nightWalkers,
+        ],
         metaImage: seedPhotoDocs.heroNotes,
         projectImageCommute: seedPhotoDocs.heldAttention,
         projectImageJump: seedPhotoDocs.gloriousFriction,

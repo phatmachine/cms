@@ -1,11 +1,34 @@
 /*
-  Design tokens for the "Rethink the Machine" campaign homepage.
-  Synced from the Claude Design system "Rethink The Machine Design System"
-  (claude.ai/design/p/1d73c2e2-eb77-4a9e-ba64-dda9fe1eebea) — values are final,
-  do not hardcode hex/px equivalents elsewhere, reference these custom
+  Design tokens for "Rethink the Machine".
+  Sitewide default is the "Paper" register — synced from the Claude Design
+  system "Rethink The Machine - v2" (warm off-white ground, dark olive ink,
+  olive/umber accents; Inter, Playfair Display, JetBrains Mono). Values are
+  final, do not hardcode hex/px equivalents elsewhere, reference these custom
   properties instead.
+
+  The older "Nebula Ramp" (cosmos/drift/gold/star/ember) below still backs the
+  [data-theme='signal'] and [data-theme='ember'] overrides used by pre-rebrand
+  blocks (Thesis, FeatureGrid, StatsShelf, ProtocolCTA, the Nebula/Signal
+  Carousel heroes). Those sections self-contain their own dark palette via
+  that attribute, so they're unaffected by the Paper defaults below.
 */
 :root {
+  /* ============================================================
+     PAPER — the current brand register. Warm off-white ground, dark
+     olive ink, olive-brass and umber accents. No blue, no red, no
+     semantic green, no dark mode.
+     ============================================================ */
+  --rtm-bg: #fdfcf7;
+  --rtm-fg: #3d3d33;
+  --rtm-accent: #827b4c;
+  --rtm-umber: #5e4a3e;
+
+  --rtm-ground-page: #fdfcf7;
+  --rtm-ground-footer: #f7f6ed;
+  --rtm-ground-slab: #f0eee2;
+  --rtm-ground-hero: #ebe7d5;
+  --rtm-hairline: #e0dfd5;
+
   /* ============================================================
      NEBULA RAMP — sampled top-to-bottom from the reference sky:
      cold star-field void → olive drift → brass → gold → pale
@@ -88,29 +111,29 @@
   --signal-fog: #9ba79f;
   --signal-line: var(--cosmos-600);
 
-  /* --- Semantic aliases — default "Dusk" register: warm starlight paper --- */
-  --surface-page: var(--star-100);
-  --surface-raised: var(--star-50);
-  --surface-sunken: var(--star-200);
-  --surface-inverse: var(--cosmos-900);
-  --surface-clinical: var(--star-50);
-  --surface-clinical-dark: var(--cosmos-void);
+  /* --- Semantic aliases — default "Paper" register --- */
+  --surface-page: var(--rtm-bg);
+  --surface-raised: var(--rtm-ground-slab);
+  --surface-sunken: var(--rtm-ground-footer);
+  --surface-inverse: var(--rtm-fg);
+  --surface-clinical: var(--rtm-bg);
+  --surface-clinical-dark: var(--rtm-fg);
 
-  --text-primary: var(--cosmos-900);
-  --text-secondary: var(--drift-khaki);
-  --text-muted: var(--drift-brass);
-  --text-inverse: var(--star-100);
-  --text-clinical: var(--cosmos-700);
+  --text-primary: var(--rtm-fg);
+  --text-secondary: var(--rtm-umber);
+  --text-muted: var(--rtm-accent);
+  --text-inverse: var(--rtm-bg);
+  --text-clinical: var(--rtm-fg);
 
-  --border-subtle: var(--gold-300);
-  --border-strong: var(--drift-brass);
-  --border-clinical: var(--gold-300);
+  --border-subtle: var(--rtm-hairline);
+  --border-strong: var(--rtm-accent);
+  --border-clinical: var(--rtm-hairline);
 
-  --action-primary: var(--ember-600);
-  --action-primary-hover: var(--ember-700);
-  --action-on-primary: var(--star-50);
+  --action-primary: var(--rtm-umber);
+  --action-primary-hover: var(--rtm-fg);
+  --action-on-primary: var(--rtm-bg);
 
-  --focus-ring: var(--drift-bronze);
+  --focus-ring: var(--rtm-accent);
 
   /* --- Signature gradient: the reference sky itself --- */
   --grad-nebula: linear-gradient(
@@ -129,9 +152,14 @@
   --grad-dawn: linear-gradient(180deg, var(--star-50) 0%, var(--gold-400) 60%, var(--ember-600) 100%);
   --grad-dust: linear-gradient(180deg, var(--cosmos-900) 0%, var(--drift-bronze) 100%);
 
-  /* --- Typography (font families point at next/font variables, see layout.tsx) --- */
-  --font-display: var(--font-questrial), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  /* --- Typography (font families point at next/font variables, see layout.tsx) ---
+     Inter carries display type and UI text; Playfair Display is reserved for
+     italic serif prose (narrative statements, project descriptions); JetBrains
+     Mono is reserved for labels, nav, captions — always uppercase, tracked. */
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-mono-label: var(--font-jetbrains-mono), ui-monospace, monospace;
 
   --text-display-hero: 400 96px/0.98 var(--font-display);
   --ls-display-hero: -3px;

@@ -5,7 +5,7 @@ import { CMSLink } from '@/components/Link'
 import { Wordmark } from '@/components/Wordmark'
 
 const linkClasses =
-  'no-underline hover:text-gold-400 [transition:color_var(--duration-base)_var(--ease-standard)]'
+  'no-underline hover:text-rtm-fg [transition:color_var(--duration-base)_var(--ease-standard)]'
 
 export async function Footer() {
   const footerData = await getCachedGlobal('footer', 1)()
@@ -22,36 +22,31 @@ export async function Footer() {
   } = footerData || {}
 
   return (
-    <footer
-      data-theme="ember"
-      className="relative overflow-hidden bg-[var(--surface-page)] text-ink text-rtm-body font-rtm-body"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.28)_0%,rgba(0,0,0,0)_55%)]" />
-
+    <footer className="relative overflow-hidden bg-rtm-ground-footer text-rtm-fg text-rtm-body font-rtm-body">
       <div className="relative max-w-[1240px] mx-auto grid gap-[clamp(48px,6vw,80px)] px-[clamp(24px,5vw,72px)] pt-[clamp(64px,8vw,120px)] pb-8">
         <div className="grid grid-cols-[minmax(0,1fr)] gap-[clamp(24px,3vw,40px)]">
           {headline && (
-            <p className="m-0 max-w-[22ch] text-pretty text-[clamp(34px,5.4vw,68px)] leading-[1.02] tracking-[-2px] font-rtm-display font-normal text-gold-300">
+            <p className="m-0 max-w-[24ch] text-pretty text-[clamp(30px,4vw,56px)] italic leading-[1.1] font-rtm-serif font-normal text-rtm-umber">
               {headline}
             </p>
           )}
           {subhead && (
-            <p className="m-0 max-w-[46ch] text-pretty text-rtm-body-lg font-rtm-body text-ink-secondary">
+            <p className="m-0 max-w-[46ch] text-pretty text-rtm-body-lg font-rtm-serif text-rtm-fg">
               {subhead}
             </p>
           )}
         </div>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-[clamp(32px,4vw,56px)] border-t border-hairline pt-[clamp(32px,4vw,48px)]">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-[clamp(32px,4vw,56px)] border-t border-rtm-hairline pt-[clamp(32px,4vw,48px)]">
           <div className="grid gap-3.5 content-start">
-            <Wordmark className="text-[17px]" />
+            <Wordmark className="text-[19px]" variant="footer" />
             {missionLine && (
-              <p className="m-0 max-w-[32ch] text-pretty text-rtm-body-sm font-rtm-body text-ink-muted">
+              <p className="m-0 max-w-[32ch] text-pretty text-rtm-body-sm font-rtm-body text-rtm-umber">
                 {missionLine}
               </p>
             )}
             {signatureLine && (
-              <p className="m-0 max-w-[32ch] text-rtm-body-sm font-rtm-body text-gold-400">
+              <p className="m-0 max-w-[32ch] text-rtm-caption font-rtm-mono-label tracking-caption uppercase text-rtm-accent">
                 {signatureLine}
               </p>
             )}
@@ -59,13 +54,13 @@ export async function Footer() {
 
           {columns?.map((column, i) => (
             <nav className="grid gap-3 content-start" key={i}>
-              <span className="text-rtm-label font-rtm-body tracking-label uppercase text-ink-muted">
+              <span className="text-rtm-label font-rtm-mono-label tracking-label uppercase text-rtm-accent">
                 {column.heading}
               </span>
               {column.links?.map(({ link }, j) => (
                 <CMSLink
                   appearance="inline"
-                  className={`text-rtm-body font-rtm-body text-ink ${linkClasses}`}
+                  className={`text-rtm-body-sm font-rtm-mono-label tracking-label uppercase text-rtm-fg ${linkClasses}`}
                   key={j}
                   {...link}
                 />
@@ -74,14 +69,14 @@ export async function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-4 border-t border-hairline pt-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-4 border-t border-rtm-hairline pt-6">
           {copyrightText && (
-            <span className="text-rtm-caption font-rtm-body tracking-caption text-ink-muted">
+            <span className="text-rtm-caption font-rtm-mono-label tracking-caption uppercase text-rtm-accent">
               {copyrightText}
             </span>
           )}
           {disclosure && (
-            <span className="max-w-[64ch] text-pretty text-rtm-caption font-rtm-body tracking-caption text-ink-muted">
+            <span className="max-w-[64ch] text-pretty text-rtm-caption font-rtm-mono-label tracking-caption uppercase text-rtm-accent">
               {disclosure}
             </span>
           )}
@@ -90,7 +85,7 @@ export async function Footer() {
               {legalLinks.map(({ link }, i) => (
                 <CMSLink
                   appearance="inline"
-                  className={`text-rtm-caption font-rtm-body tracking-caption text-ink-muted ${linkClasses}`}
+                  className={`text-rtm-caption font-rtm-mono-label tracking-caption uppercase text-rtm-accent ${linkClasses}`}
                   key={i}
                   {...link}
                 />

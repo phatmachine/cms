@@ -3,29 +3,39 @@ import type { Metadata } from 'next'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
-import { Figtree, Questrial } from 'next/font/google'
+import { Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
+import { GrainCanvas } from '@/components/GrainCanvas'
 import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
+import { ScrollProgress } from '@/components/ScrollProgress'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
-const questrial = Questrial({
+const inter = Inter({
   subsets: ['latin'],
-  weight: '400',
-  variable: '--font-questrial',
+  weight: ['400', '500', '600', '700', '900'],
+  variable: '--font-inter',
 })
 
-const figtree = Figtree({
+const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-figtree',
+  style: ['normal', 'italic'],
+  weight: ['400', '500'],
+  variable: '--font-playfair',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-jetbrains-mono',
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,7 +43,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={cn(GeistSans.variable, GeistMono.variable, questrial.variable, figtree.variable)}
+      className={cn(
+        GeistSans.variable,
+        GeistMono.variable,
+        inter.variable,
+        playfairDisplay.variable,
+        jetbrainsMono.variable,
+      )}
       lang="en"
       suppressHydrationWarning
     >
@@ -50,6 +66,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           />
 
+          <ScrollProgress />
+          <GrainCanvas />
           <Header />
           {children}
           <Footer />

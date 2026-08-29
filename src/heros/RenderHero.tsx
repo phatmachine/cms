@@ -6,6 +6,7 @@ import { HighImpactHero } from '@/heros/HighImpact'
 import { LowImpactHero } from '@/heros/LowImpact'
 import { MediumImpactHero } from '@/heros/MediumImpact'
 import { NebulaHero } from '@/heros/Nebula'
+import { PaperHero } from '@/heros/PaperHero'
 import { SignalCarouselHero } from '@/heros/SignalCarousel'
 
 const heroes = {
@@ -13,6 +14,7 @@ const heroes = {
   lowImpact: LowImpactHero,
   mediumImpact: MediumImpactHero,
   nebula: NebulaHero,
+  paper: PaperHero,
   signalCarousel: SignalCarouselHero,
 }
 

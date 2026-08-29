@@ -1,4 +1,5 @@
 import type { CollectionSlug, Payload, PayloadRequest, File } from 'payload'
+import type { Media } from '@/payload-types'
 
 import fs from 'fs'
 import path from 'path'
@@ -142,6 +143,79 @@ export const seed = async ({
     ),
   ])
 
+  payload.logger.info(`— Seeding "Paper" homepage photography...`)
+
+  // The current homepage's real photography — sourced on Unsplash, resized
+  // and re-encoded into public/media/seed-photography/. The first four back
+  // the homepage hero and its three project rows; the rest are deposited in
+  // the media library for later use.
+  const seedPhotoDir = path.join(process.cwd(), 'public', 'media', 'seed-photography')
+  const seedPhotos = [
+    {
+      file: 'hero-notes.jpg',
+      key: 'heroNotes' as const,
+      alt: 'A woman rides a sunlit train carriage, glasses on, looking down — photo by Annie Williams / Unsplash',
+    },
+    {
+      file: 'held-attention.jpg',
+      key: 'heldAttention' as const,
+      alt: 'A film crew shoots between the seats of a crowded subway carriage — photo by Gene Dizon / Unsplash',
+    },
+    {
+      file: 'glorious-friction.jpg',
+      key: 'gloriousFriction' as const,
+      alt: 'A woman leaps across a quiet suburban street at golden hour — photo by Tanner Ross / Unsplash',
+    },
+    {
+      file: 'quiet-exit.jpg',
+      key: 'quietExit' as const,
+      alt: 'A woman asleep, head down on a train table, in warm afternoon light — photo by Abbie Bernet / Unsplash',
+    },
+    {
+      file: 'convenience-store.jpg',
+      key: 'convenienceStore' as const,
+      alt: 'Two figures beside a lit drinks fridge in a late-night convenience store — photo by Frankie Cordoba / Unsplash',
+    },
+    {
+      file: 'night-walkers.jpg',
+      key: 'nightWalkers' as const,
+      alt: 'A group of friends walking a path at dusk — photo by Brian Lundquist / Unsplash',
+    },
+    {
+      file: 'rooftop.jpg',
+      key: 'rooftop' as const,
+      alt: 'Three friends on a rooftop at night, one holding a beer — photo by Sasha Matveeva / Unsplash',
+    },
+    {
+      file: 'skaters.jpg',
+      key: 'skaters' as const,
+      alt: 'A group of skaters gathered on stone steps at night — photo by Frankie Cordoba / Unsplash',
+    },
+    {
+      file: 'underground-car.jpg',
+      key: 'undergroundCar' as const,
+      alt: 'A woman with pale hair watches a car pass beneath an overpass — photo by Lesha Tuman / Unsplash',
+    },
+    {
+      file: 'bathtub.jpg',
+      key: 'bathtub' as const,
+      alt: 'Two people relax with their feet up in a freestanding bathtub — photo by Tomiris Mantaeva / Unsplash',
+    },
+  ]
+
+  const seedPhotoDocs = Object.fromEntries(
+    await Promise.all(
+      seedPhotos.map(async ({ file, key, alt }) => {
+        const doc = await payload.create({
+          collection: 'media',
+          data: { alt },
+          file: readLocalFile(path.join(seedPhotoDir, file), 'image/jpeg'),
+        })
+        return [key, doc] as const
+      }),
+    ),
+  ) as Record<(typeof seedPhotos)[number]['key'], Media>
+
   payload.logger.info(`— Seeding example page (Leaving Gmail)...`)
 
   const leavingGmailPage = await payload.create({
@@ -272,11 +346,11 @@ export const seed = async ({
         disableRevalidate: true,
       },
       data: home({
-        heroImage: imageHomeDoc,
-        metaImage: imageHomeDoc,
-        protocolImage: image3Doc,
-        thesisImageA: image1Doc,
-        thesisImageB: image2Doc,
+        heroImage: seedPhotoDocs.heroNotes,
+        metaImage: seedPhotoDocs.heroNotes,
+        projectImageCommute: seedPhotoDocs.heldAttention,
+        projectImageJump: seedPhotoDocs.gloriousFriction,
+        projectImageRest: seedPhotoDocs.quietExit,
       }),
     }),
     payload.create({
@@ -299,11 +373,16 @@ export const seed = async ({
       },
       data: {
         navItems: [
-          { link: { type: 'custom', label: 'Field notes', url: '#field-notes' }, meta: 'Essays' },
-          { link: { type: 'custom', label: 'The machines', url: '/posts' }, meta: 'Receipts' },
-          { link: { type: 'custom', label: 'Evidence', url: '#evidence' }, meta: 'Sources' },
-          { link: { type: 'custom', label: 'The protocol', url: '#protocol' }, meta: 'Practice' },
-          { link: { type: 'custom', label: 'Manifesto', url: '#manifesto' }, meta: 'Position' },
+          { link: { type: 'custom', label: 'Our thesis', url: '/#our-thesis' }, meta: 'Position' },
+          { link: { type: 'custom', label: 'Field notes', url: '/posts' }, meta: 'Receipts' },
+          {
+            link: {
+              type: 'reference',
+              label: 'Contact',
+              reference: { relationTo: 'pages', value: contactPage.id },
+            },
+            meta: 'Say hello',
+          },
         ],
         footerLinks: [
           {
@@ -340,10 +419,8 @@ export const seed = async ({
             heading: 'Navigate',
             links: [
               { link: { type: 'custom', label: 'Home', url: '/' } },
-              { link: { type: 'custom', label: 'Field notes', url: '#field-notes' } },
-              { link: { type: 'custom', label: 'The machines', url: '/posts' } },
-              { link: { type: 'custom', label: 'The protocol', url: '#protocol' } },
-              { link: { type: 'custom', label: 'Manifesto', url: '#manifesto' } },
+              { link: { type: 'custom', label: 'Our thesis', url: '/#our-thesis' } },
+              { link: { type: 'custom', label: 'Field notes', url: '/posts' } },
             ],
           },
           {
@@ -366,7 +443,6 @@ export const seed = async ({
             links: [
               { link: { type: 'custom', label: 'Notes by email', url: '#newsletter' } },
               { link: { type: 'custom', label: 'TikTok', url: '#tiktok' } },
-              { link: { type: 'custom', label: 'Evidence shelf', url: '#evidence-shelf' } },
               { link: { type: 'custom', label: 'RSS', url: '/posts-sitemap.xml' } },
             ],
           },

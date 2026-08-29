@@ -11,8 +11,10 @@ import { FeatureGridBlock } from '@/blocks/FeatureGrid/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { HowToSwitchBlock } from '@/blocks/HowToSwitch/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { NarrativeBlock } from '@/blocks/Narrative/Component'
 import { OptionsBlock } from '@/blocks/Options/Component'
 import { PostsCarouselBlock } from '@/blocks/PostsCarousel/Component'
+import { ProjectRowBlock } from '@/blocks/ProjectRow/Component'
 import { ProtocolCTABlock } from '@/blocks/ProtocolCTA/Component'
 import { StatsShelfBlock } from '@/blocks/StatsShelf/Component'
 import { TestimonialBlock } from '@/blocks/Testimonial/Component'
@@ -29,8 +31,10 @@ const blockComponents = {
   formBlock: FormBlock,
   howToSwitch: HowToSwitchBlock,
   mediaBlock: MediaBlock,
+  narrative: NarrativeBlock,
   options: OptionsBlock,
   postsCarousel: PostsCarouselBlock,
+  projectRow: ProjectRowBlock,
   protocolCta: ProtocolCTABlock,
   statsShelf: StatsShelfBlock,
   testimonial: TestimonialBlock,

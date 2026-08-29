@@ -155,7 +155,7 @@ export interface Page {
   id: string;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'signalCarousel' | 'nebula';
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'signalCarousel' | 'nebula' | 'paper';
     /**
      * Small label above the headline, e.g. "Field notes on a cold intelligence".
      */
@@ -226,6 +226,16 @@ export interface Page {
         | null;
       formButtonLabel?: string | null;
     };
+    paperSettings?: {
+      /**
+       * e.g. "Est. 2026 / Attention & Sovereignty"
+       */
+      metaLine?: string | null;
+      /**
+       * e.g. "Rethink the Machine // Attention, not capture // Est. 2026"
+       */
+      sidebarLabel?: string | null;
+    };
   };
   layout: (
     | CallToActionBlock
@@ -244,6 +254,8 @@ export interface Page {
     | StatsShelfBlock
     | PostsCarouselBlock
     | ProtocolCTABlock
+    | NarrativeBlock
+    | ProjectRowBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1074,6 +1086,81 @@ export interface ProtocolCTABlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NarrativeBlock".
+ */
+export interface NarrativeBlock {
+  /**
+   * e.g. "Our thesis [01]". Set in mono, above a hairline rule.
+   */
+  label?: string | null;
+  /**
+   * One long sentence, or one short declarative. Select one phrase and italicise it for emphasis — the brand marks exactly one per statement.
+   */
+  statement: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'narrative';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectRowBlock".
+ */
+export interface ProjectRowBlock {
+  image: string | Media;
+  /**
+   * Zero-padded, e.g. "001".
+   */
+  number?: string | null;
+  /**
+   * Alternate this with neighbouring rows.
+   */
+  side?: ('left' | 'right') | null;
+  /**
+   * Two words, evocative, no verbs — e.g. "Held Attention". Rendered uppercase.
+   */
+  title: string;
+  /**
+   * One or two sentences, ending on a concrete noun pair.
+   */
+  description?: string | null;
+  /**
+   * Optional. The round button — keep the label to one word, e.g. "Read".
+   */
+  link: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'projectRow';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1393,6 +1480,12 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               formButtonLabel?: T;
             };
+        paperSettings?:
+          | T
+          | {
+              metaLine?: T;
+              sidebarLabel?: T;
+            };
       };
   layout?:
     | T
@@ -1413,6 +1506,8 @@ export interface PagesSelect<T extends boolean = true> {
         statsShelf?: T | StatsShelfBlockSelect<T>;
         postsCarousel?: T | PostsCarouselBlockSelect<T>;
         protocolCta?: T | ProtocolCTABlockSelect<T>;
+        narrative?: T | NarrativeBlockSelect<T>;
+        projectRow?: T | ProjectRowBlockSelect<T>;
       };
   meta?:
     | T
@@ -1722,6 +1817,38 @@ export interface ProtocolCTABlockSelect<T extends boolean = true> {
   image?: T;
   formButtonLabel?: T;
   successMessage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NarrativeBlock_select".
+ */
+export interface NarrativeBlockSelect<T extends boolean = true> {
+  label?: T;
+  statement?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectRowBlock_select".
+ */
+export interface ProjectRowBlockSelect<T extends boolean = true> {
+  image?: T;
+  number?: T;
+  side?: T;
+  title?: T;
+  description?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
   id?: T;
   blockName?: T;
 }

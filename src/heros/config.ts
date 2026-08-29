@@ -43,6 +43,10 @@ export const hero: Field = {
           label: 'Nebula (narrative homepage)',
           value: 'nebula',
         },
+        {
+          label: 'Paper (human interface homepage)',
+          value: 'paper',
+        },
       ],
       required: true,
     },
@@ -50,7 +54,7 @@ export const hero: Field = {
       name: 'eyebrow',
       type: 'text',
       admin: {
-        condition: (_, { type } = {}) => type === 'nebula',
+        condition: (_, { type } = {}) => type === 'nebula' || type === 'paper',
         description: 'Small label above the headline, e.g. "Field notes on a cold intelligence".',
       },
     },
@@ -76,7 +80,8 @@ export const hero: Field = {
       overrides: {
         maxRows: 2,
         admin: {
-          condition: (_, { type } = {}) => type !== 'signalCarousel' && type !== 'nebula',
+          condition: (_, { type } = {}) =>
+            type !== 'signalCarousel' && type !== 'nebula' && type !== 'paper',
         },
       },
     }),
@@ -84,7 +89,8 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'nebula'].includes(type),
+        condition: (_, { type } = {}) =>
+          ['highImpact', 'mediumImpact', 'nebula', 'paper'].includes(type),
       },
       relationTo: 'media',
       required: true,
@@ -193,6 +199,32 @@ export const hero: Field = {
           type: 'text',
           label: 'Email capture button label',
           defaultValue: 'Notes by email',
+        },
+      ],
+    },
+    {
+      name: 'paperSettings',
+      type: 'group',
+      label: 'Paper settings',
+      admin: {
+        condition: (_, { type } = {}) => type === 'paper',
+      },
+      fields: [
+        {
+          name: 'metaLine',
+          type: 'text',
+          label: 'Meta line (bottom-right, on the image)',
+          admin: {
+            description: 'e.g. "Est. 2026 / Attention & Sovereignty"',
+          },
+        },
+        {
+          name: 'sidebarLabel',
+          type: 'text',
+          label: 'Vertical sidebar label (bottom-left, reads bottom-to-top)',
+          admin: {
+            description: 'e.g. "Rethink the Machine // Attention, not capture // Est. 2026"',
+          },
         },
       ],
     },

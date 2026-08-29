@@ -15,12 +15,13 @@ interface HeaderClientProps {
 
 const barClass = 'absolute left-0 w-[26px] h-[1.5px] bg-current origin-center [transition:transform_220ms_ease]'
 
+/**
+ * Fixed nav, no background, no border, no scroll state — the brand's nav
+ * never changes register as you scroll. See readme.md "Layout".
+ */
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  /* Storing the value in a useState to avoid hydration errors */
-  const [theme, setTheme] = useState<string | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const { headerTheme, setHeaderTheme } = useHeaderTheme()
+  const { setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
 
   useEffect(() => {
@@ -28,18 +29,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     setMenuOpen(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
-
-  useEffect(() => {
-    if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerTheme])
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -50,21 +39,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     return () => window.removeEventListener('keydown', onKey)
   }, [menuOpen])
 
-  const lit = scrolled || menuOpen
-
   return (
-    <header
-      className={cn(
-        'sticky top-0 z-30 flex items-center justify-between px-12 py-6 max-sm:px-5 max-sm:py-4 min-h-[var(--header-height)] text-ink [transition:background-color_var(--duration-base)_var(--ease-standard),border-color_var(--duration-base)_var(--ease-standard),backdrop-filter_var(--duration-base)_var(--ease-standard)] border-b border-transparent',
-        lit && 'bg-[rgba(6,14,20,0.82)] border-b-[rgba(242,212,140,0.14)] backdrop-blur-md',
-      )}
-      {...(theme === 'dark' ? { 'data-theme': 'signal' } : {})}
-    >
-      <Wordmark className={cn('text-[18px]', theme !== 'dark' && !lit && 'invert')} href="/" />
+    <header className="sticky top-0 z-30 flex items-center justify-between px-12 py-6 max-sm:px-5 max-sm:py-4 min-h-[var(--header-height)] text-rtm-fg">
+      <Wordmark className="text-[16px]" href="/" variant="nav" />
       <button
         aria-expanded={menuOpen}
         aria-label="Open navigation"
-        className="bg-transparent border-0 cursor-pointer p-3 -m-3 text-current flex"
+        className="bg-transparent border-0 p-3 -m-3 text-current flex"
         onClick={() => setMenuOpen((open) => !open)}
         type="button"
       >

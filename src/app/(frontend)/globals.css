@@ -222,6 +222,16 @@
   --color-signal-fog: var(--signal-fog);
   --color-signal-line: var(--signal-line);
 
+  /* Paper — the current brand register (see tokens.css) */
+  --color-rtm-bg: var(--rtm-bg);
+  --color-rtm-fg: var(--rtm-fg);
+  --color-rtm-accent: var(--rtm-accent);
+  --color-rtm-umber: var(--rtm-umber);
+  --color-rtm-ground-footer: var(--rtm-ground-footer);
+  --color-rtm-ground-slab: var(--rtm-ground-slab);
+  --color-rtm-ground-hero: var(--rtm-ground-hero);
+  --color-rtm-hairline: var(--rtm-hairline);
+
   /* Nebula Ramp — the raw palette. Prefer the semantic aliases above for
      components; reach for these directly when composing new pages/blocks. */
   --color-cosmos-void: var(--cosmos-void);
@@ -255,6 +265,8 @@
 
   --font-rtm-display: var(--font-display);
   --font-rtm-body: var(--font-body);
+  --font-rtm-serif: var(--font-serif);
+  --font-rtm-mono-label: var(--font-mono-label);
 
   --text-rtm-display-1: 64px;
   --text-rtm-display-1--line-height: 1.02;
@@ -287,6 +299,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    cursor: crosshair;
   }
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;

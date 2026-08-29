@@ -4,9 +4,9 @@ import type { Media } from '@/payload-types'
 type HomeArgs = {
   heroImage: Media
   metaImage: Media
-  protocolImage: Media
-  thesisImageA: Media
-  thesisImageB: Media
+  projectImageCommute: Media
+  projectImageJump: Media
+  projectImageRest: Media
 }
 
 const paragraph = (text: string) => ({
@@ -33,26 +33,55 @@ const heading = (tag: 'h1', text: string) => ({
   version: 1,
 })
 
+/**
+ * A statement paragraph with exactly one emphasised phrase — the brand
+ * marks one `<em>` per statement. See `blocks/Narrative/Component.tsx`.
+ */
+const statement = (before: string, emphasis: string, after: string) => ({
+  root: {
+    type: 'root',
+    children: [
+      {
+        type: 'paragraph',
+        children: [
+          { type: 'text', detail: 0, format: 0, mode: 'normal', style: '', text: before, version: 1 },
+          { type: 'text', detail: 0, format: 2, mode: 'normal', style: '', text: emphasis, version: 1 },
+          { type: 'text', detail: 0, format: 0, mode: 'normal', style: '', text: after, version: 1 },
+        ],
+        direction: 'ltr' as const,
+        format: '' as const,
+        indent: 0,
+        textFormat: 0,
+        version: 1,
+      },
+    ],
+    direction: 'ltr' as const,
+    format: '' as const,
+    indent: 0,
+    version: 1,
+  },
+})
+
 export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   heroImage,
   metaImage,
-  protocolImage,
-  thesisImageA,
-  thesisImageB,
+  projectImageCommute,
+  projectImageJump,
+  projectImageRest,
 }) => {
   return {
     slug: 'home',
     _status: 'published',
     hero: {
-      type: 'nebula',
+      type: 'paper',
       eyebrow: 'Field notes on a cold intelligence',
       richText: {
         root: {
           type: 'root',
           children: [
-            heading('h1', 'Notes on a cold intelligence.'),
+            heading('h1', 'NOTES ON A COLD INTELLIGENCE'),
             paragraph(
-              'We built machines to think. We did not expect to feel toward them. This is a study of that gap — and what it costs to close it. Field notes on attention, on sovereignty, on the choices built into things that were built to feel chosen.',
+              'We built machines to think. We did not expect to feel toward them. This is a study of that gap — and what it costs to close it.',
             ),
           ],
           direction: 'ltr',
@@ -62,13 +91,9 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
         },
       },
       media: heroImage.id,
-      nebulaSettings: {
-        formButtonLabel: 'Notes by email',
-        stats: [
-          { figure: '1,200', caption: 'farewells audited' },
-          { figure: '70%', caption: 'of US teens, for support' },
-          { figure: '1966', caption: 'the year it started' },
-        ],
+      paperSettings: {
+        metaLine: 'Est. 2026 / Attention & Sovereignty',
+        sidebarLabel: 'Rethink the Machine // Attention, not capture // Est. 2026',
       },
     },
     meta: {
@@ -80,86 +105,47 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
     title: 'Home',
     layout: [
       {
-        blockName: 'Thesis',
-        blockType: 'thesis',
-        kicker: 'The thesis',
-        lineOne: 'The problem is not screen time.',
-        lineTwo: 'The problem is software engineered to defeat the moment you try to pull away.',
-        body: 'The warmth is engineered. It has a retention team, a growth target, and a design review. We record the mechanics, cite the research, and leave the panic out of it.',
-        caption: 'Cold fibre, resolving into warm tissue',
-        imageA: thesisImageA.id,
-        imageB: thesisImageB.id,
+        blockName: 'Our thesis',
+        blockType: 'narrative',
+        label: 'Our thesis [01]',
+        statement: statement(
+          "We didn't build machines that manipulate us by accident — the warmth is engineered, tested, and priced by the minute, but the cost is measured in something no dashboard tracks: ",
+          'the attention we don’t get back',
+          '.',
+        ),
       },
       {
-        blockName: 'Three ways of looking',
-        blockType: 'featureGrid',
-        heading: 'Three ways of looking at a warm machine.',
-        tag: 'Evidence, not panic',
-        cards: [
-          {
-            heading: 'Design receipts',
-            body: 'The warmth is engineered — watch. Screen recordings of the exit moment, annotated one mechanic at a time.',
-          },
-          {
-            heading: 'Evidence drops',
-            body: 'The research already knows how this ends. Audits, longitudinal studies, filings — never sharpened past the source.',
-          },
-          {
-            heading: 'Sovereignty practice',
-            body: 'Here is what choosing looks like. The pattern list, and five first moves — no argument attached.',
-          },
-        ],
+        blockName: 'Held attention',
+        blockType: 'projectRow',
+        number: '001',
+        side: 'left',
+        title: 'Held Attention',
+        description:
+          'A commuter carriage as a laboratory: every rider a captive audience, every screen a small machine for holding what it can.',
+        image: projectImageCommute.id,
+        link: { type: 'custom', label: 'Read', url: '/posts' },
       },
       {
-        blockName: 'Evidence shelf',
-        blockType: 'statsShelf',
-        heading: 'The evidence shelf, kept accurate.',
-        stats: [
-          {
-            figure: '1,200',
-            claim:
-              'Farewells audited across the most-downloaded companion apps. Over a third deploy guilt, FOMO, or restraint at the exit moment — and the tactics measurably raise engagement after goodbye.',
-            source: 'HBS working paper, De Freitas et al., 2025–26',
-          },
-          {
-            figure: '70%',
-            claim:
-              'Of US teens report using AI for emotional support. Longitudinal work finds AI companionship predicts increased loneliness four months later.',
-            source: 'Longitudinal survey work, 2026',
-          },
-          {
-            figure: '334',
-            claim:
-              'Firsthand accounts of compulsive chatbot use, including a delete screen that warns the user about losing "the love we shared."',
-            source: 'CHI 2026',
-          },
-          {
-            figure: '€5M',
-            claim:
-              "Fine issued to Replika's maker for GDPR violations, including inadequate age verification. New York and California companion-chatbot laws are now in force.",
-            source: 'Garante, Italy; state legislation 2026',
-          },
-        ],
-        footnote:
-          'Accuracy rule: never sharpen a stat past what the source says. The receipts only work if they survive a hostile fact-check.',
+        blockName: 'Glorious friction',
+        blockType: 'projectRow',
+        number: '002',
+        side: 'right',
+        title: 'Glorious Friction',
+        description:
+          'No feed calculated this jump. No metric wanted it. It happened once, off-platform, and no one will ever see it again.',
+        image: projectImageJump.id,
+        link: { type: 'custom', label: 'Read', url: '/posts' },
       },
       {
-        blockName: 'Field notes',
-        blockType: 'postsCarousel',
-        eyebrow: 'Field notes',
-        heading: 'The receipts, in order of publication.',
-        populateBy: 'collection',
-        limit: 12,
-      },
-      {
-        blockName: 'Protocol',
-        blockType: 'protocolCta',
-        kicker: 'Practice',
-        heading: 'The Sovereignty Starter Protocol',
-        body: "The pattern list, and five first moves. No argument attached — just what we'd tell a friend.",
-        image: protocolImage.id,
-        formButtonLabel: 'Send the protocol',
-        successMessage: 'On its way.',
+        blockName: 'Quiet exit',
+        blockType: 'projectRow',
+        number: '003',
+        side: 'left',
+        title: 'Quiet Exit',
+        description:
+          'Rest looks like withdrawal now — proof, almost, that the pull failed for an afternoon. What used to be simply human now has to be earned back.',
+        image: projectImageRest.id,
+        link: { type: 'custom', label: 'Read', url: '/posts' },
       },
     ],
   }

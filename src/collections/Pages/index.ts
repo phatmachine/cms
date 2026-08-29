@@ -11,8 +11,10 @@ import { FeatureGrid } from '../../blocks/FeatureGrid/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { HowToSwitch } from '../../blocks/HowToSwitch/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { Narrative } from '../../blocks/Narrative/config'
 import { Options } from '../../blocks/Options/config'
 import { PostsCarousel } from '../../blocks/PostsCarousel/config'
+import { ProjectRow } from '../../blocks/ProjectRow/config'
 import { ProtocolCTA } from '../../blocks/ProtocolCTA/config'
 import { StatsShelf } from '../../blocks/StatsShelf/config'
 import { Testimonial } from '../../blocks/Testimonial/config'
@@ -100,6 +102,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 StatsShelf,
                 PostsCarousel,
                 ProtocolCTA,
+                Narrative,
+                ProjectRow,
               ],
               required: true,
               admin: {

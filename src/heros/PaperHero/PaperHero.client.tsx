@@ -44,8 +44,20 @@ export const PaperHeroClient: React.FC<PaperHeroClientProps> = ({
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // `mix-blend-mode: difference` against this photo is unreliable across
+  // browsers/renderers — the blend frequently locks in against a
+  // not-yet-decoded backdrop and never recomputes, leaving the H1 flat and
+  // unblended. `background-clip: text` sidesteps that entirely: it clips a
+  // second, inverted copy of the same photo directly into the glyph shapes
+  // instead of relying on live cross-element blend compositing, giving the
+  // same "x-ray" reveal reliably.
+  const heroImageUrl = media?.url
+
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center bg-rtm-ground-hero text-rtm-fg mt-[calc((var(--header-height)+4rem)*-1)] px-[4vw]">
+    <div
+      className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center bg-rtm-ground-hero text-rtm-fg mt-[calc((var(--header-height)+4rem)*-1)] px-[4vw]"
+      style={heroImageUrl ? ({ '--hero-media': `url(${heroImageUrl})` } as React.CSSProperties) : undefined}
+    >
       {media && (
         <div className="absolute -inset-y-[10%] inset-x-0" ref={imageRef}>
           <Media
@@ -66,7 +78,7 @@ export const PaperHeroClient: React.FC<PaperHeroClientProps> = ({
 
         {richText && (
           <RichText
-            className="[&_h1]:relative [&_h1]:z-[2] [&_h1]:m-0 [&_h1]:font-rtm-display [&_h1]:font-black [&_h1]:uppercase [&_h1]:text-[13vw] max-sm:[&_h1]:text-[18vw] [&_h1]:leading-[0.85] [&_h1]:tracking-[-0.04em] [&_h1]:text-rtm-bg [&_h1]:mix-blend-difference [&_p]:relative [&_p]:z-[2] [&_p]:mix-blend-difference [&_p]:m-0 [&_p]:mt-2 [&_p]:font-rtm-serif [&_p]:italic [&_p]:text-[clamp(17px,1.6vw,22px)] [&_p]:leading-[1.5] [&_p]:text-rtm-bg [&_p]:max-w-[52ch] [&_p]:text-pretty grid justify-items-center gap-[clamp(16px,2vw,24px)]"
+            className="[&_h1]:relative [&_h1]:z-[2] [&_h1]:m-0 [&_h1]:font-rtm-display [&_h1]:font-black [&_h1]:uppercase [&_h1]:text-[13vw] max-sm:[&_h1]:text-[18vw] [&_h1]:leading-[0.85] [&_h1]:tracking-[-0.04em] [&_h1]:bg-[image:var(--hero-media)] [&_h1]:bg-cover [&_h1]:bg-center [&_h1]:bg-clip-text [&_h1]:text-transparent [&_h1]:[filter:invert(1)_sepia(0.3)_contrast(1.05)_brightness(0.9)] [&_p]:relative [&_p]:z-[2] [&_p]:m-0 [&_p]:mt-2 [&_p]:font-rtm-serif [&_p]:italic [&_p]:text-[clamp(17px,1.6vw,22px)] [&_p]:leading-[1.5] [&_p]:text-rtm-bg [&_p]:max-w-[52ch] [&_p]:text-pretty grid justify-items-center gap-[clamp(16px,2vw,24px)]"
             data={richText}
             enableGutter={false}
             enableProse={false}

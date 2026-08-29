@@ -6,8 +6,6 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 
-const glow = { textShadow: '0 0 40px var(--rtm-bg)' }
-
 /**
  * One gallery row: an oversized, rotated photo slab bleeding past the trim,
  * with the caption block overlapping its far corner. Alternates rotation
@@ -56,32 +54,32 @@ export const ProjectRowBlock: React.FC<ProjectRowBlockProps> = ({
             : 'md:absolute md:bottom-0 md:-left-[2vw] items-end text-right',
         )}
       >
-        {number && (
-          <span
-            className="mb-6 text-[10px] font-rtm-mono-label text-rtm-fg"
-            style={glow}
-          >
-            {number}
-          </span>
-        )}
-        {title && (
-          <h3
-            className="m-0 mb-5 font-rtm-display font-bold uppercase text-[clamp(28px,5vw,64px)] leading-[1.2] tracking-[-0.02em] text-rtm-fg text-pretty"
-            style={glow}
-          >
-            {title}
-          </h3>
-        )}
-        {description && (
-          <p
+        {(number || title || description) && (
+          <div
             className={cn(
-              'm-0 max-w-[42ch] font-rtm-serif text-[18px] leading-[1.4] text-rtm-fg text-pretty',
-              isLeft ? 'text-left' : 'text-right',
+              'flex flex-col w-fit max-w-full bg-[rgba(253,252,247,0.72)] backdrop-blur-[6px] px-[clamp(20px,3vw,36px)] py-[clamp(18px,2.6vw,32px)]',
+              isLeft ? 'items-start' : 'items-end',
             )}
-            style={glow}
           >
-            {description}
-          </p>
+            {number && (
+              <span className="mb-6 text-[10px] font-rtm-mono-label text-rtm-fg">{number}</span>
+            )}
+            {title && (
+              <h3 className="m-0 mb-5 font-rtm-display font-bold uppercase text-[clamp(28px,5vw,64px)] leading-[1.2] tracking-[-0.02em] text-rtm-fg text-pretty">
+                {title}
+              </h3>
+            )}
+            {description && (
+              <p
+                className={cn(
+                  'm-0 max-w-[42ch] font-rtm-serif text-[18px] leading-[1.4] text-rtm-fg text-pretty',
+                  isLeft ? 'text-left' : 'text-right',
+                )}
+              >
+                {description}
+              </p>
+            )}
+          </div>
         )}
         {cta?.label && (cta?.url || cta?.reference) && (
           <CMSLink

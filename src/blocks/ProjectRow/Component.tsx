@@ -31,7 +31,7 @@ export const ProjectRowBlock: React.FC<ProjectRowBlockProps> = ({
     >
       <div
         className={cn(
-          'group relative flex-shrink-0 w-full md:w-[88vw] h-[50vh] md:h-[85vh] min-h-[320px] md:min-h-[600px] overflow-hidden bg-rtm-ground-slab',
+          'group relative flex-shrink-0 w-full md:w-[88vw] h-[50vh] md:h-[85vh] min-h-[320px] md:min-h-[600px] overflow-hidden bg-rtm-ground-hero',
           isLeft ? 'md:-ml-[4vw] rotate-0 md:-rotate-[1.2deg]' : 'md:-mr-[4vw] rotate-0 md:rotate-[1.2deg]',
         )}
       >
@@ -39,7 +39,7 @@ export const ProjectRowBlock: React.FC<ProjectRowBlockProps> = ({
           <div className="absolute -top-[5%] -left-[5%] w-[110%] h-[110%]">
             <Media
               fill
-              imgClassName="object-cover [filter:sepia(0.2)_contrast(1)] [transition:transform_1.2s_cubic-bezier(0.16,1,0.3,1),filter_0.6s_ease] group-hover:[filter:sepia(0)_contrast(1.05)] group-hover:scale-[1.03] group-hover:-translate-y-[1%]"
+              imgClassName="object-cover [filter:sepia(0.3)_contrast(1.05)_brightness(0.9)] opacity-[0.85] [transition:transform_1.2s_cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] group-hover:-translate-y-[1%]"
               resource={image}
             />
           </div>

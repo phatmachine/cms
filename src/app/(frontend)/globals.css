@@ -302,11 +302,20 @@
     cursor: crosshair;
   }
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    @apply bg-background text-foreground min-h-[100vh] flex flex-col overflow-x-hidden;
   }
 }
 
 html {
+  /*
+    Off-canvas UI (the nav drawer, etc.) is positioned out past the
+    viewport edge via `translate-x-full` rather than removed from layout —
+    clipping that at the component level isn't reliably enough to stop it
+    inflating the page's horizontal scroll range, so it's clipped here at
+    the root instead. Needs both html and body: either one alone leaves
+    the page horizontally scrollable.
+  */
+  overflow-x: hidden;
   opacity: 0;
 }
 

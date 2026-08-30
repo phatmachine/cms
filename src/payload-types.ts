@@ -227,6 +227,7 @@ export interface Page {
       formButtonLabel?: string | null;
     };
     paperSettings?: {
+      backgroundType?: ('image' | 'video') | null;
       /**
        * Add up to 3 images. One is picked at random on every visit, so the homepage feels different each time someone lands on it.
        */
@@ -236,6 +237,10 @@ export interface Page {
             id?: string | null;
           }[]
         | null;
+      /**
+       * MP4 or WebM. Plays muted, looped, and autoplaying as the backdrop — no sound, no controls. The "x-ray" title effect only works over a static image, so the title renders as plain text over video.
+       */
+      heroVideo?: (string | null) | Media;
       /**
        * e.g. "Est. 2026 / Attention & Sovereignty"
        */
@@ -1492,12 +1497,14 @@ export interface PagesSelect<T extends boolean = true> {
         paperSettings?:
           | T
           | {
+              backgroundType?: T;
               heroImages?:
                 | T
                 | {
                     image?: T;
                     id?: T;
                   };
+              heroVideo?: T;
               metaLine?: T;
               sidebarLabel?: T;
             };

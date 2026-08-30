@@ -1134,7 +1134,12 @@ export interface NarrativeBlock {
  * via the `definition` "ProjectRowBlock".
  */
 export interface ProjectRowBlock {
-  image: string | Media;
+  backgroundType?: ('image' | 'video') | null;
+  image?: (string | null) | Media;
+  /**
+   * MP4 or WebM. Plays muted, looped, and autoplaying — no sound, no controls.
+   */
+  video?: (string | null) | Media;
   /**
    * Zero-padded, e.g. "001".
    */
@@ -1857,7 +1862,9 @@ export interface NarrativeBlockSelect<T extends boolean = true> {
  * via the `definition` "ProjectRowBlock_select".
  */
 export interface ProjectRowBlockSelect<T extends boolean = true> {
+  backgroundType?: T;
   image?: T;
+  video?: T;
   number?: T;
   side?: T;
   title?: T;

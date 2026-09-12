@@ -10,11 +10,10 @@ import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
 import { imageHero1 } from './image-hero-1'
-import { alternativeToGmail } from './pages-alternative-to-gmail'
-import { leavingSlack } from './pages-leaving-slack'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
+import { postExitGmail } from './post-exit-gmail'
 import { slides as slideSeeds } from './slides'
 
 const collections: CollectionSlug[] = [
@@ -202,16 +201,6 @@ export const seed = async ({
       key: 'bathtub' as const,
       alt: 'Two people relax with their feet up in a freestanding bathtub — photo by Tomiris Mantaeva / Unsplash',
     },
-    {
-      file: 'exit-protocol-hero.jpg',
-      key: 'exitProtocolHero' as const,
-      alt: 'A woman with dark hair in a bun and gold jewelry, backlit against a soft pink backdrop',
-    },
-    {
-      file: 'exit-protocol-step.jpg',
-      key: 'exitProtocolStep' as const,
-      alt: 'A woman works on a laptop amid cabling and hardware on a factory assembly bench',
-    },
   ]
 
   const seedPhotoDocs = Object.fromEntries(
@@ -227,37 +216,12 @@ export const seed = async ({
     ),
   ) as Record<(typeof seedPhotos)[number]['key'], Media>
 
-  payload.logger.info(`— Seeding example page (Leaving Gmail)...`)
+  payload.logger.info(`— Seeding "Exit Big Tech" example post (Leave Gmail)...`)
 
-  const leavingGmailPage = await payload.create({
-    collection: 'pages',
-    depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: alternativeToGmail({
-      heroImage: imageHomeDoc,
-      imageA: image1Doc,
-      imageB: image2Doc,
-      imageC: image3Doc,
-    }),
+  const imLeavingYouCategory = await payload.create({
+    collection: 'categories',
+    data: { slug: 'im-leaving-you', title: "I'm Leaving You" },
   })
-
-  payload.logger.info(`— Seeding example page (Leaving Slack)...`)
-
-  await payload.create({
-    collection: 'pages',
-    depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: leavingSlack({
-      heroImages: [seedPhotoDocs.exitProtocolHero],
-      stepImage: seedPhotoDocs.exitProtocolStep,
-    }),
-  })
-
-  payload.logger.info(`— Seeding carousel slides...`)
 
   const slide1VideoBuffer = readLocalFile(
     path.join(process.cwd(), 'public', 'media', 'slide-1.mp4'),
@@ -269,6 +233,21 @@ export const seed = async ({
     data: { alt: 'Gmail inbox — looping background video' },
     file: slide1VideoBuffer,
   })
+
+  const exitGmailPost = await payload.create({
+    collection: 'posts',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: postExitGmail({
+      category: imLeavingYouCategory,
+      heroImage: imageHomeDoc,
+      video: slide1Video,
+    }),
+  })
+
+  payload.logger.info(`— Seeding carousel slides...`)
 
   const slideDocs = await Promise.all(
     slideSeeds.map((slide, i) =>
@@ -282,7 +261,7 @@ export const seed = async ({
             i === 0
               ? {
                   type: 'reference',
-                  reference: { relationTo: 'pages', value: leavingGmailPage.id },
+                  reference: { relationTo: 'posts', value: exitGmailPost.id },
                 }
               : undefined,
         },

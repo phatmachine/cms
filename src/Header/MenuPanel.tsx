@@ -26,7 +26,7 @@ export const MenuPanel: React.FC<MenuPanelProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-40 pointer-events-none"
+      className="fixed inset-0 z-40 overflow-hidden pointer-events-none"
       {...(isOpen ? {} : { 'aria-hidden': true })}
     >
       <button

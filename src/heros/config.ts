@@ -210,12 +210,22 @@ export const hero: Field = {
       },
       fields: [
         {
+          name: 'backgroundType',
+          type: 'select',
+          label: 'Background type',
+          defaultValue: 'image',
+          options: [
+            { label: 'Static image', value: 'image' },
+            { label: 'Video (loops, muted)', value: 'video' },
+          ],
+        },
+        {
           name: 'heroImages',
           type: 'array',
           label: 'Hero images',
-          minRows: 1,
           maxRows: 3,
           admin: {
+            condition: (_, { backgroundType } = {}) => (backgroundType || 'image') === 'image',
             description:
               'Add up to 3 images. One is picked at random on every visit, so the homepage feels different each time someone lands on it.',
           },
@@ -227,6 +237,23 @@ export const hero: Field = {
               required: true,
             },
           ],
+        },
+        {
+          name: 'heroVideo',
+          type: 'upload',
+          label: 'Hero video',
+          relationTo: 'media',
+          admin: {
+            condition: (_, { backgroundType } = {}) => backgroundType === 'video',
+            description:
+              'MP4 or WebM. Plays muted, looped, and autoplaying as the backdrop — no sound, no controls. The "x-ray" title effect only works over a static image, so the title renders as plain text over video.',
+          },
+          validate: (value: unknown, { siblingData }: { siblingData?: { backgroundType?: string } }) => {
+            if (siblingData?.backgroundType === 'video' && !value) {
+              return 'A video is required when the background type is set to Video.'
+            }
+            return true
+          },
         },
         {
           name: 'metaLine',

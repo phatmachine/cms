@@ -22,6 +22,18 @@ export const PaperHero: React.FC<PaperHeroProps> = ({
   paperSettings,
   richText,
 }) => {
+  if (paperSettings?.backgroundType === 'video' && isMediaObject(paperSettings.heroVideo)) {
+    return (
+      <PaperHeroClient
+        eyebrow={eyebrow}
+        media={null}
+        paperSettings={paperSettings}
+        richText={richText}
+        video={paperSettings.heroVideo}
+      />
+    )
+  }
+
   const candidates = (paperSettings?.heroImages || [])
     .map((row) => row.image)
     .filter(isMediaObject)
@@ -38,6 +50,7 @@ export const PaperHero: React.FC<PaperHeroProps> = ({
       media={chosen}
       paperSettings={paperSettings}
       richText={richText}
+      video={null}
     />
   )
 }

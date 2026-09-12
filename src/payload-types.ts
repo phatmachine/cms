@@ -227,6 +227,7 @@ export interface Page {
       formButtonLabel?: string | null;
     };
     paperSettings?: {
+      backgroundType?: ('image' | 'video') | null;
       /**
        * Add up to 3 images. One is picked at random on every visit, so the homepage feels different each time someone lands on it.
        */
@@ -236,6 +237,10 @@ export interface Page {
             id?: string | null;
           }[]
         | null;
+      /**
+       * MP4 or WebM. Plays muted, looped, and autoplaying as the backdrop — no sound, no controls. The "x-ray" title effect only works over a static image, so the title renders as plain text over video.
+       */
+      heroVideo?: (string | null) | Media;
       /**
        * e.g. "Est. 2026 / Attention & Sovereignty"
        */
@@ -1257,7 +1262,12 @@ export interface NarrativeBlock {
  * via the `definition` "ProjectRowBlock".
  */
 export interface ProjectRowBlock {
-  image: string | Media;
+  backgroundType?: ('image' | 'video') | null;
+  image?: (string | null) | Media;
+  /**
+   * MP4 or WebM. Plays muted, looped, and autoplaying — no sound, no controls.
+   */
+  video?: (string | null) | Media;
   /**
    * Zero-padded, e.g. "001".
    */
@@ -1620,12 +1630,14 @@ export interface PagesSelect<T extends boolean = true> {
         paperSettings?:
           | T
           | {
+              backgroundType?: T;
               heroImages?:
                 | T
                 | {
                     image?: T;
                     id?: T;
                   };
+              heroVideo?: T;
               metaLine?: T;
               sidebarLabel?: T;
             };
@@ -1978,7 +1990,9 @@ export interface NarrativeBlockSelect<T extends boolean = true> {
  * via the `definition` "ProjectRowBlock_select".
  */
 export interface ProjectRowBlockSelect<T extends boolean = true> {
+  backgroundType?: T;
   image?: T;
+  video?: T;
   number?: T;
   side?: T;
   title?: T;

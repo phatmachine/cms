@@ -11,10 +11,44 @@ export const ProjectRow: Block = {
   },
   fields: [
     {
+      name: 'backgroundType',
+      type: 'select',
+      label: 'Background type',
+      defaultValue: 'image',
+      options: [
+        { label: 'Static image', value: 'image' },
+        { label: 'Video (loops, muted)', value: 'video' },
+      ],
+    },
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      admin: {
+        condition: (_, { backgroundType } = {}) => (backgroundType || 'image') === 'image',
+      },
+      validate: (value: unknown, { siblingData }: { siblingData?: { backgroundType?: string } }) => {
+        if ((siblingData?.backgroundType || 'image') === 'image' && !value) {
+          return 'An image is required when the background type is set to Static image.'
+        }
+        return true
+      },
+    },
+    {
+      name: 'video',
+      type: 'upload',
+      label: 'Background video',
+      relationTo: 'media',
+      admin: {
+        condition: (_, { backgroundType } = {}) => backgroundType === 'video',
+        description: 'MP4 or WebM. Plays muted, looped, and autoplaying — no sound, no controls.',
+      },
+      validate: (value: unknown, { siblingData }: { siblingData?: { backgroundType?: string } }) => {
+        if (siblingData?.backgroundType === 'video' && !value) {
+          return 'A video is required when the background type is set to Video.'
+        }
+        return true
+      },
     },
     {
       type: 'row',

@@ -1,16 +1,20 @@
 import type { ComparisonTableBlock as ComparisonTableBlockProps } from '@/payload-types'
 
+import { ExitSectionHeader } from '@/components/ExitSectionHeader'
+import { Reveal } from '@/components/Reveal'
 import { cn } from '@/utilities/ui'
-import { Check, Minus, X } from 'lucide-react'
 import React from 'react'
 
-import { Reveal } from '@/components/Reveal'
-import { SectionHeader } from '@/components/SectionHeader'
+const statusLabel: Record<string, string> = {
+  no: 'No',
+  partial: 'Partial',
+  yes: 'Yes',
+}
 
-const statusIcon: Record<string, React.ReactNode> = {
-  no: <X aria-label="No" className="text-ink-muted opacity-60" size={16} />,
-  partial: <Minus aria-label="Partial" className="text-ink-muted" size={16} />,
-  yes: <Check aria-label="Yes" className="text-action" size={16} />,
+const statusColor: Record<string, string> = {
+  no: 'text-rtm-accent opacity-55',
+  partial: 'text-rtm-accent',
+  yes: 'text-rtm-umber',
 }
 
 export const ComparisonTableBlock: React.FC<ComparisonTableBlockProps> = ({
@@ -22,68 +26,68 @@ export const ComparisonTableBlock: React.FC<ComparisonTableBlockProps> = ({
   if (!columns || columns.length === 0 || !rows || rows.length === 0) return null
 
   return (
-    <div className="py-32">
-      <div className="container">
-        <SectionHeader eyebrow={eyebrow} heading={heading} />
+    <section className="bg-rtm-bg px-[8vw] py-[clamp(80px,12vh,140px)]">
+      <ExitSectionHeader eyebrow={eyebrow} heading={heading} />
 
-        <Reveal className="overflow-x-auto border border-hairline">
-          <table className="w-full min-w-[560px] border-collapse">
-            <thead>
-              <tr>
-                <th className="min-w-[200px]" scope="col" />
-                {columns.map((column, index) => (
-                  <th
-                    className={cn(
-                      'py-4 px-6 text-left text-rtm-label font-rtm-body tracking-label text-ink-secondary uppercase border-b border-l border-hairline',
-                      column.isFeatured && 'text-action bg-surface-raised',
-                    )}
-                    key={index}
-                    scope="col"
-                  >
-                    {column.label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  <th
-                    className="py-4 px-6 text-left text-rtm-body-sm font-rtm-body font-semibold text-ink border-b border-hairline whitespace-nowrap"
-                    scope="row"
-                  >
-                    {row.feature}
-                  </th>
-                  {columns.map((column, colIndex) => {
-                    const cell = row.cells?.[colIndex]
-
-                    return (
-                      <td
-                        className={cn(
-                          'py-4 px-6 border-b border-l border-hairline',
-                          column.isFeatured && 'bg-surface-raised',
-                        )}
-                        key={colIndex}
-                      >
-                        {cell ? (
-                          <div className="flex items-center gap-2">
-                            {statusIcon[cell.status || 'yes']}
-                            {cell.note && (
-                              <span className="text-rtm-caption font-rtm-body text-ink-muted">
-                                {cell.note}
-                              </span>
-                            )}
-                          </div>
-                        ) : null}
-                      </td>
-                    )
-                  })}
-                </tr>
+      <Reveal className="overflow-x-auto">
+        <table className="w-full min-w-[560px] border-collapse font-rtm-mono-label">
+          <thead>
+            <tr>
+              <th className="w-[34%] py-3.5 border-b border-rtm-accent" scope="col" />
+              {columns.map((column, index) => (
+                <th
+                  className={cn(
+                    'py-3.5 px-5 text-left text-[11px] font-normal tracking-[0.15em] uppercase border-b border-rtm-accent',
+                    column.isFeatured ? 'bg-rtm-ground-slab text-rtm-umber' : 'text-rtm-accent',
+                  )}
+                  key={index}
+                  scope="col"
+                >
+                  {column.label}
+                </th>
               ))}
-            </tbody>
-          </table>
-        </Reveal>
-      </div>
-    </div>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                <th
+                  className="py-[18px] text-left font-rtm-serif font-normal text-[18px] text-rtm-fg border-b border-rtm-hairline whitespace-nowrap"
+                  scope="row"
+                >
+                  {row.feature}
+                </th>
+                {columns.map((column, colIndex) => {
+                  const cell = row.cells?.[colIndex]
+                  const status = cell?.status || 'yes'
+
+                  return (
+                    <td
+                      className={cn(
+                        'py-[18px] px-5 border-b border-rtm-hairline',
+                        column.isFeatured && 'bg-rtm-ground-slab',
+                      )}
+                      key={colIndex}
+                    >
+                      {cell && (
+                        <span
+                          className={cn(
+                            'text-[11px] tracking-[0.15em] uppercase',
+                            statusColor[status],
+                          )}
+                        >
+                          {statusLabel[status]}
+                          {cell.note ? ` — ${cell.note}` : ''}
+                        </span>
+                      )}
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Reveal>
+    </section>
   )
 }

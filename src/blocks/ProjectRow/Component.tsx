@@ -7,20 +7,25 @@ import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 
 /**
- * One gallery row: an oversized, rotated photo slab bleeding past the trim,
- * with the caption block overlapping its far corner. Alternates rotation
- * and layout by `side`. See
+ * One gallery row: an oversized, rotated photo (or looping video) slab
+ * bleeding past the trim, with the caption block overlapping its far
+ * corner. Alternates rotation and layout by `side`. See
  * `Rethink The Machine - v2/components/sections/ProjectRow.jsx`.
  */
 export const ProjectRowBlock: React.FC<ProjectRowBlockProps> = ({
+  backgroundType,
   description,
   image,
   link: cta,
   number,
   side = 'left',
   title,
+  video,
 }) => {
   const isLeft = side !== 'right'
+  const isVideo = backgroundType === 'video' && video && typeof video === 'object'
+  const treatmentClassName =
+    'object-cover [filter:sepia(0.3)_contrast(1.05)_brightness(0.9)] opacity-[0.85] [transition:transform_1.2s_cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] group-hover:-translate-y-[1%]'
 
   return (
     <div
@@ -35,14 +40,17 @@ export const ProjectRowBlock: React.FC<ProjectRowBlockProps> = ({
           isLeft ? 'md:-ml-[4vw] rotate-0 md:-rotate-[1.2deg]' : 'md:-mr-[4vw] rotate-0 md:rotate-[1.2deg]',
         )}
       >
-        {image && typeof image === 'object' && (
+        {isVideo ? (
           <div className="absolute -top-[5%] -left-[5%] w-[110%] h-[110%]">
-            <Media
-              fill
-              imgClassName="object-cover [filter:sepia(0.3)_contrast(1.05)_brightness(0.9)] opacity-[0.85] [transition:transform_1.2s_cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] group-hover:-translate-y-[1%]"
-              resource={image}
-            />
+            <Media resource={video} videoClassName={cn('w-full h-full', treatmentClassName)} />
           </div>
+        ) : (
+          image &&
+          typeof image === 'object' && (
+            <div className="absolute -top-[5%] -left-[5%] w-[110%] h-[110%]">
+              <Media fill imgClassName={treatmentClassName} resource={image} />
+            </div>
+          )
         )}
       </div>
 

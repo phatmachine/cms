@@ -18,6 +18,7 @@ import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import { meshedDisplay } from '@/fonts/meshedDisplay'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -49,6 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         inter.variable,
         playfairDisplay.variable,
         jetbrainsMono.variable,
+        meshedDisplay.variable,
       )}
       lang="en"
       suppressHydrationWarning

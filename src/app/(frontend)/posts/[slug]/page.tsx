@@ -10,6 +10,7 @@ import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
 
+import { ExitGuideTemplate } from '@/components/ExitGuide'
 import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
@@ -51,6 +52,21 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />
 
+  if (post.postType === 'exitGuide') {
+    return (
+      <article className="pt-16 pb-16">
+        <PageClient />
+
+        {/* Allows redirects for valid pages too */}
+        <PayloadRedirects disableNotFound url={url} />
+
+        {draft && <LivePreviewListener />}
+
+        <ExitGuideTemplate post={post} />
+      </article>
+    )
+  }
+
   return (
     <article className="pt-16 pb-16">
       <PageClient />
@@ -64,7 +80,9 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
+          {post.content && (
+            <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
+          )}
           {post.relatedPosts && post.relatedPosts.length > 0 && (
             <RelatedPosts
               className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"

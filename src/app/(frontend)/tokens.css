@@ -29,6 +29,12 @@
   --rtm-ground-hero: #ebe7d5;
   --rtm-hairline: #e0dfd5;
 
+  /* Teal — sampled from the "Exit Big Tech" template's feature imagery.
+     Confirmed as a permanent brand accent (not sitewide default): reserved
+     for indictment statements and callouts that need to read as a jolt
+     against the warm Paper register, e.g. the exit-guide subject section. */
+  --rtm-teal: #22c9d6;
+
   /* ============================================================
      NEBULA RAMP — sampled top-to-bottom from the reference sky:
      cold star-field void → olive drift → brass → gold → pale
@@ -160,6 +166,10 @@
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), Georgia, serif;
   --font-mono-label: var(--font-jetbrains-mono), ui-monospace, monospace;
+  /* Meshed Display — client-licensed face reserved for the "Exit Big Tech"
+     template's prose/quotes. Always set uppercase with tracking in use;
+     the slanted cut is not loaded, italics are not part of this brand. */
+  --font-meshed: var(--font-meshed-display), Georgia, serif;
 
   --text-display-hero: 400 96px/0.98 var(--font-display);
   --ls-display-hero: -3px;

@@ -305,8 +305,12 @@ export interface Page {
 export interface Post {
   id: string;
   title: string;
+  /**
+   * Switches this post to the "Exit Big Tech" long-form editorial template.
+   */
+  postType: 'standard' | 'exitGuide';
   heroImage?: (string | null) | Media;
-  content: {
+  content?: {
     root: {
       type: string;
       children: {
@@ -320,6 +324,130 @@ export interface Post {
       version: number;
     };
     [k: string]: unknown;
+  } | null;
+  /**
+   * Only used when Post Type (sidebar) is "Exit Guide". Every element on the template reads from these fields.
+   */
+  exitGuide?: {
+    appName?: string | null;
+    guideNumber?: string | null;
+    hero?: {
+      kicker?: string | null;
+      titleLine1?: string | null;
+      titleLine2?: string | null;
+      /**
+       * Select one phrase and bold it for emphasis — the brand marks exactly one per standfirst.
+       */
+      standfirst?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+    subject?: {
+      label?: string | null;
+      /**
+       * Select one phrase and bold it for emphasis.
+       */
+      statement?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      specs?:
+        | {
+            /**
+             * e.g. Released, Owner, Users, Model
+             */
+            key: string;
+            value: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    whyExit?: {
+      label?: string | null;
+      /**
+       * Short MP4/H.264, 1280×720, ~10s. Scrubbed by scroll — no audio needed.
+       */
+      video?: (string | null) | Media;
+      /**
+       * One panel per reason; they cross-fade as the video scrubs.
+       */
+      reasons?:
+        | {
+            /**
+             * e.g. 01
+             */
+            number: string;
+            title: string;
+            body: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    altsLabel?: string | null;
+    altsIntro?: string | null;
+    alternatives?:
+      | {
+          name: string;
+          /**
+           * e.g. "Encrypted Mail · Geneva"
+           */
+          tagline?: string | null;
+          /**
+           * e.g. "[001] Recommended First Move"
+           */
+          rank?: string | null;
+          description: string;
+          /**
+           * Optional. Empty = typographic slab (name set large on warm ground).
+           */
+          image?: (string | null) | Media;
+          difficulty: '2' | '3' | '4' | '5';
+          ctaLabel?: string | null;
+          /**
+           * Opens in a new tab with rel="noopener sponsored".
+           */
+          referralUrl: string;
+          id?: string | null;
+        }[]
+      | null;
+    migrationLabel?: string | null;
+    migrationHeading?: string | null;
+    migrationSteps?:
+      | {
+          title: string;
+          body: string;
+          id?: string | null;
+        }[]
+      | null;
+    carouselHeading?: string | null;
+    /**
+     * Optional. Leave empty to reuse this post's own categories.
+     */
+    carouselCategoryOverride?: (string | null) | Category;
+    carouselLimit?: number | null;
   };
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
@@ -1873,8 +2001,77 @@ export interface ProjectRowBlockSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  postType?: T;
   heroImage?: T;
   content?: T;
+  exitGuide?:
+    | T
+    | {
+        appName?: T;
+        guideNumber?: T;
+        hero?:
+          | T
+          | {
+              kicker?: T;
+              titleLine1?: T;
+              titleLine2?: T;
+              standfirst?: T;
+            };
+        subject?:
+          | T
+          | {
+              label?: T;
+              statement?: T;
+              specs?:
+                | T
+                | {
+                    key?: T;
+                    value?: T;
+                    id?: T;
+                  };
+            };
+        whyExit?:
+          | T
+          | {
+              label?: T;
+              video?: T;
+              reasons?:
+                | T
+                | {
+                    number?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+            };
+        altsLabel?: T;
+        altsIntro?: T;
+        alternatives?:
+          | T
+          | {
+              name?: T;
+              tagline?: T;
+              rank?: T;
+              description?: T;
+              image?: T;
+              difficulty?: T;
+              ctaLabel?: T;
+              referralUrl?: T;
+              id?: T;
+            };
+        migrationLabel?: T;
+        migrationHeading?: T;
+        migrationSteps?:
+          | T
+          | {
+              title?: T;
+              body?: T;
+              id?: T;
+            };
+        carouselHeading?: T;
+        carouselCategoryOverride?: T;
+        carouselLimit?: T;
+      };
   relatedPosts?: T;
   categories?: T;
   meta?:

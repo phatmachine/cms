@@ -231,6 +231,7 @@
   --color-rtm-ground-slab: var(--rtm-ground-slab);
   --color-rtm-ground-hero: var(--rtm-ground-hero);
   --color-rtm-hairline: var(--rtm-hairline);
+  --color-rtm-teal: var(--rtm-teal);
 
   /* Nebula Ramp — the raw palette. Prefer the semantic aliases above for
      components; reach for these directly when composing new pages/blocks. */
@@ -267,6 +268,7 @@
   --font-rtm-body: var(--font-body);
   --font-rtm-serif: var(--font-serif);
   --font-rtm-mono-label: var(--font-mono-label);
+  --font-rtm-meshed: var(--font-meshed);
 
   --text-rtm-display-1: 64px;
   --text-rtm-display-1--line-height: 1.02;

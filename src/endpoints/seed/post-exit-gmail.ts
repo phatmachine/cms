@@ -113,7 +113,7 @@ export const postExitGmail: (args: PostExitGmailArgs) => RequiredDataFromCollect
       subject: {
         label: 'The Subject [01]',
         specs: [
-          { key: 'Released', value: '2004' },
+          { key: 'Jurisdiction', value: 'United States' },
           { key: 'Owner', value: 'Alphabet Inc.' },
           { key: 'Users', value: '1.8 Billion' },
           { key: 'Model', value: 'Ad Targeting' },

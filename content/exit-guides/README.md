@@ -63,8 +63,8 @@ subject:
   label: "The Subject [01]"
   statement: "... because you are **free**."   # required
   specs:                       # up to 4
-    - key: Released
-      value: "2004"
+    - key: Jurisdiction
+      value: United States
     - key: Owner
       value: Alphabet Inc.
 

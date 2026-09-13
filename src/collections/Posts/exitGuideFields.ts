@@ -108,7 +108,7 @@ export const exitGuideTab: Tab = {
               name: 'key',
               type: 'text',
               required: true,
-              admin: { description: 'e.g. Released, Owner, Users, Model' },
+              admin: { description: 'e.g. Jurisdiction, Owner, Users, Model' },
             },
             { name: 'value', type: 'text', required: true },
           ],

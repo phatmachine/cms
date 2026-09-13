@@ -382,7 +382,7 @@ export interface Post {
       specs?:
         | {
             /**
-             * e.g. Released, Owner, Users, Model
+             * e.g. Jurisdiction, Owner, Users, Model
              */
             key: string;
             value: string;

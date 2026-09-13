@@ -6,7 +6,7 @@ appName: Gmail
 guideNumber: "007"
 categories:
   - I'm Leaving You
-heroImage: image-hero1.webp
+heroImage: post-exist-gmail.jpg
 
 hero:
   kicker: "Exit Big Tech // Guide No. 007 // Email"
@@ -18,8 +18,8 @@ subject:
   label: "The Subject [01]"
   statement: "Gmail is not a mail client. It is a surveillance surface with an inbox attached — **free** because you, and every sentence you write, are the product."
   specs:
-    - key: Released
-      value: "2004"
+    - key: Jurisdiction
+      value: United States
     - key: Owner
       value: Alphabet Inc.
     - key: Users

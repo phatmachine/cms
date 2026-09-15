@@ -2,7 +2,7 @@
 
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import type { Media as MediaType, Post } from '@/payload-types'
 
@@ -22,35 +22,42 @@ type WhyExitScrubProps = {
  * driven directly by scroll progress (no .play(), no audio needed), while
  * reason panels cross-fade based on the same progress. Adapts the pinned
  * ScrollTrigger scaffold already used by the Thesis block, swapping its
- * image crossfade for a video scrub. Reduced-motion just shows reason one
- * against a paused frame, per the design brief.
+ * image crossfade for a video scrub.
+ *
+ * `prefers-reduced-motion` skips the pin/scrub entirely and renders every
+ * reason as a plain stacked list instead of just the first one — the
+ * previous fallback ("show reason one against a paused frame") never wired
+ * up ScrollTrigger at all, so reasons two onward were permanently
+ * unreachable for anyone with that OS/browser setting on, not just
+ * unanimated.
  */
 export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, video }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const fillRef = useRef<HTMLDivElement>(null)
   const reasonRefs = useRef<Array<HTMLDivElement | null>>([])
+  const [reducedMotion, setReducedMotion] = useState(false)
 
   useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(mql.matches)
+    const onChange = () => setReducedMotion(mql.matches)
+    mql.addEventListener('change', onChange)
+    return () => mql.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion) return
     const section = sectionRef.current
     const videoEl = videoRef.current
     if (!section || !videoEl) return
 
     const panels = reasonRefs.current.filter((el): el is HTMLDivElement => Boolean(el))
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     try {
       videoEl.pause()
     } catch {
       // no-op: some browsers reject pause() before metadata loads
-    }
-
-    if (reduced) {
-      panels.forEach((el, i) => {
-        el.style.opacity = i === 0 ? '1' : '0'
-        el.style.transform = 'translateY(-50%)'
-      })
-      return
     }
 
     ensureScrollTrigger()
@@ -92,9 +99,45 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
     tick(0)
 
     return () => ctx.revert()
-  }, [])
+  }, [reducedMotion])
 
   const src = typeof video === 'object' ? getMediaUrl(video.url, video.updatedAt) : ''
+
+  if (reducedMotion) {
+    return (
+      <section className="relative bg-rtm-fg py-20">
+        {label && (
+          <div className="mx-[8vw] mb-10 border-t border-rtm-bg/50 pt-3 font-rtm-mono-label text-[12px] tracking-[0.12em] text-rtm-bg/85 uppercase">
+            {label}
+          </div>
+        )}
+
+        <video
+          className="mx-[8vw] mb-12 aspect-video max-w-[900px] object-cover"
+          muted
+          playsInline
+          preload="metadata"
+          src={src}
+        />
+
+        <div className="mx-[8vw] flex flex-col gap-12">
+          {reasons.map((reason, i) => (
+            <div className="max-w-[640px]" key={reason.id || i}>
+              <div className="font-rtm-display text-[9vw] leading-[0.9] font-black tracking-[-0.04em] text-rtm-bg opacity-90 sm:text-[56px]">
+                {reason.number}
+              </div>
+              <h3 className="mt-[18px] mb-5 font-rtm-display text-[3vw] font-bold tracking-[-0.02em] text-rtm-bg uppercase max-sm:text-[7vw] sm:text-[32px]">
+                {reason.title}
+              </h3>
+              <p className="font-rtm-meshed text-[22px] leading-[1.4] tracking-[0.01em] text-rtm-ground-slab uppercase">
+                {reason.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="relative h-[340vh] bg-rtm-fg" ref={sectionRef}>

@@ -111,7 +111,7 @@ export const MoreExitsCarousel: React.FC<MoreExitsCarouselProps> = ({ cards, hea
       >
         {cards.map((card, i) => (
           <Link
-            className="flex-none [flex-basis:420px] [scroll-snap-align:start]"
+            className="flex-none grayscale transition-[filter] duration-500 [flex-basis:420px] [scroll-snap-align:start] hover:grayscale-0"
             href={card.href}
             key={i}
           >

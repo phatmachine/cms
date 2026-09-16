@@ -21,10 +21,17 @@ type WhyExitScrubProps = {
  * plain CSS `position: sticky`; progress is computed directly from the
  * section's live `getBoundingClientRect()` on scroll/resize rather than
  * via GSAP ScrollTrigger, which occasionally stopped delivering onUpdate
- * calls after the first tick in the wild (video and panels froze on
- * reason one for the rest of the scroll) in a way that never reproduced
- * in automated testing — a direct listener has no cached trigger bounds
- * or internal update-batching to go stale.
+ * calls after the first tick in the wild — a direct listener has no
+ * cached trigger bounds or internal update-batching to go stale.
+ *
+ * The video uses `preload="metadata"`, not `"auto"`: with `"auto"`, Chrome
+ * greedily downloads the whole file sequentially from byte 0, and our own
+ * currentTime seeks (as the user scrolls) repeatedly abort and restart
+ * that download at a new byte range — visible as a constant
+ * abort/range-request churn in the network panel, which made the video
+ * (and reportedly, sometimes, the whole scroll handler) unreliable.
+ * `"metadata"` avoids the competing full download entirely; the browser
+ * only ever fetches the ranges our own seeks ask for.
  *
  * `prefers-reduced-motion` skips the pin/scrub entirely and renders every
  * reason as a plain stacked list instead of just the first one — the
@@ -159,7 +166,7 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
           className="absolute inset-0 z-[1] h-full w-full object-cover"
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           ref={videoRef}
           src={src}
         />

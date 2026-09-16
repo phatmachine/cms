@@ -304,7 +304,9 @@
     cursor: crosshair;
   }
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col overflow-x-hidden;
+    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    /* `clip`, not `hidden` — see the html rule below. */
+    overflow-x: clip;
   }
 }
 
@@ -316,8 +318,16 @@ html {
     inflating the page's horizontal scroll range, so it's clipped here at
     the root instead. Needs both html and body: either one alone leaves
     the page horizontally scrollable.
+
+    Must be `clip`, NOT `hidden`. `overflow-x: hidden` forces overflow-y to
+    compute to `auto` (per spec, `visible` is not allowed alongside a
+    non-visible value), which makes html/body scroll containers and
+    silently breaks every `position: sticky` on the site — the exit-guide
+    "Why Exit" video panel scrolled away instead of pinning, leaving ~240vh
+    of blank space. `clip` clips the same content without creating a scroll
+    container, so sticky keeps working.
   */
-  overflow-x: hidden;
+  overflow-x: clip;
   opacity: 0;
 }
 

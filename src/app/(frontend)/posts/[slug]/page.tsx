@@ -16,6 +16,15 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
+// Without this, individual post pages get frozen static at build time
+// (s-maxage=31536000) and only ever refresh via the posts collection's
+// on-demand revalidatePath hook — so any content that doesn't trigger that
+// hook (or a downstream/shared cache that already grabbed the stale
+// version) can serve stale post content indefinitely. Same class of bug as
+// the bare `/` route (see that file's comment); force-dynamic here trades
+// a bit of performance for post pages always reflecting live CMS content.
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const posts = await payload.find({

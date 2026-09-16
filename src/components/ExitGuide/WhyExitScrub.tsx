@@ -1,13 +1,10 @@
 'use client'
 
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef, useState } from 'react'
 
 import type { Media as MediaType, Post } from '@/payload-types'
 
 import { getMediaUrl } from '@/utilities/getMediaUrl'
-import { ensureScrollTrigger } from '@/utilities/useScrollReveal'
 
 type Reason = NonNullable<NonNullable<NonNullable<Post['exitGuide']>['whyExit']>['reasons']>[number]
 
@@ -20,9 +17,14 @@ type WhyExitScrubProps = {
 /**
  * "Why Exit [02]" — a 340vh pinned section whose video's currentTime is
  * driven directly by scroll progress (no .play(), no audio needed), while
- * reason panels cross-fade based on the same progress. Adapts the pinned
- * ScrollTrigger scaffold already used by the Thesis block, swapping its
- * image crossfade for a video scrub.
+ * reason panels cross-fade based on the same progress. The pin itself is
+ * plain CSS `position: sticky`; progress is computed directly from the
+ * section's live `getBoundingClientRect()` on scroll/resize rather than
+ * via GSAP ScrollTrigger, which occasionally stopped delivering onUpdate
+ * calls after the first tick in the wild (video and panels froze on
+ * reason one for the rest of the scroll) in a way that never reproduced
+ * in automated testing — a direct listener has no cached trigger bounds
+ * or internal update-batching to go stale.
  *
  * `prefers-reduced-motion` skips the pin/scrub entirely and renders every
  * reason as a plain stacked list instead of just the first one — the
@@ -60,8 +62,6 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
       // no-op: some browsers reject pause() before metadata loads
     }
 
-    ensureScrollTrigger()
-
     const tick = (p: number) => {
       if (videoEl.readyState >= 1 && videoEl.duration) {
         const t = p * (videoEl.duration - 0.05)
@@ -87,18 +87,31 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
       })
     }
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        end: 'bottom bottom',
-        onUpdate: (self) => tick(self.progress),
-        start: 'top top',
-        trigger: section,
+    const computeProgress = () => {
+      const rect = section.getBoundingClientRect()
+      const total = rect.height - window.innerHeight
+      const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0
+      tick(p)
+    }
+
+    let rafId: null | number = null
+    const onScroll = () => {
+      if (rafId != null) return
+      rafId = requestAnimationFrame(() => {
+        rafId = null
+        computeProgress()
       })
-    }, section)
+    }
 
-    tick(0)
+    computeProgress()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
 
-    return () => ctx.revert()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (rafId != null) cancelAnimationFrame(rafId)
+    }
   }, [reducedMotion])
 
   const src = typeof video === 'object' ? getMediaUrl(video.url, video.updatedAt) : ''

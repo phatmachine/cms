@@ -15,34 +15,26 @@ type WhyExitScrubProps = {
 }
 
 /**
- * "Why Exit [02]" — a 340vh pinned section whose video's currentTime is
- * driven directly by scroll progress (no .play(), no audio needed), while
- * reason panels cross-fade based on the same progress. The pin itself is
- * plain CSS `position: sticky`; progress is computed directly from the
- * section's live `getBoundingClientRect()` on scroll/resize rather than
- * via GSAP ScrollTrigger, which occasionally stopped delivering onUpdate
- * calls after the first tick in the wild — a direct listener has no
- * cached trigger bounds or internal update-batching to go stale.
+ * "Why Exit [02]" — a 340vh pinned section with a looping background
+ * video behind reason panels that cross-fade based on scroll progress.
+ * The pin itself is plain CSS `position: sticky`; progress is computed
+ * directly from the section's live `getBoundingClientRect()` on
+ * scroll/resize.
  *
- * The video uses `preload="metadata"`, not `"auto"`: with `"auto"`, Chrome
- * greedily downloads the whole file sequentially from byte 0, and our own
- * currentTime seeks (as the user scrolls) repeatedly abort and restart
- * that download at a new byte range — visible as a constant
- * abort/range-request churn in the network panel, which made the video
- * (and reportedly, sometimes, the whole scroll handler) unreliable.
- * `"metadata"` avoids the competing full download entirely; the browser
- * only ever fetches the ranges our own seeks ask for.
+ * The video plays on a plain `autoPlay loop` — it is NOT scroll-scrubbed.
+ * An earlier version drove `currentTime` directly from scroll position,
+ * but that seeking fought with the browser's own video buffering
+ * (`preload="auto"` downloads sequentially from byte 0; every seek
+ * aborted and restarted that download at a new byte range) badly enough
+ * to intermittently freeze in real Chrome/Brave, in a way that never
+ * reproduced in headless automated testing. A plain looping background
+ * video has no scroll-dependent seeking to go wrong.
  *
- * `prefers-reduced-motion` skips the pin/scrub entirely and renders every
- * reason as a plain stacked list instead of just the first one — the
- * previous fallback ("show reason one against a paused frame") never wired
- * up ScrollTrigger at all, so reasons two onward were permanently
- * unreachable for anyone with that OS/browser setting on, not just
- * unanimated.
+ * `prefers-reduced-motion` skips the pin entirely and renders every
+ * reason as a plain stacked list instead of just the first one.
  */
 export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, video }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const fillRef = useRef<HTMLDivElement>(null)
   const reasonRefs = useRef<Array<HTMLDivElement | null>>([])
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -58,29 +50,11 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
   useEffect(() => {
     if (reducedMotion) return
     const section = sectionRef.current
-    const videoEl = videoRef.current
-    if (!section || !videoEl) return
+    if (!section) return
 
     const panels = reasonRefs.current.filter((el): el is HTMLDivElement => Boolean(el))
 
-    try {
-      videoEl.pause()
-    } catch {
-      // no-op: some browsers reject pause() before metadata loads
-    }
-
     const tick = (p: number) => {
-      if (videoEl.readyState >= 1 && videoEl.duration) {
-        const t = p * (videoEl.duration - 0.05)
-        if (Math.abs((videoEl.currentTime || 0) - t) > 0.02) {
-          try {
-            videoEl.currentTime = t
-          } catch {
-            // no-op: seeking can throw if the video isn't seekable yet
-          }
-        }
-      }
-
       if (fillRef.current) fillRef.current.style.width = `${(p * 100).toFixed(1)}%`
 
       const n = panels.length
@@ -133,10 +107,12 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
         )}
 
         <video
+          autoPlay
           className="mx-[8vw] mb-12 aspect-video max-w-[900px] object-cover"
+          loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           src={src}
         />
 
@@ -163,11 +139,12 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
     <section className="relative h-[340vh] bg-rtm-fg" ref={sectionRef}>
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
         <video
+          autoPlay
           className="absolute inset-0 z-[1] h-full w-full object-cover"
+          loop
           muted
           playsInline
-          preload="metadata"
-          ref={videoRef}
+          preload="auto"
           src={src}
         />
         <div className="absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(30,22,16,0.72)_0%,rgba(30,22,16,0.35)_45%,rgba(30,22,16,0)_75%)]" />

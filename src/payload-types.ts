@@ -79,11 +79,16 @@ export interface Config {
     search: Search;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
+    'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'payload-folders': {
+      documentsAndFolders: 'payload-folders' | 'media';
+    };
+  };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -97,6 +102,7 @@ export interface Config {
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
+    'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -314,6 +320,9 @@ export interface Post {
    * Switches this post to the "Exit Big Tech" long-form editorial template.
    */
   postType: 'standard' | 'exitGuide';
+  /**
+   * Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header shows a solid teal panel instead.
+   */
   heroImage?: (string | null) | Media;
   content?: {
     root: {
@@ -421,12 +430,16 @@ export interface Post {
            */
           tagline?: string | null;
           /**
+           * Where the service is legally based — drives the flag beside its name. e.g. "Switzerland", or "France / Germany" for two. Leave empty for a federated or self-hosted service with no home country (no flag is shown).
+           */
+          country?: string | null;
+          /**
            * e.g. "[001] Recommended First Move"
            */
           rank?: string | null;
           description: string;
           /**
-           * Optional. Empty = typographic slab (name set large on warm ground).
+           * Optional banner. Keep it free of logos, wordmarks and text — the logo has its own field, and the name and description sit on a solid panel beside the banner, overlapping about a fifth of one edge, so keep the focal point in the middle. Empty = typographic slab (name set large on warm ground).
            */
           image?: (string | null) | Media;
           difficulty: '2' | '3' | '4' | '5';
@@ -435,6 +448,11 @@ export interface Post {
            * Opens in a new tab with rel="noopener sponsored".
            */
           referralUrl: string;
+          learnMoreLabel?: string | null;
+          /**
+           * Optional. A non-commercial link — the service’s own review/comparison page, its privacy policy, Wikipedia, etc. Opens in a new tab without the sponsored/affiliate rel used by the Referral URL. The button is left out entirely if this is empty.
+           */
+          learnMoreUrl?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -444,6 +462,32 @@ export interface Post {
       | {
           title: string;
           body: string;
+          id?: string | null;
+        }[]
+      | null;
+    sourcesLabel?: string | null;
+    /**
+     * Published at the foot of the guide, collapsed by default. One row per factual claim on the page. Honest opinion is only defensible where its factual basis is visible, so these are part of the argument, not an appendix.
+     */
+    sources?:
+      | {
+          /**
+           * The claim as a reader meets it on the page.
+           */
+          claim: string;
+          /**
+           * Who published the source, e.g. "YouTube Official Blog".
+           */
+          publisher?: string | null;
+          url: string;
+          /**
+           * Archived copy (web.archive.org / archive.today). A dead citation reads as an invented one.
+           */
+          archiveUrl?: string | null;
+          /**
+           * Date this link was last confirmed, e.g. 2026-09-21.
+           */
+          checked?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -488,6 +532,7 @@ export interface Post {
 export interface Media {
   id: string;
   alt: string;
+  folder?: (string | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -499,6 +544,32 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders".
+ */
+export interface FolderInterface {
+  id: string;
+  name: string;
+  folder?: (string | null) | FolderInterface;
+  documentsAndFolders?: {
+    docs?: (
+      | {
+          relationTo?: 'payload-folders';
+          value: string | FolderInterface;
+        }
+      | {
+          relationTo?: 'media';
+          value: string | Media;
+        }
+    )[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  folderType?: 'media'[] | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1535,6 +1606,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'search';
         value: string | Search;
+      } | null)
+    | ({
+        relationTo: 'payload-folders';
+        value: string | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -2065,12 +2140,15 @@ export interface PostsSelect<T extends boolean = true> {
           | {
               name?: T;
               tagline?: T;
+              country?: T;
               rank?: T;
               description?: T;
               image?: T;
               difficulty?: T;
               ctaLabel?: T;
               referralUrl?: T;
+              learnMoreLabel?: T;
+              learnMoreUrl?: T;
               id?: T;
             };
         migrationLabel?: T;
@@ -2080,6 +2158,17 @@ export interface PostsSelect<T extends boolean = true> {
           | {
               title?: T;
               body?: T;
+              id?: T;
+            };
+        sourcesLabel?: T;
+        sources?:
+          | T
+          | {
+              claim?: T;
+              publisher?: T;
+              url?: T;
+              archiveUrl?: T;
+              checked?: T;
               id?: T;
             };
         carouselHeading?: T;
@@ -2115,6 +2204,7 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -2421,6 +2511,18 @@ export interface PayloadJobsSelect<T extends boolean = true> {
   queue?: T;
   waitUntil?: T;
   processing?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders_select".
+ */
+export interface PayloadFoldersSelect<T extends boolean = true> {
+  name?: T;
+  folder?: T;
+  documentsAndFolders?: T;
+  folderType?: T;
   updatedAt?: T;
   createdAt?: T;
 }

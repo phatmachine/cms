@@ -20,8 +20,14 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { meshedDisplay } from '@/fonts/meshedDisplay'
 
+// Italic is loaded because --font-serif now resolves to Inter, and five call
+// sites are explicitly italic (Narrative, Options, ExitSectionHeader, Footer,
+// PaperHero). Playfair carried real italics; without these the browser
+// synthesises an oblique instead. If those italics get dropped now the type is
+// sans, drop 'italic' here too — it is a meaningful chunk of font payload.
 const inter = Inter({
   subsets: ['latin'],
+  style: ['normal', 'italic'],
   weight: ['400', '500', '600', '700', '900'],
   variable: '--font-inter',
 })
@@ -35,7 +41,10 @@ const playfairDisplay = Playfair_Display({
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: '400',
+  // 700 is only used by the exit-guide CTA button. Without a real bold file
+  // the browser fakes one by smearing the regular glyphs, which looks muddy at
+  // small sizes — so it's loaded properly rather than relying on font-bold.
+  weight: ['400', '700'],
   variable: '--font-jetbrains-mono',
 })
 

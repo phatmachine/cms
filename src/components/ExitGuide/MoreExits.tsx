@@ -4,6 +4,8 @@ import configPromise from '@payload-config'
 import { getPayload, type Where } from 'payload'
 import React from 'react'
 
+import { resolvePostImage } from '@/utilities/defaultPostImage'
+
 import { MoreExitsCarousel } from './MoreExitsCarousel.client'
 
 export type ExitCard = {
@@ -19,11 +21,15 @@ const toCards = (posts: Post[]): ExitCard[] =>
       | { title?: null | string }
       | undefined
 
+    // heroImage, then the SEO tab's meta.image, then the site-wide default —
+    // so a card here is never a blank thumbnail just because the post itself
+    // renders fine without a feature image (see ExitGuideHero's own teal
+    // fallback for that case).
     return {
       appName: post.exitGuide?.appName || post.title,
       category: category?.title || null,
       href: `/posts/${post.slug}`,
-      image: typeof post.heroImage === 'object' ? post.heroImage : null,
+      image: resolvePostImage(post.heroImage, post.meta?.image),
     }
   })
 

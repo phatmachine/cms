@@ -18,6 +18,13 @@ const nextConfig: NextConfig = {
       {
         pathname: '/api/media/file/**',
       },
+      // Static fallback image for posts with no image of their own — see
+      // src/utilities/defaultPostImage.ts. `search: ''` = no query string,
+      // per the Next docs' advice to keep local patterns exact.
+      {
+        pathname: '/media/**',
+        search: '',
+      },
     ],
     qualities: [100],
     remotePatterns: [

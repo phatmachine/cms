@@ -6,6 +6,7 @@ import { Alternatives } from './Alternatives'
 import { ExitGuideHero } from './Hero'
 import { MigrationChecklist } from './MigrationChecklist'
 import { MoreExits } from './MoreExits'
+import { Sources } from './Sources'
 import { Subject } from './Subject'
 import { WhyExitScrub } from './WhyExitScrub'
 
@@ -45,6 +46,11 @@ export const ExitGuideTemplate: React.FC<{ post: Post }> = ({ post }) => {
         migrationHeading={exitGuide.migrationHeading}
         migrationLabel={exitGuide.migrationLabel}
         migrationSteps={exitGuide.migrationSteps || []}
+      />
+
+      <Sources
+        sources={exitGuide.sources || []}
+        sourcesLabel={exitGuide.sourcesLabel}
       />
 
       <MoreExits post={post} />

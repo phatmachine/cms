@@ -9,14 +9,17 @@ AI
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+Leaving ChatGPT? Export your history, clear its memory and close the account in five steps, with Proton Lumo and Mistral Le Chat to try.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 006 // AI
 
 ## hero.title
-Leave ChatGPT
+I'm Leaving ChatGPT
 
 ## hero.standfirst
-Since February it has carried advertising, aimed using the content of your conversations. You tell it things, and it decides what to <em>sell</em> you.
+Its engineered for empathy - it only has a cold commercial heart. In the end it's a product thats built to profit others and so much on what you value will ultimately become the cost you pay.
 
 ## subject.statement
 People confide in it the way they once confided in a diary, or a doctor. It is neither. It is an advertising surface with a sympathetic voice, and a <em>record</em> that courts have already reached into.
@@ -34,22 +37,22 @@ OpenAI Group PBC
 Ads And Subscriptions
 
 ## reason.01.title
-The Conversation Is The Target
+I Said Too Much
 
 ## reason.01.body
-Ads went live in February 2026 and OpenAI opened self-serve ad buying in July. Targeting works from the context of what you type, not keywords, so the confiding is the mechanism.
+Ads went live in February 2026 and OpenAI opened self-serve ad buying in July. Targeting works from the context of what you type rather than from keywords, so the confiding is the mechanism, and that is what changed it for me.
 
 ## reason.02.title
-Deleted Was Not Deleted
+Deleted Wasn't Deleted
 
 ## reason.02.body
-A court ordered OpenAI to preserve every chat, including deleted ones, from May to September 2025. Those logs still exist, lawyers are reading them, and the list of flagged accounts can still grow.
+A court ordered OpenAI to preserve every chat, including deleted ones, from May to September 2025. Knowing those logs still exist and that lawyers are reading them is enough to stop me typing.
 
 ## reason.03.title
-Owned, Not Independent
+American Rules & American Control
 
 ## reason.03.body
-The non-profit foundation controls it, but Microsoft holds around 27 per cent and access to the models until 2032. Your conversations sit inside an American company with an American shareholder.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 Two European assistants. One cannot read what you store, the other is simply <em>better</em> at the work.
@@ -62,6 +65,9 @@ Proton Lumo
 
 ## alternative.01.locationLine
 AI Assistant · Geneva
+
+## alternative.01.country
+Switzerland
 
 ## alternative.01.blurb
 A Swiss assistant that stores your history with zero-access encryption, keeps no server-side logs and never trains on what you type. Its apps are open source, so the claim can be <em>checked</em>.
@@ -84,6 +90,9 @@ Paid subscriptions. No ads, no training on user data, no investors to answer to.
 ## alternative.01.price
 Free tier with daily limits, usable without an account. Lumo Plus from about €9.99 a month billed yearly.
 
+## alternative.01.referralUrl
+https://lumo.proton.me/
+
 ## alternative.02.label
 The Capable European
 
@@ -92,6 +101,9 @@ Mistral Le Chat
 
 ## alternative.02.locationLine
 AI Assistant · Paris
+
+## alternative.02.country
+France
 
 ## alternative.02.blurb
 A French lab whose models sit close to the frontier, hosted in Europe under GDPR, with much of its model work released openly. This is the option you reach for when the work actually has to be <em>good</em>.
@@ -113,6 +125,9 @@ Subscriptions, enterprise contracts and API sales, on top of large venture round
 
 ## alternative.02.price
 Free consumer tier. Pro is around $14.99 a month per person.
+
+## alternative.02.referralUrl
+https://chat.mistral.ai/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Close The Account
 Delete from Settings, Data controls, and expect roughly thirty days. Note that anything preserved under the 2025 court order is outside your reach.
 
 ## archive.01
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.02
-Social → Friendica | Leave Facebook
+Social → Friendica | I'm Leaving Facebook
 
 ## archive.03
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp
 
 ## archive.04
-Wearables → ENGO | Leave Meta Glasses
+Wearables → ENGO | I'm Leaving Meta Glasses

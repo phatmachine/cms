@@ -9,17 +9,20 @@ AI
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+Leaving Grok? Clear your conversations, request your archive and cancel in five steps, then try Proton Lumo or Jan instead.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 008 // AI
 
 ## hero.title
-Leave Grok
+I'm Leaving Grok
 
 ## hero.standfirst
 Your posts were fed to it before anyone asked. A regulator made the company stop, and the model still <em>keeps</em> what it learned from you.
 
 ## subject.statement
-The company you signed up with no longer exists. Grok, X and the data centres now sit inside a listed rocket business, and nobody asked your <em>permission</em> for that either.
+The company you signed up with no longer exists. Grok, X and the data centres now sit inside a listed rocket business, and nobody asked your <em>permission</em> for that either. 
 
 ## subject.jurisdiction
 USA
@@ -34,22 +37,22 @@ SpaceX (SpaceXAI)
 Ads And Subscriptions
 
 ## reason.01.title
-Opted In Without Asking
+Nobody Asked Me
 
 ## reason.01.body
-In July 2024 X switched users into sharing their posts for Grok training by default. An opt-out arrived later, buried in settings, after the collecting had already happened.
+Users sharing their posts for Grok training just makes me feel ripped off. The opt-out arrived later, buried in settings, after the collecting had already happened. This one smells like shit and if it smells a shit, it usually is. 
 
 ## reason.02.title
-The Model Keeps It
+I Can't Undo It
 
 ## reason.02.body
-Ireland's regulator forced X to stop and to delete the European data it had taken. X was not required to delete the models already trained on it, so the learning survives the deletion.
+Ireland's regulator forced X to stop and to delete the European data it had taken. X was not required to delete the models already trained on it, so whatever it learned from me survives the deletion.
 
 ## reason.03.title
-The Owner Changed
+American Rules & American Control
 
 ## reason.03.body
-SpaceX bought xAI in February 2026 and dissolved it entirely by July. Whatever you weighed up when you started using Grok, you are now dealing with a different company.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 The honest field here is small. One assistant cannot read what you store, and the other never <em>sends</em> it anywhere.
@@ -62,6 +65,9 @@ Proton Lumo
 
 ## alternative.01.locationLine
 AI Assistant · Geneva
+
+## alternative.01.country
+Switzerland
 
 ## alternative.01.blurb
 A Swiss assistant that stores your history with zero-access encryption, keeps no server-side logs, and never trains on what you type. The apps are open source, so the promise can be <em>checked</em>.
@@ -83,6 +89,9 @@ Paid subscriptions. No ads, no training on user data, no investors to satisfy.
 
 ## alternative.01.price
 Free tier with daily limits, usable without an account. Lumo Plus from about €9.99 a month billed yearly.
+
+## alternative.01.referralUrl
+https://lumo.proton.me/
 
 ## alternative.02.label
 The Nothing-Leaves Route
@@ -113,6 +122,9 @@ Open-source project. Free to download, telemetry off by default, remote provider
 
 ## alternative.02.price
 Free. The real cost is a computer capable of running the model.
+
+## alternative.02.referralUrl
+https://jan.ai/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +160,13 @@ Move One Real Task
 Take the thing you actually use it for and do it elsewhere for a fortnight. For most people that is checking claims, which a search engine still does.
 
 ## archive.01
-AI → Proton Lumo | Leave ChatGPT
+AI → Proton Lumo | I'm Leaving ChatGPT
 
 ## archive.02
-AI → Mistral Le Chat | Leave Gemini
+AI → Mistral Le Chat | I'm Leaving Gemini
 
 ## archive.03
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

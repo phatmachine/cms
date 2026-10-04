@@ -4,6 +4,8 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 
+import { resolvePostImage } from '@/utilities/defaultPostImage'
+
 import { CarouselClient } from './Carousel.client'
 
 export const PostsCarouselBlock: React.FC<
@@ -50,7 +52,8 @@ export const PostsCarouselBlock: React.FC<
 
     return {
       href: `/posts/${post.slug}`,
-      image: typeof post.heroImage === 'object' ? post.heroImage : null,
+      // heroImage, then the SEO tab's image, then the site-wide default.
+      image: resolvePostImage(post.heroImage, post.meta?.image),
       kicker: category?.title || null,
       title: post.title,
     }

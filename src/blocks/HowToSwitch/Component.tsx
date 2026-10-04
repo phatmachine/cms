@@ -47,7 +47,7 @@ export const HowToSwitchBlock: React.FC<HowToSwitchBlockProps> = ({
                   <h3 className="m-0 font-rtm-display font-bold text-[20px] leading-[1.2] tracking-[-0.02em] uppercase text-rtm-fg">
                     {step.title}
                   </h3>
-                  <p className="m-0 font-rtm-serif text-[18px] leading-[1.4] text-rtm-umber max-w-[46ch]">
+                  <p className="m-0 font-rtm-serif font-bold text-[18px] leading-[1.4] text-rtm-umber max-w-[46ch]">
                     {step.description}
                   </p>
                   {step.media && (

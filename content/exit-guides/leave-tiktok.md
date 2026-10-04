@@ -9,11 +9,14 @@ Social
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+Leaving TikTok? Download your videos, switch off personalisation and delete the account in five steps, with Loops and PeerTube to try.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 010 // Social
 
 ## hero.title
-Leave TikTok
+I'm Leaving TikTok
 
 ## hero.standfirst
 For four years it told Ireland's regulator that European data never sat on Chinese servers. In April 2025 it discovered that it <em>had</em>.
@@ -34,22 +37,22 @@ ByteDance Ltd.
 Ad Targeting
 
 ## reason.01.title
-It Told Them Wrong
+I Was Told Wrong
 
 ## reason.01.body
-Throughout a four-year inquiry TikTok denied that European data was stored in China, then reported in April 2025 that some had been. Ireland's regulator fined it five hundred and thirty million euros.
+Throughout a four-year inquiry TikTok denied that European data was stored in China, then reported in April 2025 that some had been. Ireland's regulator fined it five hundred and thirty million euros, and I stopped believing the assurances.
 
 ## reason.02.title
 The Landlord Changed
 
 ## reason.02.body
-January's American joint venture rearranged who owns the US business, not what the app collects. Everywhere outside the United States, ByteDance still owns the whole thing.
+January's American joint venture rearranged who owns the US business and whom becomes the manipulator, not what the app collects. Everywhere outside the United States ByteDance still owns the whole thing, and that includes wherever I am sitting.
 
 ## reason.03.title
-Sovereign Either Way
+Either Way, Not Mine
 
 ## reason.03.body
-Fifteen per cent of the American venture sits with an Abu Dhabi investment firm, and Oracle now hosts the data and retrains the feed. The question was never whether a state could reach it.
+Fifteen per cent of the American venture sits with an Abu Dhabi investment firm, and Oracle now hosts the data and retrains the feed. The question was never whether a state could reach it, which is why I left.
 
 ## alternatives.intro
 Nothing here reproduces that feed, and no honest page will pretend otherwise. What follows replaces the <em>posting</em>, not the scrolling.
@@ -84,6 +87,9 @@ Grants, donations and sponsorships. No advertising and no venture capital.
 ## alternative.01.price
 Free. Some instances ask for a contribution toward hosting.
 
+## alternative.01.referralUrl
+https://loops.video/
+
 ## alternative.02.label
 For People Who Post
 
@@ -92,6 +98,9 @@ PeerTube
 
 ## alternative.02.locationLine
 Video Hosting · France
+
+## alternative.02.country
+France
 
 ## alternative.02.blurb
 French non-profit video hosting where your channel lives on a server you choose, or one you run. If you make things rather than watch them, this is where the work stays <em>yours</em>.
@@ -113,6 +122,9 @@ Donations and public interest grants. No advertising, no investors, nothing to s
 
 ## alternative.02.price
 Free to join an instance, and free to run your own.
+
+## alternative.02.referralUrl
+https://joinpeertube.org/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +160,13 @@ Delete, Not Just Uninstall
 Deleting the app leaves the account and its history live. Delete the account itself in Settings, and note the thirty-day window before it becomes final.
 
 ## archive.01
-Social → Pixelfed | Leave Instagram
+Social → Pixelfed | I'm Leaving Instagram
 
 ## archive.02
-Social → Mastodon | Leave X
+Social → Mastodon | I'm Leaving X
 
 ## archive.03
-Social → Friendica | Leave Facebook
+Social → Friendica | I'm Leaving Facebook
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

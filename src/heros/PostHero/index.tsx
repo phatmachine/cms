@@ -4,6 +4,7 @@ import React from 'react'
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
+import { resolvePostImage } from '@/utilities/defaultPostImage'
 import { formatAuthors } from '@/utilities/formatAuthors'
 
 export const PostHero: React.FC<{
@@ -63,9 +64,13 @@ export const PostHero: React.FC<{
         </div>
       </div>
       <div className="min-h-[80vh] select-none">
-        {heroImage && typeof heroImage !== 'string' && (
-          <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
-        )}
+        {/* heroImage, then the SEO tab's image, then the site-wide default. */}
+        <Media
+          fill
+          priority
+          imgClassName="-z-10 object-cover"
+          resource={resolvePostImage(heroImage, post.meta?.image)}
+        />
         <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-black to-transparent" />
       </div>
     </div>

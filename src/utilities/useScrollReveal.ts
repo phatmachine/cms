@@ -7,11 +7,30 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef, useState } from 'react'
 
 let scrollTriggerRegistered = false
+let refreshOnSettleAttached = false
 
 export function ensureScrollTrigger() {
   if (!scrollTriggerRegistered) {
     gsap.registerPlugin(ScrollTrigger)
     scrollTriggerRegistered = true
+  }
+
+  // On a long page (the exit-guide template easily runs several thousand
+  // px), a Reveal instance far down the page measures its trigger position
+  // as soon as it mounts — before everything above it has necessarily
+  // finished loading and settled into its final size. If that measurement
+  // is short (e.g. an image above it hasn't taken its final layout height
+  // yet), the trigger can read as "already scrolled past" and fire
+  // immediately instead of on scroll. Re-measuring once via refresh() after
+  // the window and fonts have both settled corrects every trigger's
+  // position in one pass, once per page load — this is GSAP's own
+  // documented fix for this class of bug, not a per-instance workaround.
+  if (!refreshOnSettleAttached) {
+    refreshOnSettleAttached = true
+    const refresh = () => ScrollTrigger.refresh()
+    if (document.readyState === 'complete') refresh()
+    else window.addEventListener('load', refresh, { once: true })
+    document.fonts?.ready?.then(refresh).catch(() => {})
   }
 }
 

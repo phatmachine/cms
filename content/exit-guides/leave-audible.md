@@ -9,17 +9,20 @@ Audiobooks
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+How to leave Audible: spend your credits, check what you own and cancel in five steps, with Libro.fm and Storytel as alternatives.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 017 // Audiobooks
 
 ## hero.title
-Leave Audible
+I'm Leaving Audible
 
 ## hero.standfirst
 Spend a credit and you have not bought the book. You have licensed it, inside one app, from a shop that can <em>withdraw</em> it.
 
 ## subject.statement
-The word for what Audible sells is not ownership. Authors are locked in for years to be there, and listeners are locked in <em>afterwards</em>, and both conditions are deliberate.
+The word for what Audible sells is not ownership. Authors are entised to lock in to be there, and listeners are locked in <em>afterwards</em>, and both conditions are deliberate.
 
 ## subject.jurisdiction
 USA
@@ -34,22 +37,22 @@ TK — Verify Before Publishing
 Subscription
 
 ## reason.01.title
-Seven Years, One Shop
+I Won't Back That
 
 ## reason.01.body
-Authors taking Audible's higher royalty rate have historically been bound to it for seven years, barred from every other shop. The catalogue you pay for is built on that exclusion.
+Authors are bound and I am not comfortable that the catalogue I pay for is built on that exclusion.
 
 ## reason.02.title
-Now Paid From A Pool
+I've Seen This Before
 
 ## reason.02.body
-During 2026 Audible replaced its flat royalty with a pooled model paying by listening time. It is the same arrangement that music has spent a decade arguing about, arriving in books.
+During 2026 Audible replaced its flat royalty with a pooled model paying by listening time. It is the arrangement music has spent a decade arguing about, and I would rather not watch books repeat it.
 
 ## reason.03.title
-You Are Renting It
+American Rules & American Control
 
 ## reason.03.body
-Titles bought with credits are wrapped in rights management and tied to the account that bought them. They cannot be moved to another app, and access depends on the account continuing to exist.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 One sells you the file outright and splits the money with a bookshop. The other is European, and <em>cheaper</em>.
@@ -62,6 +65,9 @@ Libro.fm
 
 ## alternative.01.locationLine
 Audiobooks · Seattle
+
+## alternative.01.country
+United States
 
 ## alternative.01.blurb
 An employee-owned certified B Corp selling six hundred thousand audiobooks with no rights management at all, sharing the profit with an independent bookshop you choose. Credits never <em>expire</em>.
@@ -84,6 +90,9 @@ Membership credits and one-off purchases, with profit shared with your chosen bo
 ## alternative.01.price
 Around $14.99 a month for one credit, and credits can be bought without a membership.
 
+## alternative.01.referralUrl
+https://libro.fm/
+
 ## alternative.02.label
 The European Subscription
 
@@ -92,6 +101,9 @@ Storytel
 
 ## alternative.02.locationLine
 Audiobooks · Stockholm
+
+## alternative.02.country
+Sweden
 
 ## alternative.02.blurb
 A Swedish service with eight hundred thousand titles across forty languages in more than twenty-five markets, priced well below the American options. European company, European <em>law</em>.
@@ -113,6 +125,9 @@ Subscriptions only, across more than twenty-five markets. It also publishes its 
 
 ## alternative.02.price
 From around €6.49 a month, varying by country, with a free trial.
+
+## alternative.02.referralUrl
+https://www.storytel.com/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Cancel, Keep The Library
 Cancelling the membership leaves purchased titles in the account, so do not delete the Amazon account itself. Keep it dormant and empty instead.
 
 ## archive.01
-Music → Qobuz | Leave Spotify
+Music → Qobuz | I'm Leaving Spotify
 
 ## archive.02
-Subscriptions → MUBI | Leave Amazon Prime
+Subscriptions → MUBI | I'm Leaving Amazon Prime
 
 ## archive.03
-Shopping → Back Market | Leave Amazon
+Shopping → Back Market | I'm Leaving Amazon
 
 ## archive.04
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail

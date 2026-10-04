@@ -1,0 +1,23 @@
+/*
+  Custom Payload admin styles. Loaded via src/app/(payload)/custom.scss
+  (which layout.tsx imports) — NOT via `admin.css` in payload.config.ts,
+  which Payload 3 doesn't support.
+*/
+
+/* Media (upload) list view: larger thumbnails in the filename column.
+   Payload renders these as `td.cell-filename > … > .thumbnail`; the default
+   `--size-small` thumbnail is capped by its own width/max-height, hence
+   resetting those here. */
+td.cell-filename .thumbnail {
+  width: 100px !important; /* Change to your desired width */
+  height: 100px !important; /* Change to your desired height */
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Scales the preview image inside that container */
+td.cell-filename .thumbnail img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover; /* Keeps aspect ratio intact */
+}

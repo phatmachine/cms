@@ -38,7 +38,7 @@ export const ExitSectionHeader: React.FC<ExitSectionHeaderProps> = ({
             </h2>
           )}
           {intro && (
-            <p className="m-0 font-rtm-serif italic text-[clamp(18px,1.8vw,24px)] leading-[1.4] text-rtm-umber max-w-[46ch] text-pretty">
+            <p className="m-0 font-rtm-serif font-bold italic text-[clamp(18px,1.8vw,24px)] leading-[1.4] text-rtm-umber max-w-[46ch] text-pretty">
               {intro}
             </p>
           )}

@@ -63,7 +63,15 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (post.postType === 'exitGuide') {
     return (
-      <article className="pt-16 pb-16">
+      // bg-rtm-bg here is load-bearing, not decorative: the exit-guide
+      // sections don't all set their own background (see e.g. Alternatives),
+      // and several rely on *this* being the warm Paper cream to work at
+      // all — dark, low-contrast text and text-shadow "halo" effects meant
+      // to blend into cream. Without it they inherit <body>'s bg-background,
+      // which the sitewide theme flips near-black under prefers-color-scheme:
+      // dark — despite tokens.css stating the brand register has no dark
+      // mode. Do not remove this in favor of per-section fixes only.
+      <article className="bg-rtm-bg pt-16 pb-16">
         <PageClient />
 
         {/* Allows redirects for valid pages too */}

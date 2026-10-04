@@ -9,11 +9,14 @@ Payments
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+How to leave PayPal: compare Wise and Wero, find your subscriptions, move your money out and close the account in five steps.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 014 // Payments
 
 ## hero.title
-Leave PayPal
+I'm Leaving PayPal
 
 ## hero.standfirst
 Three American states have laws forcing PayPal to ask permission before sharing what you buy. Everywhere else, it simply <em>started</em>.
@@ -34,22 +37,22 @@ TK — Verify Before Publishing
 Fees And Ads
 
 ## reason.01.title
-Opted In By Default
+I Was Opted In
 
 ## reason.01.body
-PayPal's own privacy statement says that unless the law requires your consent, it discloses what you buy to partners and merchants for personalised shopping. The setting exists, but you had to go looking.
+PayPal's own privacy statement says that unless the law requires consent, it discloses what you buy to partners and merchants for personalised shopping. The setting exists, but I had to go looking for it.
 
 ## reason.02.title
-Three States Got Asked
+Only Three Got Asked
 
 ## reason.02.body
-In California, North Dakota and Vermont, PayPal shares only if you tell it to, because those states require it. Same company, same data, and the difference is entirely whether a legislature insisted.
+It wants to control and limit you - restrictions on whom I pay and why are determined by a commercial based profit machine. Even refusing to operate in Palestinian territories like the West Bank and Gaza. No Pay of mine!!
 
 ## reason.03.title
-Opting Out Is Partial
+American Rules & American Control
 
 ## reason.03.body
-Switch the setting off and PayPal still discloses whatever it considers necessary to complete your transactions. Once that reaches a merchant, their privacy policy governs it, not yours.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 One works almost everywhere and is honest about its fees. The other is owned by European banks rather than <em>investors</em>.
@@ -62,6 +65,9 @@ Wise
 
 ## alternative.01.locationLine
 Payments · London
+
+## alternative.01.country
+United Kingdom
 
 ## alternative.01.blurb
 Cross-border payments with the exchange rate and fee shown before you commit, averaging about half a per cent. Nineteen million customers, and no advertising business built on what you <em>spend</em>.
@@ -84,6 +90,9 @@ Transaction fees, card spending and interest on balances. No advertising and no 
 ## alternative.01.price
 Free to hold an account. Transfers cost around 0.52 per cent on average, shown upfront.
 
+## alternative.01.referralUrl
+https://wise.com/
+
 ## alternative.02.label
 The European Route
 
@@ -92,6 +101,9 @@ Wero
 
 ## alternative.02.locationLine
 Bank Payments · Brussels
+
+## alternative.02.country
+European Union
 
 ## alternative.02.blurb
 A wallet built by a coalition of twenty European banks, moving money directly between accounts with no card network in the middle. More than forty-three million people already <em>use</em> it.
@@ -113,6 +125,9 @@ Bank-funded infrastructure, paid for by the members. No advertising and no data 
 
 ## alternative.02.price
 Free between individuals, through your existing banking app.
+
+## alternative.02.referralUrl
+https://wero-wallet.eu/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Close, Once It Is Empty
 Closing with a balance, an open dispute or a pending payment will fail. Clear all three, then close the account from the settings page.
 
 ## archive.01
-Shopping → Back Market | Leave Amazon
+Shopping → Back Market | I'm Leaving Amazon
 
 ## archive.02
-Shopping → Refurbed | Leave Temu
+Shopping → Refurbed | I'm Leaving Temu
 
 ## archive.03
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

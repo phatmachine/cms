@@ -9,17 +9,20 @@ Shopping
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+How to leave Temu: check what plugs in, request your data and delete the account in five steps, then try Refurbed or Vinted.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 013 // Shopping
 
 ## hero.title
-Leave Temu
+I'm Leaving Temu
 
 ## hero.standfirst
 The European Commission bought a basket of goods and tested them. Most of the chargers failed <em>basic</em> safety checks, and it fined Temu two hundred million euros.
 
 ## subject.statement
-This is not a page about your data. It is a page about the charger by your bed, the toy in the cot, and a regulator that went shopping and did not <em>like</em> what it found.
+This is not a page about your data. It is a page about your choice to opt for cheap goods and destroy your local industry. Accept responsibility and change.
 
 ## subject.jurisdiction
 CHINA / IRELAND
@@ -34,22 +37,22 @@ PDD Holdings Inc.
 Marketplace Fees
 
 ## reason.01.title
-Very Likely Illegal
+I Stopped Risking It
 
 ## reason.01.body
-In May the Commission fined Temu two hundred million euros, finding EU shoppers are very likely to meet illegal items there. Its testing found chargers failing safety checks and baby toys with banned chemicals.
+In May the Commission fined Temu two hundred million euros, finding EU shoppers are very likely to meet illegal items there. Its testing found chargers failing safety checks and baby toys with banned chemicals, so I stopped ordering.
 
 ## reason.02.title
-The Feed Amplifies It
+The Feed Kept Pushing
 
 ## reason.02.body
-The Commission also found Temu never assessed how its recommendations and paid influencers spread those products further. Separate proceedings into the app's addictive design remain open.
+The Commission also found Temu never assessed how its recommendations and paid influencers spread those products further. Separate proceedings into the app's addictive design remain open, and I would rather not wait for the finding.
 
 ## reason.03.title
-Four Countries, One Company
+Four Countries, No Answer
 
 ## reason.03.body
-The parent is incorporated in the Cayman Islands, files from Dublin and is listed in New York. When filings first said Dublin, the company said its headquarters would always be Shanghai.
+The parent is incorporated in the Cayman Islands, files from Dublin and is listed in New York. When filings first said Dublin the company said its headquarters would always be Shanghai, and I gave up working out who I was buying from.
 
 ## alternatives.intro
 The cheap thing that arrives in four days is the whole product, so nothing matches it. These two cost more and <em>last</em> longer.
@@ -62,6 +65,9 @@ Refurbed
 
 ## alternative.01.locationLine
 Refurbished Goods · Vienna
+
+## alternative.01.country
+Austria
 
 ## alternative.01.blurb
 An Austrian marketplace for professionally restored electronics and appliances, every item carrying at least a twelve-month warranty after a forty-step check. A certified B Corp with a published <em>score</em>, not just a slogan.
@@ -84,6 +90,9 @@ Roughly ten per cent seller commission. Profitable since March 2025, with no adv
 ## alternative.01.price
 Free to buy from. You pay only for the item, which is usually well below new.
 
+## alternative.01.referralUrl
+https://www.refurbed.com/
+
 ## alternative.02.label
 For Everything Else
 
@@ -92,6 +101,9 @@ Vinted
 
 ## alternative.02.locationLine
 Secondhand · Vilnius
+
+## alternative.02.country
+Lithuania
 
 ## alternative.02.blurb
 Europe's biggest secondhand marketplace, covering clothes, homeware, books and toys. Nothing is manufactured to fill your order, so the safety question changes shape <em>entirely</em>.
@@ -113,6 +125,9 @@ Buyer protection fees and promoted listings. Profitable in 2025 on around €1.1
 
 ## alternative.02.price
 Free to list and browse. A protection fee applies when you buy.
+
+## alternative.02.referralUrl
+https://www.vinted.com/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Delete The Account
 Deleting the app leaves the account and its order history intact. Close the account itself in settings, and expect a waiting period before it finalises.
 
 ## archive.01
-Shopping → Back Market | Leave Amazon
+Shopping → Back Market | I'm Leaving Amazon
 
 ## archive.02
-Social → Pixelfed | Leave Instagram
+Social → Pixelfed | I'm Leaving Instagram
 
 ## archive.03
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

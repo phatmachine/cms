@@ -2,8 +2,11 @@ import type { Media as MediaType, Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import { Reveal } from '@/components/Reveal'
+import { hasJurisdictionFlag } from '@/utilities/jurisdictionFlags'
 import { cn } from '@/utilities/ui'
 import React from 'react'
+
+import { JurisdictionFlags } from './JurisdictionValue'
 
 type Alternative = NonNullable<NonNullable<Post['exitGuide']>['alternatives']>[number]
 
@@ -31,13 +34,16 @@ export const Alternatives: React.FC<AlternativesProps> = ({ altsIntro, altsLabel
   return (
     <section id="alternatives">
       <div className="grid grid-cols-12 gap-6 px-[8vw] pt-40 pb-10">
-        <div className="col-span-12 border-t border-rtm-hairline pt-3 font-rtm-mono-label text-rtm-label tracking-label text-rtm-accent uppercase md:col-span-3">
+        <Reveal className="col-span-12 border-t border-rtm-hairline pt-3 font-rtm-mono-label text-rtm-label tracking-label text-rtm-accent uppercase md:col-span-3">
           {altsLabel}
-        </div>
+        </Reveal>
         {altsIntro && (
-          <div className="col-span-12 font-rtm-meshed text-[2.6vw] leading-[1.2] tracking-[0.01em] text-rtm-umber uppercase max-sm:text-[6vw] md:col-span-9 md:col-start-5">
+          <Reveal
+            className="col-span-12 font-rtm-meshed font-black text-[2.6vw] leading-[1.2] tracking-[0.01em] text-rtm-umber uppercase max-sm:text-[6vw] md:col-span-9 md:col-start-5"
+            delay={0.1}
+          >
             {altsIntro}
-          </div>
+          </Reveal>
         )}
       </div>
 
@@ -47,19 +53,23 @@ export const Alternatives: React.FC<AlternativesProps> = ({ altsIntro, altsLabel
           const tilt = reversed ? 1.2 : -1.2
           const filled = Number(alt.difficulty)
           const image = typeof alt.image === 'object' ? (alt.image as MediaType) : null
+          const hasFlag = hasJurisdictionFlag(alt.country)
 
           return (
             <div
               className={cn(
-                'relative flex min-h-[78vh] items-stretch',
-                reversed ? 'flex-row-reverse' : 'flex-row',
+                // Phones: the banner, then the text panel tucked up over its
+                // bottom edge. From md: side by side, the panel overlapping
+                // one edge of the banner, bottom-aligned.
+                'relative flex flex-col md:min-h-[78vh] md:items-end',
+                reversed ? 'md:flex-row-reverse' : 'md:flex-row',
               )}
               key={alt.id || index}
             >
               <div
                 className={cn(
-                  'relative h-[78vh] min-h-[560px] w-[80vw] flex-shrink-0 overflow-hidden bg-rtm-ground-slab',
-                  reversed ? '-mr-[4vw]' : '-ml-[4vw]',
+                  'relative h-[45vh] min-h-[280px] w-full flex-shrink-0 overflow-hidden bg-rtm-ground-slab md:h-[78vh] md:min-h-[560px] md:w-[80vw]',
+                  reversed ? 'md:-mr-[4vw]' : 'md:-ml-[4vw]',
                 )}
                 style={{ transform: `rotate(${tilt}deg)` }}
               >
@@ -77,7 +87,7 @@ export const Alternatives: React.FC<AlternativesProps> = ({ altsIntro, altsLabel
                         {alt.tagline}
                       </div>
                     )}
-                    <div className="font-rtm-display text-[9vw] leading-[0.85] font-black tracking-[-0.05em] text-rtm-fg uppercase">
+                    <div className="w-full max-w-full text-pretty break-words font-rtm-display text-[9vw] leading-[0.85] font-black tracking-[-0.05em] text-rtm-fg uppercase">
                       {alt.name}
                     </div>
                   </div>
@@ -86,47 +96,83 @@ export const Alternatives: React.FC<AlternativesProps> = ({ altsIntro, altsLabel
 
               <Reveal
                 className={cn(
-                  'absolute bottom-0 z-[2] flex w-[42%] flex-col px-[3vw] py-[5vw]',
-                  reversed ? 'left-[-2vw] items-end text-right' : 'right-[-2vw] items-start text-left',
+                  // A SOLID paper panel, not a transparent overlay. The old one
+                  // sat over the banner with only a cream text-shadow glow to
+                  // keep it readable — that only worked on light images, and a
+                  // dark banner swallowed the dark text. On its own surface the
+                  // text is legible whatever the banner looks like, and the
+                  // overlap across the banner's edge (the design's whole
+                  // point) is kept. shrink-0 so it isn't squeezed narrower.
+                  'relative z-[2] flex shrink-0 flex-col items-start bg-rtm-bg px-[6vw] py-[8vw] text-left shadow-[0_30px_70px_-30px_rgba(20,14,10,0.4)] max-md:-mt-[10vw] max-md:mx-[4vw] md:w-[42%] md:px-[3vw] md:py-[4vw]',
+                  reversed
+                    ? 'md:-mr-[16vw] md:items-end md:text-right'
+                    : 'md:-ml-[16vw] md:items-start md:text-left',
                 )}
               >
                 {alt.rank && (
-                  <div className="mb-5 font-rtm-mono-label text-rtm-caption text-rtm-accent uppercase [text-shadow:0_0_40px_var(--rtm-bg)]">
+                  <div className="mb-5 font-rtm-mono-label text-rtm-caption text-rtm-accent uppercase">
                     {alt.rank}
                   </div>
                 )}
-                <h2 className="mb-5 font-rtm-display text-[4vw] font-bold tracking-[-0.02em] text-rtm-fg uppercase [text-shadow:0_0_40px_var(--rtm-bg)] max-sm:text-[8vw]">
+                <h2 className="mb-5 font-rtm-display text-[4vw] leading-[1.2] font-bold tracking-[-0.02em] text-rtm-fg uppercase max-sm:text-[8vw]">
                   {alt.name}
                 </h2>
-                <p className="max-w-[420px] font-rtm-meshed text-[18px] leading-[1.45] tracking-[0.01em] text-rtm-umber uppercase [text-shadow:0_0_40px_var(--rtm-bg)]">
+                {/* Flag(s) of the country the service is legally based in, at
+                    least 80px wide, growing with the viewport to keep pace with
+                    the vw-sized heading. Absent for a federated/self-hosted
+                    service with no home country. */}
+                {hasFlag && (
+                  <div className={cn('mb-5 flex flex-wrap items-center gap-4', reversed && 'md:justify-end')}>
+                    <JurisdictionFlags
+                      className="aspect-[3/2] h-auto w-[max(80px,5.5vw)] shrink-0 rounded-[3px] shadow-[0_0_0_1px_rgba(61,61,51,0.2),0_6px_18px_rgba(20,14,10,0.2)]"
+                      value={alt.country as string}
+                    />
+                  </div>
+                )}
+                <p className="max-w-[420px] font-rtm-meshed font-bold text-[18px] leading-[1.45] tracking-[0.01em] text-rtm-umber uppercase">
                   {alt.description}
                 </p>
 
-                <div className={cn('mt-7 flex flex-col gap-2', reversed && 'items-end')}>
+                <div className={cn('mt-7 flex flex-col gap-2', reversed && 'md:items-end')}>
                   <div className="font-rtm-mono-label text-[9px] tracking-[0.15em] text-rtm-accent uppercase">
                     Difficulty To Switch — {DIFFICULTY_LABEL[alt.difficulty]}
                   </div>
                   <div className="flex gap-1.5">
                     {[0, 1, 2, 3, 4].map((seg) => (
                       <span
-                        className={cn('h-[5px] w-[34px]', seg < filled ? 'bg-rtm-umber' : 'bg-[#d8d5c4]')}
+                        className={cn('h-[5px] w-[34px]', seg < filled ? 'bg-rtm-teal' : 'bg-[#d8d5c4]')}
                         key={seg}
                       />
                     ))}
                   </div>
                 </div>
 
-                <a
-                  className="mt-9 flex h-[150px] w-[150px] items-center justify-center rounded-full border border-rtm-accent bg-rtm-bg/55 p-3 text-center font-rtm-mono-label text-[10px] tracking-[0.12em] text-rtm-umber uppercase backdrop-blur-[5px] hover:border-rtm-umber hover:bg-rtm-umber hover:text-rtm-bg"
-                  href={alt.referralUrl}
-                  rel="noopener sponsored"
-                  style={{
-                    transition: `background 0.4s ${EASE}, color 0.4s ${EASE}, border-color 0.4s ${EASE}`,
-                  }}
-                  target="_blank"
-                >
-                  {alt.ctaLabel || 'Make The Switch'}
-                </a>
+                {/* Two side-by-side rectangular buttons — filled primary
+                    (referral) + outlined secondary (Learn More) — replacing
+                    the old single circular CTA. Shape/pairing modelled on
+                    menlo.ai's own buy/learn-more pair, rendered in this
+                    site's own tokens rather than their orange. Learn More
+                    has no rel="sponsored": it's not the paid/referral link. */}
+                <div className="mt-9 flex flex-wrap gap-4">
+                  <a
+                    className="inline-flex h-[52px] items-center justify-center rounded-lg border border-rtm-teal-dark bg-rtm-teal-dark px-8 text-center font-rtm-mono-label text-[13px] font-bold tracking-[0.12em] text-rtm-bg uppercase transition-[background-color,border-color] duration-300 hover:border-rtm-magenta hover:bg-rtm-magenta"
+                    href={alt.referralUrl}
+                    rel="noopener sponsored"
+                    target="_blank"
+                  >
+                    {alt.ctaLabel || 'Make The Switch'}
+                  </a>
+                  {alt.learnMoreUrl && (
+                    <a
+                      className="inline-flex h-[52px] items-center justify-center rounded-lg border border-rtm-accent bg-transparent px-8 text-center font-rtm-mono-label text-[13px] font-bold tracking-[0.12em] text-rtm-umber uppercase transition-colors duration-300 hover:border-rtm-fg hover:text-rtm-fg"
+                      href={alt.learnMoreUrl}
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      {alt.learnMoreLabel || 'Learn More'}
+                    </a>
+                  )}
+                </div>
               </Reveal>
             </div>
           )

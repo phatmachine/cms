@@ -24,6 +24,8 @@ const { mongoMemoryServer, url } = await getDatabaseUri()
 
 export default buildConfig({
   admin: {
+    // Custom admin styles: src/styles/custom-admin.css, pulled in by
+    // src/app/(payload)/custom.scss. (Payload 3 has no `admin.css` option.)
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.

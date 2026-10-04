@@ -9,11 +9,23 @@ Social
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+Leaving X? Request your archive, take your following list and delete the account in five steps, with Mastodon and Bluesky to try.
+
+## meta.video
+green_smoke_loop.mp4
+
+## meta.heroImage
+hdr-rethink-x-1.jpg
+
+## meta.status
+published
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 009 // Social
 
 ## hero.title
-Leave X
+I'm Leaving X
 
 ## hero.standfirst
 Europe fined X one hundred and twenty million euros in December, and the first finding was that its blue ticks mean <em>nothing</em> at all.
@@ -34,22 +46,22 @@ SpaceX (SpaceXAI)
 Ads And Subscriptions
 
 ## reason.01.title
-Verified Means Paid
+Verified Meant Paid
 
 ## reason.01.body
-The European Commission found that selling blue checkmarks deceives people, because nothing about the account has actually been verified. It called the result a greater exposure to impersonation and scams.
+The European Commission found that selling blue checkmarks deceives people, because nothing about the account has actually been verified. It called the result greater exposure to impersonation and scams, and I stopped trusting what I was seeing.
 
 ## reason.02.title
-Nobody Can Audit It
+I Can't Check It
 
 ## reason.02.body
-The same decision penalised an ad repository missing the content and the payer, and terms of service that forbid researchers from collecting public posts. Nobody outside the company can check what it amplifies.
+The same decision penalised an ad repository missing the content and the payer, and terms that forbid researchers from collecting public posts. Nobody outside the company can check what it amplifies, and that includes me.
 
 ## reason.03.title
-Your Posts Feed It
+American Rules & American Control
 
 ## reason.03.body
-Since July 2024 your posts have trained Grok by default, with the opt-out arriving only afterwards. Ireland's regulator made X delete the European data, but not the model already built from it.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 One is owned by nobody and cannot be sold. The other is far easier to join, and has <em>investors</em> who will eventually want paying.
@@ -84,6 +96,9 @@ Donations and sponsorships. No advertising, no venture capital, and nothing for 
 ## alternative.01.price
 Free. Most servers ask for a contribution toward hosting.
 
+## alternative.01.referralUrl
+https://joinmastodon.org/
+
 ## alternative.02.label
 The Softer Landing
 
@@ -92,6 +107,9 @@ Bluesky
 
 ## alternative.02.locationLine
 Microblogging · Delaware
+
+## alternative.02.country
+United States
 
 ## alternative.02.blurb
 The easiest move if you are leaving this week: a familiar feed, people you know already there, and moderation filters you set yourself. Built on an open protocol, so your handle stays <em>yours</em>.
@@ -113,6 +131,9 @@ Venture capital, with no advertising so far. How it will eventually make money i
 
 ## alternative.02.price
 Free to use, with no advertising at present.
+
+## alternative.02.referralUrl
+https://bsky.app/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +169,13 @@ Deactivate, Then Delete
 Deactivation starts a thirty-day clock before the account is removed. Log back in during that window and the clock resets, so log out and leave it.
 
 ## archive.01
-AI → Proton Lumo | Leave Grok
+AI → Proton Lumo | I'm Leaving Grok
 
 ## archive.02
-Social → Friendica | Leave Facebook
+Social → Friendica | I'm Leaving Facebook
 
 ## archive.03
-Social → Pixelfed | Leave Instagram
+Social → Pixelfed | I'm Leaving Instagram
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

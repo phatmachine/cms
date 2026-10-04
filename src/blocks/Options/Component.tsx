@@ -34,12 +34,12 @@ export const OptionsBlock: React.FC<OptionsBlockProps> = ({ eyebrow, heading, in
                 {option.name}
               </h3>
               {option.tagline && (
-                <p className="m-0 font-rtm-serif italic text-[20px] leading-[1.4] text-rtm-umber">
+                <p className="m-0 font-rtm-serif font-bold italic text-[20px] leading-[1.4] text-rtm-umber">
                   {option.tagline}
                 </p>
               )}
               {option.description && (
-                <p className="m-0 font-rtm-serif text-[18px] leading-[1.4] text-rtm-umber max-w-[44ch]">
+                <p className="m-0 font-rtm-serif font-bold text-[18px] leading-[1.4] text-rtm-umber max-w-[44ch]">
                   {option.description}
                 </p>
               )}

@@ -26,7 +26,7 @@ export const NarrativeBlock: React.FC<NarrativeBlockProps> = ({ label, statement
       {statement && (
         <div className="col-span-12 md:col-span-8 md:col-start-5">
           <RichText
-            className="[&_p]:m-0 [&_p]:font-rtm-serif [&_p]:italic [&_p]:text-[8vw] md:[&_p]:text-[4vw] [&_p]:leading-[1.1] [&_p]:text-rtm-umber [&_p]:text-pretty [&_em]:not-italic [&_em]:text-rtm-fg"
+            className="[&_p]:m-0 [&_p]:font-rtm-serif [&_p]:font-black [&_p]:italic [&_p]:text-[8vw] md:[&_p]:text-[4vw] [&_p]:leading-[1.1] [&_p]:text-rtm-umber [&_p]:text-pretty [&_em]:not-italic [&_em]:text-rtm-fg"
             data={statement}
             enableGutter={false}
             enableProse={false}

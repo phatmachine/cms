@@ -232,6 +232,8 @@
   --color-rtm-ground-hero: var(--rtm-ground-hero);
   --color-rtm-hairline: var(--rtm-hairline);
   --color-rtm-teal: var(--rtm-teal);
+  --color-rtm-teal-dark: var(--rtm-teal-dark);
+  --color-rtm-magenta: var(--rtm-magenta);
 
   /* Nebula Ramp — the raw palette. Prefer the semantic aliases above for
      components; reach for these directly when composing new pages/blocks. */

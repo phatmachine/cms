@@ -118,14 +118,14 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
 
         <div className="mx-[8vw] flex flex-col gap-12">
           {reasons.map((reason, i) => (
-            <div className="max-w-[640px]" key={reason.id || i}>
+            <div className="max-w-[900px]" key={reason.id || i}>
               <div className="font-rtm-display text-[9vw] leading-[0.9] font-black tracking-[-0.04em] text-rtm-bg opacity-90 sm:text-[56px]">
                 {reason.number}
               </div>
-              <h3 className="mt-[18px] mb-5 font-rtm-display text-[3vw] font-bold tracking-[-0.02em] text-rtm-bg uppercase max-sm:text-[7vw] sm:text-[32px]">
+              <h3 className="mt-[18px] mb-5 font-rtm-display text-[3vw] leading-[1.1] font-bold tracking-[-0.02em] text-rtm-bg uppercase max-sm:text-[7vw] sm:text-[32px]">
                 {reason.title}
               </h3>
-              <p className="font-rtm-meshed text-[22px] leading-[1.4] tracking-[0.01em] text-rtm-ground-slab uppercase">
+              <p className="max-w-[640px] font-rtm-meshed font-bold text-[22px] leading-[1.4] tracking-[0.01em] text-rtm-ground-slab uppercase">
                 {reason.body}
               </p>
             </div>
@@ -158,7 +158,7 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
         <div className="relative z-[3] w-full max-w-[1500px] px-[8vw]">
           {reasons.map((reason, i) => (
             <div
-              className="absolute top-1/2 right-[8vw] left-[8vw] max-w-[640px] opacity-0 [transition:opacity_0.5s_ease,transform_0.5s_cubic-bezier(0.16,1,0.3,1)]"
+              className="absolute top-1/2 right-[8vw] left-[8vw] max-w-[900px] opacity-0 [transition:opacity_0.5s_ease,transform_0.5s_cubic-bezier(0.16,1,0.3,1)]"
               key={reason.id || i}
               ref={(el) => {
                 reasonRefs.current[i] = el
@@ -168,10 +168,10 @@ export const WhyExitScrub: React.FC<WhyExitScrubProps> = ({ label, reasons, vide
               <div className="font-rtm-display text-[9vw] leading-[0.9] font-black tracking-[-0.04em] text-rtm-bg opacity-90">
                 {reason.number}
               </div>
-              <h3 className="mt-[18px] mb-5 font-rtm-display text-[3vw] font-bold tracking-[-0.02em] text-rtm-bg uppercase max-sm:text-[7vw]">
+              <h3 className="mt-[18px] mb-5 font-rtm-display text-[3vw] leading-[1.1] font-bold tracking-[-0.02em] text-rtm-bg uppercase max-sm:text-[7vw]">
                 {reason.title}
               </h3>
-              <p className="font-rtm-meshed text-[22px] leading-[1.4] tracking-[0.01em] text-rtm-ground-slab uppercase">
+              <p className="max-w-[640px] font-rtm-meshed font-bold text-[22px] leading-[1.4] tracking-[0.01em] text-rtm-ground-slab uppercase">
                 {reason.body}
               </p>
             </div>

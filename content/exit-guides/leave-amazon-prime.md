@@ -9,17 +9,20 @@ Subscriptions
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+Ready to leave Amazon Prime? See MUBI and PeerTube, then follow five steps to check your refund, save your photos and cancel.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 012 // Subscriptions
 
 ## hero.title
-Leave Amazon Prime
+I'm Leaving Amazon Prime
 
 ## hero.standfirst
-Amazon's own staff named the cancellation process after Homer's <em>Iliad</em>. A court agreed it was designed that way, and Amazon paid two and a half billion dollars.
+I feel like I am plugged in to a never ending story - only this one is really bad, rotten prime produced movies that fall flat, AI injected productions that put profit before substance and content that treats us all like mindless subscribing morons. 
 
 ## subject.statement
-Every subscription is a bet that you will forget to cancel. Prime is the only one where the difficulty was <em>engineered</em>, documented internally, and then proven in a federal court.
+Every subscription is a bet that you will forget to cancel.The option to unsubscribe has a difficulty that was <em>engineered</em>.
 
 ## subject.jurisdiction
 USA
@@ -34,22 +37,22 @@ Amazon.com, Inc.
 Subscription
 
 ## reason.01.title
-Named For An Epic
+That Name Told Me
 
 ## reason.01.body
-Amazon staff called the cancellation flow "Iliad", after the poem about a ten-year journey home. The name was internal, documented, and it tells you exactly what the design was meant to achieve.
+Amazon staff called the cancellation flow “Iliad”, after the poem about a ten-year journey home. The name was internal and documented, and once I knew it I could not unsee what the design was for.
 
 ## reason.02.title
-A Court Agreed
+A Court Saw It
 
 ## reason.02.body
-In September 2025 a federal judge found Amazon took billing details before disclosing what Prime cost and how to cancel. Amazon settled three days into trial for two and a half billion dollars.
+In September 2025 a federal judge found Amazon took billing details before disclosing what Prime cost and how to cancel. It settled three days into trial for two and a half billion dollars, and I stopped giving it the benefit of the doubt.
 
 ## reason.03.title
-You Paid, Ads Came
+American Rules & American Control
 
 ## reason.03.body
-In 2024 Amazon put adverts into Prime Video and charged extra to remove them, rising again in April to five dollars a month. A court called that a benefit modification rather than a price rise.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 Prime is a bundle, and the delivery half has no honest replacement. What follows covers the part most people actually <em>use</em>.
@@ -62,6 +65,9 @@ MUBI
 
 ## alternative.01.locationLine
 Curated Film · London
+
+## alternative.01.country
+United Kingdom
 
 ## alternative.01.blurb
 A hand-picked rotating selection of independent and international cinema, with no advertising and no algorithm pushing you toward whatever is cheapest to licence. It also puts films into actual <em>cinemas</em>.
@@ -84,6 +90,9 @@ Subscriptions, plus film distribution and production. No advertising anywhere in
 ## alternative.01.price
 Around $14.99 a month or $119.88 a year, and £11.99 a month in the UK.
 
+## alternative.01.referralUrl
+https://mubi.com/
+
 ## alternative.02.label
 If You Keep Video
 
@@ -92,6 +101,9 @@ PeerTube
 
 ## alternative.02.locationLine
 Video Hosting · France
+
+## alternative.02.country
+France
 
 ## alternative.02.blurb
 French non-profit video hosting, where a channel lives on a server you pick or one you run yourself. For home footage and anything you made, this keeps it <em>outside</em> a retailer's account.
@@ -113,6 +125,9 @@ Donations and public interest grants. No advertising, no investors, nothing to s
 
 ## alternative.02.price
 Free to join an instance, and free to run your own.
+
+## alternative.02.referralUrl
+https://joinpeertube.org/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Let The Delivery Habit Die
 Without Prime, the minimum order threshold makes you batch purchases and wait. That pause is doing the real work, and it is worth more than the fee.
 
 ## archive.01
-Shopping → Back Market | Leave Amazon
+Shopping → Back Market | I'm Leaving Amazon
 
 ## archive.02
-Social → Friendica | Leave Facebook
+Social → Friendica | I'm Leaving Facebook
 
 ## archive.03
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

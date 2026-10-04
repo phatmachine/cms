@@ -1,0 +1,4 @@
+// Extra admin styles live in src/styles/custom-admin.css. Imported without
+// the .css extension on purpose: Sass inlines the plain-CSS file, whereas
+// `@import '….css'` would be emitted as a runtime CSS @import and 404.
+@import '../../styles/custom-admin';

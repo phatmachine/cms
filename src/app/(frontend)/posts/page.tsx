@@ -23,6 +23,9 @@ export default async function Page() {
       title: true,
       slug: true,
       categories: true,
+      // Only the Jurisdiction spec, for the flag on each card.
+      exitGuide: { subject: { specs: true } },
+      heroImage: true,
       meta: true,
     },
   })
@@ -58,6 +61,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    title: `Rethink The Machine Posts`,
   }
 }

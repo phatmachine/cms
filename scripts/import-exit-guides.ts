@@ -18,15 +18,27 @@ import type { Category, Media } from '../src/payload-types'
  * Two source formats are supported, auto-detected per file:
  *  - YAML frontmatter (gray-matter), documented in README.md.
  *  - "Structured markdown" — a flat `## field.path` heading per value, no
- *    frontmatter block. Used for batches authored without heroImage/video/
- *    referralUrl yet on hand; those posts import as drafts (Payload skips
- *    required-field validation on draft saves for this collection, since
- *    versions.drafts.validate isn't set), ready for the user to attach
- *    media and referral links before publishing.
+ *    frontmatter block. Carries the same media and referral fields as the
+ *    YAML format (meta.status, meta.heroImage, meta.video,
+ *    alternative.NN.image, alternative.NN.referralUrl), all optional. A file
+ *    missing referralUrl on any alternative can only be saved as a draft,
+ *    since referralUrl is required and Payload skips required-field
+ *    validation on draft saves for this collection (versions.drafts.validate
+ *    isn't set) — so meta.status is honoured only once the file is complete.
+ *
+ * A published post is never overwritten by a file that would import as a
+ * draft; see the --force-published note below.
  */
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'exit-guides')
 const DEFAULT_CATEGORY = "I'm Leaving You"
+
+// The local database — not these .md files — is the source of truth for posts
+// that have already been published; they carry hand-edited titles, subject
+// specs, referral URLs and per-alternative images that this format does not
+// model and this script would therefore destroy. Markdown remains the
+// authoring format for new guides, so creates and draft updates still run.
+const FORCE_PUBLISHED = process.argv.includes('--force-published')
 
 // "before **bold** after" -> a one-paragraph Lexical doc, matching the
 // design's "exactly one emphasised phrase per statement" rule. No **bold**
@@ -179,7 +191,10 @@ async function buildFromFrontmatter(payload: Payload, data: Record<string, any>,
 
   const resolvedAlternatives = await Promise.all(
     alternatives.map(async (alt) => ({
+      country: alt.country,
       ctaLabel: alt.ctaLabel,
+      learnMoreLabel: alt.learnMoreLabel,
+      learnMoreUrl: alt.learnMoreUrl,
       description: alt.description,
       difficulty: String(alt.difficulty) as '2' | '3' | '4' | '5',
       image: alt.image ? (await findMediaByFilename(payload, alt.image)).id : undefined,
@@ -238,9 +253,14 @@ async function buildFromStructured(payload: Payload, fields: Record<string, stri
   const title = requireTruthy(fields['hero.title'], 'hero.title')
   const statement = requireTruthy(fields['subject.statement'], 'subject.statement')
 
-  const appName = title.replace(/^Leave\s+/i, '').trim()
-  const [titleLine1, ...rest] = title.split(' ')
-  const titleLine2 = rest.join(' ')
+  // Titles read "I'm Leaving <App>" — first person, so the page reads as one
+  // person's decision rather than an instruction. Older files still say
+  // "Leave <App>". Either way the lead-in becomes the first display line and
+  // whatever follows it is the app name.
+  const lead = title.match(/^(I'm\s+Leaving|Leave)\s+/i)
+  const appName = lead ? title.slice(lead[0].length).trim() : title
+  const titleLine1 = lead ? lead[1] : title.split(' ')[0]
+  const titleLine2 = lead ? appName : title.split(' ').slice(1).join(' ')
 
   const specs = (
     [
@@ -261,10 +281,15 @@ async function buildFromStructured(payload: Payload, fields: Record<string, stri
   if (reasons.length === 0) throw new Error('missing required field "reasons (at least 1)"')
 
   const alternatives: {
+    country: string | undefined
     description: string
     difficulty: '2' | '3' | '4' | '5'
+    image?: string
     name: string
     rank: string | undefined
+    learnMoreLabel: string | undefined
+    learnMoreUrl: string | undefined
+    referralUrl: string | undefined
     tagline: string | undefined
   }[] = []
   for (let i = 1; i <= 4; i++) {
@@ -273,15 +298,34 @@ async function buildFromStructured(payload: Payload, fields: Record<string, stri
     if (!name) break
     const blurb = stripEm(fields[`alternative.${idx}.blurb`]) || ''
     const caveat = stripEm(fields[`alternative.${idx}.catch`])
+    const imageName = fields[`alternative.${idx}.image`]
     alternatives.push({
+      // Drives the flag beside the service's name. Absent = no flag (a
+      // federated or self-hosted service has no home country).
+      country: fields[`alternative.${idx}.country`]?.trim() || undefined,
       description: caveat ? `${blurb} ${caveat}` : blurb,
       difficulty: parseDifficulty(fields[`alternative.${idx}.difficulty`]),
+      ...(imageName ? { image: (await findMediaByFilename(payload, imageName)).id as string } : {}),
       name,
       rank: fields[`alternative.${idx}.label`],
+      learnMoreLabel: fields[`alternative.${idx}.learnMoreLabel`],
+      learnMoreUrl: fields[`alternative.${idx}.learnMoreUrl`],
+      referralUrl: fields[`alternative.${idx}.referralUrl`],
       tagline: fields[`alternative.${idx}.locationLine`],
     })
   }
   if (alternatives.length === 0) throw new Error('missing required field "alternatives (at least 1)"')
+
+  // referralUrl is required by the schema. A file that does not carry one for
+  // every alternative can only be saved as a draft (Payload skips required-
+  // field validation on draft saves here), so `meta.status: published` is
+  // honoured only once the file is complete enough to survive publishing.
+  const complete = alternatives.every((a) => Boolean(a.referralUrl))
+  const wantsPublished = (fields['meta.status'] || '').trim().toLowerCase() === 'published'
+  const status = complete && wantsPublished ? ('published' as const) : ('draft' as const)
+
+  const heroImageName = fields['meta.heroImage']
+  const videoName = fields['meta.video']
 
   const migrationSteps: { body: string; title: string }[] = []
   for (let i = 1; i <= 8; i++) {
@@ -292,11 +336,41 @@ async function buildFromStructured(payload: Payload, fields: Record<string, stri
   }
   if (migrationSteps.length === 0) throw new Error('missing required field "migrationSteps (at least 1)"')
 
+  // Published at the foot of the guide. Honest opinion is only defensible where
+  // its factual basis is visible, so these rows are part of the argument.
+  const sources: {
+    archiveUrl: string | undefined
+    checked: string | undefined
+    claim: string
+    publisher: string | undefined
+    url: string
+  }[] = []
+  for (let i = 1; i <= 20; i++) {
+    const idx = String(i).padStart(2, '0')
+    const claim = fields[`source.${idx}.claim`]
+    if (!claim) break
+    const url = fields[`source.${idx}.url`]
+    if (!url) throw new Error(`source.${idx} has a claim but no url`)
+    sources.push({
+      archiveUrl: fields[`source.${idx}.archiveUrl`],
+      checked: fields[`source.${idx}.checked`],
+      claim: stripEm(claim) || '',
+      publisher: fields[`source.${idx}.publisher`],
+      url,
+    })
+  }
+
   const categories = await Promise.all([DEFAULT_CATEGORY].map((t) => findOrCreateCategory(payload, t)))
 
   return {
-    _status: 'draft' as const,
+    _status: status,
     categories: categories.map((c) => c.id),
+    ...(heroImageName ? { heroImage: (await findMediaByFilename(payload, heroImageName)).id } : {}),
+    // SEO tab description (100–150 chars). Only sent when the file carries
+    // one, so a file without it leaves whatever the SEO tab already holds.
+    ...(fields['meta.description']?.trim()
+      ? { meta: { description: fields['meta.description'].trim() } }
+      : {}),
     exitGuide: {
       altsIntro: stripEm(fields['alternatives.intro']),
       altsLabel: 'The Alternatives [03]',
@@ -314,6 +388,8 @@ async function buildFromStructured(payload: Payload, fields: Record<string, stri
       migrationHeading: fields['exitRoute.heading'],
       migrationLabel: 'The Exit Route [04]',
       migrationSteps,
+      sources,
+      sourcesLabel: fields['sources.label'] || 'The Receipts [05]',
       subject: {
         label: 'The Subject [01]',
         specs,
@@ -322,6 +398,7 @@ async function buildFromStructured(payload: Payload, fields: Record<string, stri
       whyExit: {
         label: 'Why Exit [02]',
         reasons,
+        ...(videoName ? { video: (await findMediaByFilename(payload, videoName)).id } : {}),
       },
     },
     postType: 'exitGuide' as const,
@@ -342,14 +419,40 @@ async function importFile(payload: Payload, filePath: string, dryRun: boolean) {
 
   const draft = postData._status === 'draft'
 
+  const { docs: existingDocs } = await payload.find({
+    collection: 'posts',
+    limit: 1,
+    where: { slug: { equals: slug } },
+  })
+  const existing = existingDocs[0]
+  // Only block where the import would actually cost something: a live post
+  // being overwritten by a file that cannot itself be published, which demotes
+  // it to draft. Note what is and is not at risk — Payload merges the update,
+  // so scalars and media relationships (heroImage, whyExit.video) survive being
+  // omitted from the file, but ARRAYS are replaced wholesale, so anything the
+  // file does not carry for `alternatives` (referralUrl, image) is lost. A
+  // complete file updating a published post is the normal path and runs
+  // unimpeded.
+  const blocked =
+    Boolean(existing) && (existing as any)._status === 'published' && draft && !FORCE_PUBLISHED
+
   if (dryRun) {
-    console.log(`--- ${slug} (${isStructured ? 'structured' : 'frontmatter'}${draft ? ', draft' : ''}) ---`)
+    const state = blocked ? 'WOULD SKIP — published' : `${isStructured ? 'structured' : 'frontmatter'}${draft ? ', draft' : ''}`
+    console.log(`--- ${slug} (${state}) ---`)
     console.log(
       JSON.stringify(
         {
-          alternatives: postData.exitGuide.alternatives.map((a: any) => `${a.name} (${a.difficulty})`),
+          alternatives: postData.exitGuide.alternatives.map(
+            (a: any) =>
+              `${a.name} (${a.difficulty}) ${a.referralUrl ?? 'NO REFERRAL URL'}${a.image ? ' +image' : ''}`,
+          ),
           appName: postData.exitGuide.appName,
           guideNumber: postData.exitGuide.guideNumber,
+          heroImage: postData.heroImage ? 'resolved' : '(none)',
+          metaDescription: postData.meta?.description
+            ? `${postData.meta.description.length} chars — ${postData.meta.description}`
+            : '(none)',
+          status: postData._status,
           migrationSteps: postData.exitGuide.migrationSteps.length,
           reasons: postData.exitGuide.whyExit.reasons.length,
           specs: postData.exitGuide.subject.specs,
@@ -362,12 +465,19 @@ async function importFile(payload: Payload, filePath: string, dryRun: boolean) {
     return
   }
 
-  const { docs: existingDocs } = await payload.find({
-    collection: 'posts',
-    limit: 1,
-    where: { slug: { equals: slug } },
-  })
-  const existing = existingDocs[0]
+  if (blocked) {
+    const missing = postData.exitGuide.alternatives
+      .filter((a: any) => !a.referralUrl)
+      .map((a: any) => a.name)
+    console.warn(
+      `skipped: ${slug} — it is published, but this file would import as a draft, demoting the live post. ` +
+        (missing.length
+          ? `Add alternative.NN.referralUrl for: ${missing.join(', ')}.`
+          : `Add "## meta.status" with the value "published".`) +
+        ` Or re-run with --force-published to demote it anyway.`,
+    )
+    return
+  }
 
   const context = { disableRevalidate: true }
 
@@ -381,7 +491,11 @@ async function importFile(payload: Payload, filePath: string, dryRun: boolean) {
 }
 
 async function main() {
-  const dryRun = process.argv.includes('--dry-run')
+  // `payload run script.ts --dry-run` swallows the flag — it only reaches the
+  // script as `payload run script.ts -- --dry-run`. Silently doing a real
+  // import when a dry run was asked for is the worst possible failure here, so
+  // DRY_RUN=1 is accepted as an equivalent that cannot be eaten by the CLI.
+  const dryRun = process.argv.includes('--dry-run') || process.env.DRY_RUN === '1'
 
   if (!fs.existsSync(CONTENT_DIR)) {
     console.error(`No such directory: ${CONTENT_DIR}`)

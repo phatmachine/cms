@@ -31,9 +31,29 @@
 
   /* Teal — sampled from the "Exit Big Tech" template's feature imagery.
      Confirmed as a permanent brand accent (not sitewide default): reserved
-     for indictment statements and callouts that need to read as a jolt
-     against the warm Paper register, e.g. the exit-guide subject section. */
+     for callouts that need to read as a jolt against the warm Paper
+     register, e.g. the exit-guide hero fallback ground and footer headline. */
   --rtm-teal: #22c9d6;
+  /* Same hue/saturation as --rtm-teal, pulled down to ~38% lightness
+     (brightened ~15% from an earlier ~33%/#178991 — that read too dark).
+     Used where teal grounds a large area behind plain text with no
+     shadow/scrim to help it (e.g. the exit-guide hero fallback when no
+     feature image is set). At this lightness contrast against cream
+     (--rtm-bg) text is ~3.15:1 — clears AA for the large title/standfirst
+     there but not for small normal-weight text; don't reuse behind
+     anything smaller without adding contrast help back. --rtm-teal
+     itself is lighter still and unsuitable for this use. */
+  --rtm-teal-dark: #1b9ea7;
+
+  /* Magenta — second brand accent, same reserved-not-sitewide status as
+     teal. Currently used for the exit-guide Subject indictment statement
+     (the one-liner naming what the product actually does). ~3.6:1 contrast
+     against the cream Paper ground (--rtm-bg) with no shadow needed —
+     clears AA there since that statement is always large text (3:1
+     minimum), but don't reuse this token behind normal-size text without
+     adding contrast help back (it doesn't clear the 4.5:1 normal-text
+     floor). */
+  --rtm-magenta: #e63eb2;
 
   /* ============================================================
      NEBULA RAMP — sampled top-to-bottom from the reference sky:
@@ -159,17 +179,20 @@
   --grad-dust: linear-gradient(180deg, var(--cosmos-900) 0%, var(--drift-bronze) 100%);
 
   /* --- Typography (font families point at next/font variables, see layout.tsx) ---
-     Inter carries display type and UI text; Playfair Display is reserved for
-     italic serif prose (narrative statements, project descriptions); JetBrains
-     Mono is reserved for labels, nav, captions — always uppercase, tracked. */
+     Inter carries display type and UI text; JetBrains Mono is reserved for
+     labels, nav, captions — always uppercase, tracked.
+
+     No serif anywhere. The --font-serif and --font-meshed slots were Playfair
+     Display and Meshed Display; both now resolve to Inter, set bold at the
+     usage sites. Keeping the two token names means the ~19 call sites did not
+     have to be renamed, and either face can be restored by changing one line
+     here. Playfair and Meshed are still loaded in layout.tsx and are now
+     unused — remove them there once this direction is settled. */
   --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-serif: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono-label: var(--font-jetbrains-mono), ui-monospace, monospace;
-  /* Meshed Display — client-licensed face reserved for the "Exit Big Tech"
-     template's prose/quotes. Always set uppercase with tracking in use;
-     the slanted cut is not loaded, italics are not part of this brand. */
-  --font-meshed: var(--font-meshed-display), Georgia, serif;
+  --font-meshed: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --text-display-hero: 400 96px/0.98 var(--font-display);
   --ls-display-hero: -3px;

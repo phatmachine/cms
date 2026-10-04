@@ -9,14 +9,17 @@ AI
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+How to leave Gemini: clear your history, take it off your phone and move to Mistral Le Chat or Jan in five steps.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 007 // AI
 
 ## hero.title
-Leave Gemini
+I'm Leaving Gemini
 
 ## hero.standfirst
-Google's own privacy notice asks you not to type anything confidential, because a human being may <em>read</em> it. Take the warning at face value.
+Google's own AI privacy notice asked me not to type anything confidential, because a human being may <em>read</em> it. Take the warning at face value.
 
 ## subject.statement
 No other product opens by telling you to hold something back. Google has written down exactly what Gemini is, in its own notice, and almost nobody has <em>read</em> it.
@@ -34,22 +37,22 @@ Google LLC (Alphabet Inc.)
 Ad Targeting
 
 ## reason.01.title
-They Told You Not To
+Read, Then Kept
 
 ## reason.01.body
-Google's notice states that human reviewers, including contractors, read some of what you type. It then asks you not to enter anything you would not want a reviewer to see.
+Google's notice says chats read by human reviewers aren't deleted when you delete your activity, but kept for up to three years. I can't unsay what I've typed.
 
 ## reason.02.title
-Off Is Not Off
+Off Wasn't Off
 
 ## reason.02.body
-Turning Keep Activity off does not stop the reading. Google's own page says your chats are still used, still reach human reviewers, and are still held for around seventy-two hours.
+Google's notice says that with Keep Activity off it still uses your chats, with help from human reviewers, and holds them for 72 hours. That isn't what "off" meant to me.
 
 ## reason.03.title
-Reviewed Means Kept
+American Rules & American Control
 
 ## reason.03.body
-Conversations pulled for human review are stored separately from your account and held for up to three years. Deleting your activity does not delete them, because they are no longer filed under you.
+The World Economic Forum says most cloud infrastructure is American-owned, and the CLOUD Act lets US authorities compel a US provider to produce data wherever it's stored. I don't want my chats within that reach.
 
 ## alternatives.intro
 One keeps the work in Europe, under laws that actually bite. The other never lets it leave the <em>room</em> at all.
@@ -62,6 +65,9 @@ Mistral Le Chat
 
 ## alternative.01.locationLine
 AI Assistant · Paris
+
+## alternative.01.country
+France
 
 ## alternative.01.blurb
 A French lab whose models sit near the frontier, hosted in Europe under GDPR, with much of its model work published openly. It is the swap that costs you the least <em>capability</em>.
@@ -83,6 +89,9 @@ Subscriptions, enterprise contracts and API sales on top of large venture rounds
 
 ## alternative.01.price
 Free consumer tier. Pro is around $14.99 a month per person.
+
+## alternative.01.referralUrl
+https://chat.mistral.ai/
 
 ## alternative.02.label
 The Nothing-Leaves Route
@@ -113,6 +122,9 @@ Open-source project. Free to download, with telemetry off by default and remote 
 
 ## alternative.02.price
 Free. The real cost is a computer capable of running the model.
+
+## alternative.02.referralUrl
+https://jan.ai/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +160,13 @@ Move One Real Task
 Run a job you actually do each week somewhere else for a fortnight. Convenience is what keeps people here, so it has to be beaten on its own ground.
 
 ## archive.01
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.02
-AI → Proton Lumo | Leave ChatGPT
+AI → Proton Lumo | I'm Leaving ChatGPT
 
 ## archive.03
-Social → Friendica | Leave Facebook
+Social → Friendica | I'm Leaving Facebook
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

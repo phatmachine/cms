@@ -9,17 +9,20 @@ Shopping
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+Leaving Amazon? Compare Back Market and Vinted, then follow five steps to save your order history and close the account.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 011 // Shopping
 
 ## hero.title
-Leave Amazon
+I'm Leaving Amazon
 
 ## hero.standfirst
 It sold nearly seventy billion dollars of advertising last year. The search results you trust are an <em>auction</em>, and you are the prize.
 
 ## subject.statement
-You think of it as a shop with adverts in it. The accounts say the opposite: an advertising business with a <em>warehouse</em> attached, where shelf position goes to whoever bids.
+We think of it as a shop with adverts in it. The accounts say the opposite: an advertising business with a <em>warehouse</em> attached, where shelf position goes to whoever bids. Squeezing providers to extract more and more profit.
 
 ## subject.jurisdiction
 USA
@@ -34,22 +37,22 @@ Amazon.com, Inc.
 Retail And Ads
 
 ## reason.01.title
-The Shelf Is Sold
+I Can't Trust It
 
 ## reason.01.body
-Amazon's advertising business approached seventy billion dollars in 2025, making it the third largest in the world. Those Sponsored Products sit in the search results you are reading as recommendations.
+Amazon's advertising business approached seventy billion dollars in 2025, the third largest in the world. With Sponsored Products sitting inside the results, I can no longer read a search there as a recommendation.
 
 ## reason.02.title
-What Sellers Pay, You Pay
+I Won't Fund It
 
 ## reason.02.body
-In August the FTC and twenty-two states alleged Amazon secretly inflated those ad auctions for seven years, extracting billions. Amazon rejects this and nothing is proven, but the regulator says the cost reached shoppers.
+Infrastrucure leased to those willing to pay - no regard for how it maybe used to target and kill. Military-grade surveillance and profiling of humans - thats me and you. Targeting shoppers is just as easy. 
 
 ## reason.03.title
-Kept As Long As Needed
+American Rules & American Control
 
 ## reason.03.body
-Amazon's own privacy notice sets no retention period, only that it keeps your information as long as required. That record is shared across the group, from Ring to Whole Foods to Twitch.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 Nothing replaces a shop that sells everything, and pretending otherwise would be dishonest. These two cover where most of the <em>money</em> actually goes.
@@ -62,6 +65,9 @@ Back Market
 
 ## alternative.01.locationLine
 Refurbished Tech · Paris
+
+## alternative.01.country
+France
 
 ## alternative.01.blurb
 A French marketplace for professionally refurbished phones, laptops and appliances, sold with warranties by around eighteen hundred vetted refurbishers. A certified B Corp, so the mission sits in the <em>articles</em>.
@@ -84,6 +90,9 @@ Marketplace commission, plus an optional protection subscription. No advertising
 ## alternative.01.price
 Free to buy from. An optional Plus tier runs about €3.99 a month for extended protections.
 
+## alternative.01.referralUrl
+https://www.backmarket.com/
+
 ## alternative.02.label
 For Everything Textile
 
@@ -92,6 +101,9 @@ Vinted
 
 ## alternative.02.locationLine
 Secondhand · Vilnius
+
+## alternative.02.country
+Lithuania
 
 ## alternative.02.blurb
 Europe's largest secondhand marketplace, Lithuanian owned and profitable, covering clothes, books, toys and homeware. Nothing new is manufactured for you, which makes it the <em>cheapest</em> option twice over.
@@ -113,6 +125,9 @@ Buyer protection fees and promoted listings. Profitable since 2023, on roughly �
 
 ## alternative.02.price
 Free to list and free to browse. A protection fee applies when you buy.
+
+## alternative.02.referralUrl
+https://www.vinted.com/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Close It Or Cool It
 Closing the account forfeits Kindle, Prime Video and Alexa purchases permanently. For most people, an empty account with no card saved is the honest end point.
 
 ## archive.01
-Social → Friendica | Leave Facebook
+Social → Friendica | I'm Leaving Facebook
 
 ## archive.02
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.03
-AI → Proton Lumo | Leave ChatGPT
+AI → Proton Lumo | I'm Leaving ChatGPT
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

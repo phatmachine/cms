@@ -9,14 +9,17 @@ Transport
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+How to leave Uber: install a local alternative like Bolt or The Drivers Cooperative, download your trips and delete the account.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 015 // Transport
 
 ## hero.title
-Leave Uber
+I'm Leaving Uber
 
 ## hero.standfirst
-Last month a Dutch regulator fined Uber eight hundred and twenty-five million euros for cutting drivers off by <em>algorithm</em> without properly telling them why.
+A regulator fined Uber eight hundred and twenty-five million euros for cutting drivers off by <em>algorithm</em> without properly telling them why.
 
 ## subject.statement
 You are not the one being watched in this app. The person driving you is, by software that decides whether they work tomorrow and does not have to <em>explain</em> itself.
@@ -34,22 +37,23 @@ TK — Verify Before Publishing
 Commission And Ads
 
 ## reason.01.title
-Sacked By Algorithm
+I Won't Fund That
 
 ## reason.01.body
-In August the Dutch regulator fined Uber eight hundred and twenty-five million euros for deactivating driver accounts automatically without adequately explaining why. It is the second largest penalty ever issued under European data law.
+I have listened to my drivers - heard the stories and seen the frustration of being marginalised, squeenzed for profit, limited and made to suffer. 
+And we enable it!! - a cheap ride or even a driver less ride costs a lot more to humans that we think.
 
 ## reason.02.title
 Sent West Regardless
 
 ## reason.02.body
-An earlier fine covered two years of European driver data sent to American servers without the required safeguards. That data included photographs, identity documents, and in some cases criminal and medical records.
+An earlier fine covered two years of European driver data sent to American servers without the required safeguards. It included photographs, identity documents and in some cases criminal and medical records, which I find hard to get past.
 
 ## reason.03.title
-Four Fines, One Country
+American Rules & American Control
 
 ## reason.03.body
-The Netherlands alone has now penalised Uber four times, in 2018, 2023, 2024 and 2026. The sums rose from six hundred thousand euros to eight hundred and twenty-five million.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 One is European and cheaper for drivers but works the same way. The other is owned by the <em>drivers</em> themselves.
@@ -62,6 +66,9 @@ Bolt
 
 ## alternative.01.locationLine
 Ride Hailing · Tallinn
+
+## alternative.01.country
+Estonia
 
 ## alternative.01.blurb
 The Estonian rival operating across more than eight hundred and fifty cities, built deliberately lean and taking a smaller cut from drivers than Uber does. European ownership means European law reaches it <em>directly</em>.
@@ -84,6 +91,9 @@ Commission on rides and deliveries. Narrowly profitable in 2025, with no adverti
 ## alternative.01.price
 Free to use, with fares typically below Uber's in the same city.
 
+## alternative.01.referralUrl
+https://bolt.eu/
+
 ## alternative.02.label
 The Driver-Owned Route
 
@@ -92,6 +102,9 @@ The Drivers Cooperative
 
 ## alternative.02.locationLine
 Ride Hailing · New York
+
+## alternative.02.country
+United States
 
 ## alternative.02.blurb
 A ride-hailing service owned outright by the drivers who work it, taking fifteen per cent against the quarter to forty per cent the big platforms charge. Profits return to the people doing the <em>driving</em>.
@@ -113,6 +126,9 @@ A fifteen per cent share of each fare, covering overheads. Surplus returns to me
 
 ## alternative.02.price
 Free to use. Fares are comparable, and more of each one reaches the driver.
+
+## alternative.02.referralUrl
+https://drivers.coop/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +164,13 @@ Delete The Account
 Removing the app leaves the account and its history live. Delete the account itself in settings, and expect a thirty-day window before it finalises.
 
 ## archive.01
-Payments → Wero | Leave PayPal
+Payments → Wero | I'm Leaving PayPal
 
 ## archive.02
-Shopping → Refurbed | Leave Temu
+Shopping → Refurbed | I'm Leaving Temu
 
 ## archive.03
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

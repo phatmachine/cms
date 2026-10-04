@@ -81,6 +81,10 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'heroImage',
               type: 'upload',
+              admin: {
+                description:
+                  'Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header shows a solid teal panel instead.',
+              },
               relationTo: 'media',
             },
             {

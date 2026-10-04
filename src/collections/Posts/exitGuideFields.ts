@@ -173,6 +173,14 @@ export const exitGuideTab: Tab = {
           admin: { description: 'e.g. "Encrypted Mail · Geneva"' },
         },
         {
+          name: 'country',
+          type: 'text',
+          admin: {
+            description:
+              'Where the service is legally based — drives the flag beside its name. e.g. "Switzerland", or "France / Germany" for two. Leave empty for a federated or self-hosted service with no home country (no flag is shown).',
+          },
+        },
+        {
           name: 'rank',
           type: 'text',
           admin: { description: 'e.g. "[001] Recommended First Move"' },
@@ -183,7 +191,8 @@ export const exitGuideTab: Tab = {
           type: 'upload',
           relationTo: 'media',
           admin: {
-            description: 'Optional. Empty = typographic slab (name set large on warm ground).',
+            description:
+              'Optional banner. Keep it free of logos, wordmarks and text — the logo has its own field, and the name and description sit on a solid panel beside the banner, overlapping about a fifth of one edge, so keep the focal point in the middle. Empty = typographic slab (name set large on warm ground).',
           },
         },
         {
@@ -210,6 +219,20 @@ export const exitGuideTab: Tab = {
           label: 'Referral URL',
           admin: { description: 'Opens in a new tab with rel="noopener sponsored".' },
         },
+        {
+          name: 'learnMoreLabel',
+          type: 'text',
+          defaultValue: 'Learn More',
+        },
+        {
+          name: 'learnMoreUrl',
+          type: 'text',
+          label: 'Learn More URL',
+          admin: {
+            description:
+              'Optional. A non-commercial link — the service’s own review/comparison page, its privacy policy, Wikipedia, etc. Opens in a new tab without the sponsored/affiliate rel used by the Referral URL. The button is left out entirely if this is empty.',
+          },
+        },
       ],
     },
     {
@@ -232,6 +255,51 @@ export const exitGuideTab: Tab = {
       fields: [
         { name: 'title', type: 'text', required: true },
         { name: 'body', type: 'textarea', required: true },
+      ],
+    },
+    {
+      name: 'sourcesLabel',
+      type: 'text',
+      label: 'Sources — label',
+      admin: { placeholder: 'The Receipts [05]' },
+    },
+    {
+      name: 'sources',
+      type: 'array',
+      label: 'Sources',
+      maxRows: 20,
+      labels: { singular: 'Source', plural: 'Sources' },
+      admin: {
+        initCollapsed: true,
+        description:
+          'Published at the foot of the guide, collapsed by default. One row per factual claim on the page. Honest opinion is only defensible where its factual basis is visible, so these are part of the argument, not an appendix.',
+      },
+      fields: [
+        {
+          name: 'claim',
+          type: 'textarea',
+          required: true,
+          admin: { description: 'The claim as a reader meets it on the page.' },
+        },
+        {
+          name: 'publisher',
+          type: 'text',
+          admin: { description: 'Who published the source, e.g. "YouTube Official Blog".' },
+        },
+        { name: 'url', type: 'text', required: true },
+        {
+          name: 'archiveUrl',
+          type: 'text',
+          admin: {
+            description:
+              'Archived copy (web.archive.org / archive.today). A dead citation reads as an invented one.',
+          },
+        },
+        {
+          name: 'checked',
+          type: 'text',
+          admin: { description: 'Date this link was last confirmed, e.g. 2026-09-21.' },
+        },
       ],
     },
     {

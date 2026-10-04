@@ -24,7 +24,7 @@ const h1ClassWithImageClip =
 const h1ClassPlain =
   '[&_h1]:relative [&_h1]:z-[2] [&_h1]:m-0 [&_h1]:font-rtm-display [&_h1]:font-black [&_h1]:uppercase [&_h1]:text-[13vw] max-sm:[&_h1]:text-[18vw] [&_h1]:leading-[0.85] [&_h1]:tracking-[-0.04em] [&_h1]:text-rtm-bg'
 const richTextSharedClass =
-  '[&_p]:relative [&_p]:z-[2] [&_p]:m-0 [&_p]:mt-2 [&_p]:font-rtm-serif [&_p]:italic [&_p]:text-[clamp(17px,1.6vw,22px)] [&_p]:leading-[1.5] [&_p]:text-rtm-bg [&_p]:max-w-[52ch] [&_p]:text-pretty grid justify-items-center gap-[clamp(16px,2vw,24px)]'
+  '[&_p]:relative [&_p]:z-[2] [&_p]:m-0 [&_p]:mt-2 [&_p]:font-rtm-serif [&_p]:font-bold [&_p]:italic [&_p]:text-[clamp(17px,1.6vw,22px)] [&_p]:leading-[1.5] [&_p]:text-rtm-bg [&_p]:max-w-[52ch] [&_p]:text-pretty grid justify-items-center gap-[clamp(16px,2vw,24px)]'
 
 /**
  * The "human interface" hero: full-viewport sepia photograph, a hero title

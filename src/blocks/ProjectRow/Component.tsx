@@ -80,7 +80,7 @@ export const ProjectRowBlock: React.FC<ProjectRowBlockProps> = ({
             {description && (
               <p
                 className={cn(
-                  'm-0 max-w-[42ch] font-rtm-serif text-[18px] leading-[1.4] text-rtm-fg text-pretty',
+                  'm-0 max-w-[42ch] font-rtm-serif font-bold text-[18px] leading-[1.4] text-rtm-fg text-pretty',
                   isLeft ? 'text-left' : 'text-right',
                 )}
               >

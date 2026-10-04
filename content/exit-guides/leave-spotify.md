@@ -9,14 +9,17 @@ Music
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+I'm leaving Spotify -  I want the services I use to be aligned to my values and reward artists development and not support war machines
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 016 // Music
 
 ## hero.title
-Leave Spotify
+I'm Leaving Spotify
 
 ## hero.standfirst
-This is not a privacy page. Spotify is European and behaves better than most, and the argument here is simply about where your ten pounds <em>lands</em>.
+This is not a privacy page. Spotify is European and behaves better than most, and the argument here is simply about where your money <em>lands</em>.
 
 ## subject.statement
 Musicians have been leaving for two years while listeners stayed. The people who make the thing you are paying for have already <em>decided</em>, and that is worth a moment of your attention.
@@ -34,22 +37,22 @@ Spotify Technology S.A.
 Subscriptions And Ads
 
 ## reason.01.title
-Where The Money Goes
+Where My Money Goes
 
 ## reason.01.body
-Daniel Ek's own investment firm led a six hundred million euro round into Helsing, a military AI company he now chairs. That is his money rather than Spotify's, and artists have left over it regardless.
+Daniel Ek's own investment firm led a six hundred million euro round into Helsing, a military AI company he now chairs. That is his money rather than Spotify's, but it is not a direction I want mine pointing in.
 
 ## reason.02.title
-Paid By Share, Not Play
+My Money Misses Them
 
 ## reason.02.body
-Spotify says plainly that it pays by streamshare rather than per stream, so royalties come from a pool the largest catalogues dominate. Independent artists see roughly three to five tenths of a penny per play.
+Spotify says plainly that it pays by streamshare rather than per stream, so royalties come from a pool the largest catalogues dominate. Independent artists see roughly three to five tenths of a penny per play, and they are who I meant to pay.
 
 ## reason.03.title
-The Pool Keeps Filling
+I'm Paying The Machines
 
 ## reason.03.body
-Thousands of AI-generated tracks and synthetic artists have arrived on the platform. Every one of them draws from the same pool of money as the musicians you actually meant to pay.
+Thousands of AI-generated tracks and synthetic artists have arrived on the platform. Every one of them draws from the same pool as the musicians I actually meant to support, which makes my subscription work against me.
 
 ## alternatives.intro
 Neither is cheaper, and that is the point. One pays musicians several times more per play; the other simply <em>sells</em> you the record.
@@ -62,6 +65,9 @@ Qobuz
 
 ## alternative.01.locationLine
 Music Streaming · Paris
+
+## alternative.01.country
+France
 
 ## alternative.01.blurb
 A French service with a full catalogue, lossless audio, and a reported payout several times the market average. It also refuses AI-generated music outright, which no major rival <em>does</em>.
@@ -84,6 +90,9 @@ Subscriptions and download sales. No advertising tier and no free plan.
 ## alternative.01.price
 Around $12.99 a month for one person, with a family plan near $17.99.
 
+## alternative.01.referralUrl
+https://www.qobuz.com/
+
 ## alternative.02.label
 For Buying, Not Renting
 
@@ -92,6 +101,9 @@ Bandcamp
 
 ## alternative.02.locationLine
 Direct Sales · Oakland
+
+## alternative.02.country
+United States
 
 ## alternative.02.blurb
 You buy the record and the artist keeps most of the money, typically over eighty per cent. The file is then yours, which no subscription anywhere can <em>promise</em>.
@@ -113,6 +125,9 @@ A share of each sale, with the rest going to the artist or label. No advertising
 
 ## alternative.02.price
 You pay per album or track. Nothing recurring, and nothing to cancel.
+
+## alternative.02.referralUrl
+https://bandcamp.com/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Cancel, Then Delete
 Cancelling only stops the billing, leaving the account and its listening history intact. Close the account separately from the privacy settings.
 
 ## archive.01
-Transport → Bolt | Leave Uber
+Transport → Bolt | I'm Leaving Uber
 
 ## archive.02
-Payments → Wero | Leave PayPal
+Payments → Wero | I'm Leaving PayPal
 
 ## archive.03
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail
 
 ## archive.04
-Messaging → Signal | Leave WhatsApp
+Messaging → Signal | I'm Leaving WhatsApp

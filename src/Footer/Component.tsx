@@ -26,12 +26,12 @@ export async function Footer() {
       <div className="relative max-w-[1240px] mx-auto grid gap-[clamp(48px,6vw,80px)] px-[clamp(24px,5vw,72px)] pt-[clamp(64px,8vw,120px)] pb-8">
         <div className="grid grid-cols-[minmax(0,1fr)] gap-[clamp(24px,3vw,40px)]">
           {headline && (
-            <p className="m-0 max-w-[24ch] text-pretty text-[clamp(30px,4vw,56px)] italic leading-[1.1] font-rtm-serif font-normal text-rtm-umber">
+            <p className="m-0 max-w-[24ch] text-pretty text-[clamp(30px,4vw,56px)] italic leading-[1.1] font-rtm-serif font-black text-rtm-teal">
               {headline}
             </p>
           )}
           {subhead && (
-            <p className="m-0 max-w-[46ch] text-pretty text-rtm-body-lg font-rtm-serif text-rtm-fg">
+            <p className="m-0 max-w-[46ch] text-pretty text-rtm-body-lg font-rtm-serif font-bold text-rtm-fg">
               {subhead}
             </p>
           )}

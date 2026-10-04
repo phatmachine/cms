@@ -52,7 +52,7 @@ export const ComparisonTableBlock: React.FC<ComparisonTableBlockProps> = ({
             {rows.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 <th
-                  className="py-[18px] text-left font-rtm-serif font-normal text-[18px] text-rtm-fg border-b border-rtm-hairline whitespace-nowrap"
+                  className="py-[18px] text-left font-rtm-serif font-bold text-[18px] text-rtm-fg border-b border-rtm-hairline whitespace-nowrap"
                   scope="row"
                 >
                   {row.feature}

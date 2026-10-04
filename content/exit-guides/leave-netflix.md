@@ -9,11 +9,14 @@ Streaming
 ## meta.filedUnder
 Exit Big Tech
 
+## meta.description
+How to leave Netflix: finish what you started, cancel rather than pause, and try ARTE or Nebula instead, all in five steps.
+
 ## hero.eyebrow
 Exit Big Tech // Guide No. 018 // Streaming
 
 ## hero.title
-Leave Netflix
+I'm Leaving Netflix
 
 ## hero.standfirst
 It stopped publishing how many subscribers it has, and from next year it will report what people watch once instead of <em>twice</em>. Growing companies rarely say less.
@@ -34,22 +37,22 @@ Netflix, Inc.
 Subscriptions And Ads
 
 ## reason.01.title
-They Stopped Counting
+They Stopped Telling Me
 
 ## reason.01.body
-Netflix ended quarterly subscriber reporting in 2025 and will cut its viewership reports from twice a year to once from 2027. A company that discloses less as it grows is telling you something.
+Netflix has dramtically influenced how my kids see the world - mind numbing content that is heavily slanted to the US agenda - even my kids are asking for tomato sauce and candy. And every Muslim is a terrorist. Localised content has been destroyed. 
 
 ## reason.02.title
 Worth More With Ads
 
 ## reason.02.body
-Netflix built its own advertising technology and an ad-supported viewer is worth several times an ad-free one. Every incentive inside the company now points toward the version with commercials.
+Netflix built its own advertising technology, and an ad-supported viewer is worth several times an ad-free one. Every incentive inside the company now points at the version of me I do not want to be.
 
 ## reason.03.title
-The Cheap Door Closed
+American Rules & American Control
 
 ## reason.03.body
-The cheaper advert-free tier was shut and the remaining one raised to almost eighteen dollars. Paying less now means accepting advertising, which was not the arrangement anyone signed up to.
+According to the World Economic Forum, the majority of data in the Western world is stored on U.S.-owned servers. Even using a US based digital application in a foreign country is bound by US legislation - local legislation and privacy controls do not protect you
 
 ## alternatives.intro
 Neither has the box sets, and no honest page will claim otherwise. One is free and <em>public</em>; the other belongs to the people who make it.
@@ -62,6 +65,9 @@ ARTE
 
 ## alternative.01.locationLine
 Public Broadcasting · Strasbourg
+
+## alternative.01.country
+France / Germany
 
 ## alternative.01.blurb
 A Franco-German cultural channel streaming free with no advertising and no account required, roughly nine tenths of it European production. Ninety-one million Europeans reach it each <em>month</em>.
@@ -84,6 +90,9 @@ Public broadcasting funds from France and Germany. No advertising, no subscripti
 ## alternative.01.price
 Free. No account needed to watch, and nothing to cancel later.
 
+## alternative.01.referralUrl
+https://www.arte.tv/
+
 ## alternative.02.label
 The Creator-Owned Route
 
@@ -92,6 +101,9 @@ Nebula
 
 ## alternative.02.locationLine
 Streaming · New York
+
+## alternative.02.country
+United States
 
 ## alternative.02.blurb
 The largest creator-owned streaming service, where the people making the programmes hold the company and receive the subscription money directly. No advertising and no sponsor <em>reads</em>.
@@ -113,6 +125,9 @@ Subscriptions only, shared with the creators whose work you watch. No advertisin
 
 ## alternative.02.price
 Around $6 a month, or $60 a year, often discounted through a creator's link.
+
+## alternative.02.referralUrl
+https://nebula.tv/
 
 ## exitRoute.heading
 Five Steps / Out The Door
@@ -148,13 +163,13 @@ Buy One Film
 Spend what a month cost on a single film you own outright. It is the cheapest possible demonstration of what renting has been costing you.
 
 ## archive.01
-Audiobooks → Libro.fm | Leave Audible
+Audiobooks → Libro.fm | I'm Leaving Audible
 
 ## archive.02
-Music → Qobuz | Leave Spotify
+Music → Qobuz | I'm Leaving Spotify
 
 ## archive.03
-Subscriptions → MUBI | Leave Amazon Prime
+Subscriptions → MUBI | I'm Leaving Amazon Prime
 
 ## archive.04
-Email → Proton Mail | Leave Gmail
+Email → Proton Mail | I'm Leaving Gmail

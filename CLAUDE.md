@@ -29,6 +29,16 @@ Defined in `src/collections/`. After adding/changing fields, regenerate types:
 npm run generate:types
 ```
 
+## Audit posts
+
+`postType: audit` is a second post template (alongside `exitGuide`): a scorecard page built
+from the audit `.md` that the `rtm-sovereignty-audit` skill writes. Drop that file in
+`content/audits/` and run `npm run import:audits` (draft by default; `DRY_RUN=1` and
+`PUBLISH=1` are env vars, not flags, because `payload run` swallows arguments). The parser
+is `src/utilities/auditParser.ts`, the template is `src/components/Audit/`, and the
+`rtm-audit-post` project skill has the full workflow. Like exit guides, the local database
+is the source of truth once an audit is published: the importer never overwrites one.
+
 ## AI (Claude/Anthropic) in the admin panel
 
 `@ai-stack/payloadcms` (community plugin, config in `src/plugins.ts`) adds AI-assisted

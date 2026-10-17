@@ -15,6 +15,7 @@ import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { auditTab } from './auditFields'
 import { exitGuideTab, postTypeField } from './exitGuideFields'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -105,7 +106,7 @@ export const Posts: CollectionConfig<'posts'> = {
               label: false,
               validate: (value, { data }) => {
                 const postType = (data as { postType?: string } | undefined)?.postType
-                if (postType === 'exitGuide') return true
+                if (postType === 'exitGuide' || postType === 'audit') return true
                 return value ? true : 'Content is required'
               },
             },
@@ -113,6 +114,7 @@ export const Posts: CollectionConfig<'posts'> = {
           label: 'Content',
         },
         exitGuideTab,
+        auditTab,
         {
           fields: [
             {

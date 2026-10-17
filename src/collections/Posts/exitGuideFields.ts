@@ -329,7 +329,8 @@ export const postTypeField: Field = {
   name: 'postType',
   type: 'select',
   admin: {
-    description: 'Switches this post to the "Exit Big Tech" long-form editorial template.',
+    description:
+      'Switches this post to a long-form editorial template: "Exit Guide" (Exit Big Tech) or "Audit" (sovereignty audit scorecard).',
     position: 'sidebar',
   },
   defaultValue: 'standard',
@@ -339,3 +340,4 @@ export const postTypeField: Field = {
   ],
   required: true,
 }
+    { label: 'Audit', value: 'audit' },

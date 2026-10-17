@@ -10,6 +10,7 @@ import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
 
+import { AuditTemplate } from '@/components/Audit'
 import { ExitGuideTemplate } from '@/components/ExitGuide'
 import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
@@ -80,6 +81,24 @@ export default async function Post({ params: paramsPromise }: Args) {
         {draft && <LivePreviewListener />}
 
         <ExitGuideTemplate post={post} />
+      </article>
+    )
+  }
+
+  if (post.postType === 'audit') {
+    return (
+      // bg-rtm-bg is load-bearing here for the same reason as in the exit-guide branch
+      // above: the scorecard's colours are chosen against the Paper cream, and the
+      // sitewide dark theme would otherwise flip <body> near-black behind them.
+      <article className="bg-rtm-bg pt-16 pb-16">
+        <PageClient />
+
+        {/* Allows redirects for valid pages too */}
+        <PayloadRedirects disableNotFound url={url} />
+
+        {draft && <LivePreviewListener />}
+
+        <AuditTemplate post={post} />
       </article>
     )
   }

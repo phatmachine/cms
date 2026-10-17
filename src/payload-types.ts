@@ -114,10 +114,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    postsPage: PostsPage;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    postsPage: PostsPageSelect<false> | PostsPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -317,11 +319,11 @@ export interface Post {
   id: string;
   title: string;
   /**
-   * Switches this post to the "Exit Big Tech" long-form editorial template.
+   * Switches this post to a long-form editorial template: "Exit Guide" (Exit Big Tech) or "Audit" (sovereignty audit scorecard).
    */
-  postType: 'standard' | 'exitGuide';
+  postType: 'standard' | 'exitGuide' | 'audit';
   /**
-   * Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header shows a solid teal panel instead.
+   * Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header uses the same default.
    */
   heroImage?: (string | null) | Media;
   content?: {
@@ -370,6 +372,14 @@ export interface Post {
     };
     subject?: {
       label?: string | null;
+      /**
+       * The primary app's logo (SVG or PNG, ideally transparent). Shown under the label.
+       */
+      logo?: (string | null) | Media;
+      /**
+       * Fixed display width. It never exceeds the label column, so it shrinks on narrow screens.
+       */
+      logoWidth?: number | null;
       /**
        * Select one phrase and bold it for emphasis.
        */
@@ -439,7 +449,7 @@ export interface Post {
           rank?: string | null;
           description: string;
           /**
-           * Optional banner. Keep it free of logos, wordmarks and text — the logo has its own field, and the name and description sit on a solid panel beside the banner, overlapping about a fifth of one edge, so keep the focal point in the middle. Empty = typographic slab (name set large on warm ground).
+           * Optional banner. Keep it free of logos, wordmarks and text — the logo has its own field, and the name and description sit on a solid panel beside the banner, overlapping about a fifth of one edge, so keep the focal point in the middle. Empty = the site default (/media/hdr-generic.jpg).
            */
           image?: (string | null) | Media;
           difficulty: '2' | '3' | '4' | '5';
@@ -497,6 +507,119 @@ export interface Post {
      */
     carouselCategoryOverride?: (string | null) | Category;
     carouselLimit?: number | null;
+  };
+  /**
+   * Only used when Post Type (sidebar) is "Audit". The scorecard, verdict, tests and sources all read from these fields.
+   */
+  audit?: {
+    serviceName?: string | null;
+    serviceDescriptor?: string | null;
+    serviceCategory?: string | null;
+    operator?: string | null;
+    country?: string | null;
+    version?: number | null;
+    /**
+     * The services readers would be leaving, e.g. Gmail, Outlook.
+     */
+    alternativeTo?: string[] | null;
+    /**
+     * Applied mechanically from the tests below, never rounded up. Saving is blocked if the tier is more favourable than the tests allow.
+     */
+    verdict?: ('reject' | 'notRecommended' | 'recommendWithCaveats' | 'recommend') | null;
+    unverified?: boolean | null;
+    /**
+     * Twelve words or fewer, drawn from the strongest case against. Shown large under the title.
+     */
+    takeaway?: string | null;
+    checkedAt?: string | null;
+    /**
+     * Verdicts expire after six months, or at once on a sale or terms change. The page shows a banner once this date passes.
+     */
+    recheckBy?: string | null;
+    /**
+     * Exactly what was audited.
+     */
+    scope?: string | null;
+    /**
+     * The verdict and the findings that decided it. Every sentence ends with its [S#] source.
+     */
+    summary?: string | null;
+    /**
+     * One row per test, in order. A test with no verifiable evidence is UNVERIFIED or a FLAG, never a PASS.
+     */
+    tests?:
+      | {
+          key: 'independence' | 'usReach' | 'privacy' | 'military' | 'law' | 'rightToLeave';
+          result: 'pass' | 'flag' | 'fail' | 'unverified';
+          /**
+           * Six words or fewer, factual, no adjectives of judgement. Shown beside the ring.
+           */
+          headline?: string | null;
+          /**
+           * Every sentence ends with its [S#] source.
+           */
+          finding: string;
+          /**
+           * Flags only: a mitigation the reader can apply.
+           */
+          readerCanDo?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    strongestCaseAgainst?: string | null;
+    companySays?: string | null;
+    notesForReaders?: string | null;
+    whatWouldChange?: string | null;
+    /**
+     * From the summary block; the importer checks them against the sources table.
+     */
+    sourceStats?: {
+      total?: number | null;
+      primary?: number | null;
+      readInFull?: number | null;
+      partial?: number | null;
+      rtmResearch?: number | null;
+      singleSource?: number | null;
+      needsConfirmation?: number | null;
+    };
+    /**
+     * The sources table. Ids (S1, S2…) are what the findings cite.
+     */
+    sources?:
+      | {
+          sid: string;
+          label: string;
+          url?: string | null;
+          publisher?: string | null;
+          type?: string | null;
+          /**
+           * As shown by the source, or "No date shown".
+           */
+          published?: string | null;
+          howRead?: string | null;
+          status?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Method, dates, right of reply, conflict of interest, corrections, checklist and search sweep. Shown under a collapsed "Integrity record" heading.
+     */
+    integrityRecord?: string | null;
+    /**
+     * Verbatim at the end of every audit.
+     */
+    disclaimer?: string | null;
+    rightOfReply?: ('not-yet-sent' | 'sent' | 'replied' | 'declined' | 'no-reply') | null;
+    publicationReady?: boolean | null;
+    /**
+     * Open integrity-checklist items. Internal: never shown on the page.
+     */
+    blocking?:
+      | {
+          item: string;
+          id?: string | null;
+        }[]
+      | null;
   };
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
@@ -2110,6 +2233,8 @@ export interface PostsSelect<T extends boolean = true> {
           | T
           | {
               label?: T;
+              logo?: T;
+              logoWidth?: T;
               statement?: T;
               specs?:
                 | T
@@ -2174,6 +2299,72 @@ export interface PostsSelect<T extends boolean = true> {
         carouselHeading?: T;
         carouselCategoryOverride?: T;
         carouselLimit?: T;
+      };
+  audit?:
+    | T
+    | {
+        serviceName?: T;
+        serviceDescriptor?: T;
+        serviceCategory?: T;
+        operator?: T;
+        country?: T;
+        version?: T;
+        alternativeTo?: T;
+        verdict?: T;
+        unverified?: T;
+        takeaway?: T;
+        checkedAt?: T;
+        recheckBy?: T;
+        scope?: T;
+        summary?: T;
+        tests?:
+          | T
+          | {
+              key?: T;
+              result?: T;
+              headline?: T;
+              finding?: T;
+              readerCanDo?: T;
+              id?: T;
+            };
+        strongestCaseAgainst?: T;
+        companySays?: T;
+        notesForReaders?: T;
+        whatWouldChange?: T;
+        sourceStats?:
+          | T
+          | {
+              total?: T;
+              primary?: T;
+              readInFull?: T;
+              partial?: T;
+              rtmResearch?: T;
+              singleSource?: T;
+              needsConfirmation?: T;
+            };
+        sources?:
+          | T
+          | {
+              sid?: T;
+              label?: T;
+              url?: T;
+              publisher?: T;
+              type?: T;
+              published?: T;
+              howRead?: T;
+              status?: T;
+              id?: T;
+            };
+        integrityRecord?: T;
+        disclaimer?: T;
+        rightOfReply?: T;
+        publicationReady?: T;
+        blocking?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
       };
   relatedPosts?: T;
   categories?: T;
@@ -2687,6 +2878,22 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * Settings for the /posts index page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "postsPage".
+ */
+export interface PostsPage {
+  id: string;
+  /**
+   * An image, or an MP4 video (plays muted on a loop). Empty = the site default (/api/media/file/hdr-generic.jpg).
+   */
+  backgroundMedia?: (string | null) | Media;
+  backgroundOpacity?: number | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
@@ -2770,6 +2977,17 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "postsPage_select".
+ */
+export interface PostsPageSelect<T extends boolean = true> {
+  backgroundMedia?: T;
+  backgroundOpacity?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -13,7 +13,7 @@ Exit Big Tech
 Leaving Snapchat? A parent's guide to talking with your child, saving their Memories and deleting the account, with Common Sense and Kinzoo.
 
 ## meta.status
-draft
+published
 
 ## hero.eyebrow
 Exit Big Tech // Guide No. 023 // Social
@@ -275,3 +275,6 @@ Video → CuriosityStream | I'm Leaving YouTube
 
 ## archive.04
 Email → Proton Mail | I'm Leaving Gmail
+
+## meta.video
+vid-hdr-09-privacy.mp4

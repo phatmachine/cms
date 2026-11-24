@@ -13,7 +13,7 @@ Exit Big Tech
 Leaving X? Request your archive, take your following list and delete the account in five steps, with Mastodon and Bluesky to try.
 
 ## meta.video
-green_smoke_loop.mp4
+vid-hdr-14-x-twitter.mp4
 
 ## meta.heroImage
 hdr-rethink-x-1.jpg

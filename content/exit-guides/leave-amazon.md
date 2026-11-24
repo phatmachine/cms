@@ -173,3 +173,9 @@ AI → Proton Lumo | I'm Leaving ChatGPT
 
 ## archive.04
 Messaging → Signal | I'm Leaving WhatsApp
+
+## meta.status
+published
+
+## meta.video
+vid-hdr-03-america-big-tech.mp4

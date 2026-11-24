@@ -1,0 +1,3 @@
+Prompt: A pop art style digital illustration of a young Black man covering his face with both hands in a facepalm or overwhelmed gesture. Flat bright cyan turquoise background (#00CDE5). High-contrast comic book halftone dot texture with prominent pink and magenta shading on his arms and face. Bold black ink outlines, vintage screen-print aesthetic. He has short afro textured hair or locs, wearing a loose white graphic t-shirt. Minimalist composition, centered subject, retro comic book print art style. --ar 16:9
+
+Sample image attached for guidance only

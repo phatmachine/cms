@@ -173,3 +173,9 @@ Shopping → Back Market | I'm Leaving Amazon
 
 ## archive.04
 Email → Proton Mail | I'm Leaving Gmail
+
+## meta.status
+published
+
+## meta.video
+vid-hdr-09-privacy.mp4

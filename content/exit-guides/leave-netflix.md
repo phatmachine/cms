@@ -173,3 +173,9 @@ Subscriptions → MUBI | I'm Leaving Amazon Prime
 
 ## archive.04
 Email → Proton Mail | I'm Leaving Gmail
+
+## meta.status
+published
+
+## meta.video
+vid-hdr-07-netflix-puppet.mp4

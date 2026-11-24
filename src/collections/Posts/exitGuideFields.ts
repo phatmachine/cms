@@ -91,6 +91,29 @@ export const exitGuideTab: Tab = {
           admin: { placeholder: 'The Subject [01]' },
         },
         {
+          name: 'logo',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'App logo',
+          admin: {
+            description:
+              "The primary app's logo (SVG or PNG, ideally transparent). Shown under the label.",
+          },
+        },
+        {
+          name: 'logoWidth',
+          type: 'number',
+          label: 'Logo width (px)',
+          defaultValue: 160,
+          min: 40,
+          max: 600,
+          admin: {
+            description:
+              'Fixed display width. It never exceeds the label column, so it shrinks on narrow screens.',
+            condition: (_, siblingData) => Boolean(siblingData?.logo),
+          },
+        },
+        {
           name: 'statement',
           type: 'richText',
           label: 'Indictment statement',
@@ -192,7 +215,7 @@ export const exitGuideTab: Tab = {
           relationTo: 'media',
           admin: {
             description:
-              'Optional banner. Keep it free of logos, wordmarks and text — the logo has its own field, and the name and description sit on a solid panel beside the banner, overlapping about a fifth of one edge, so keep the focal point in the middle. Empty = typographic slab (name set large on warm ground).',
+              'Optional banner. Keep it free of logos, wordmarks and text — the logo has its own field, and the name and description sit on a solid panel beside the banner, overlapping about a fifth of one edge, so keep the focal point in the middle. Empty = the site default (/media/hdr-generic.jpg).',
           },
         },
         {
@@ -329,13 +352,15 @@ export const postTypeField: Field = {
   name: 'postType',
   type: 'select',
   admin: {
-    description: 'Switches this post to the "Exit Big Tech" long-form editorial template.',
+    description:
+      'Switches this post to a long-form editorial template: "Exit Guide" (Exit Big Tech) or "Audit" (sovereignty audit scorecard).',
     position: 'sidebar',
   },
   defaultValue: 'standard',
   options: [
     { label: 'Standard', value: 'standard' },
     { label: 'Exit Guide', value: 'exitGuide' },
+    { label: 'Audit', value: 'audit' },
   ],
   required: true,
 }

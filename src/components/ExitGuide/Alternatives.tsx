@@ -1,7 +1,8 @@
-import type { Media as MediaType, Post } from '@/payload-types'
+import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import { Reveal } from '@/components/Reveal'
+import { resolvePostImage } from '@/utilities/defaultPostImage'
 import { hasJurisdictionFlag } from '@/utilities/jurisdictionFlags'
 import { cn } from '@/utilities/ui'
 import React from 'react'
@@ -39,7 +40,7 @@ export const Alternatives: React.FC<AlternativesProps> = ({ altsIntro, altsLabel
         </Reveal>
         {altsIntro && (
           <Reveal
-            className="col-span-12 font-rtm-meshed font-black text-[2.6vw] leading-[1.2] tracking-[0.01em] text-rtm-umber uppercase max-sm:text-[6vw] md:col-span-9 md:col-start-5"
+            className="col-span-12 font-rtm-meshed font-black text-[2.6vw] leading-[1.2] tracking-[0.01em] text-black uppercase max-sm:text-[6vw] md:col-span-9 md:col-start-5"
             delay={0.1}
           >
             {altsIntro}
@@ -52,7 +53,8 @@ export const Alternatives: React.FC<AlternativesProps> = ({ altsIntro, altsLabel
           const reversed = index % 2 === 1
           const tilt = reversed ? 1.2 : -1.2
           const filled = Number(alt.difficulty)
-          const image = typeof alt.image === 'object' ? (alt.image as MediaType) : null
+          // No image attached: fall back to the site default (hdr-generic.jpg).
+          const image = resolvePostImage(alt.image)
           const hasFlag = hasJurisdictionFlag(alt.country)
 
           return (
@@ -73,25 +75,12 @@ export const Alternatives: React.FC<AlternativesProps> = ({ altsIntro, altsLabel
                 )}
                 style={{ transform: `rotate(${tilt}deg)` }}
               >
-                {image ? (
-                  <div
-                    className="absolute inset-0 [filter:sepia(0.35)_saturate(0.9)] hover:scale-[1.03] hover:[filter:none]"
-                    style={{ transition: `filter 0.6s ${EASE}, transform 1.2s ${EASE}` }}
-                  >
-                    <Media fill imgClassName="object-cover" resource={image} />
-                  </div>
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-[6vw] text-center">
-                    {alt.tagline && (
-                      <div className="mb-6 font-rtm-mono-label text-[11px] tracking-[0.25em] text-rtm-accent uppercase">
-                        {alt.tagline}
-                      </div>
-                    )}
-                    <div className="w-full max-w-full text-pretty break-words font-rtm-display text-[9vw] leading-[0.85] font-black tracking-[-0.05em] text-rtm-fg uppercase">
-                      {alt.name}
-                    </div>
-                  </div>
-                )}
+                <div
+                  className="absolute inset-0 [filter:sepia(0.35)_saturate(0.9)] hover:scale-[1.03] hover:[filter:none]"
+                  style={{ transition: `filter 0.6s ${EASE}, transform 1.2s ${EASE}` }}
+                >
+                  <Media fill imgClassName="object-cover" resource={image} />
+                </div>
               </div>
 
               <Reveal

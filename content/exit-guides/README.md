@@ -190,7 +190,7 @@ alternatives:                  # required, at least 1, up to 4
     tagline: "Encrypted Mail · Geneva"
     rank: "[001] Recommended First Move"
     description: "..."
-    image: proton-slab.jpg     # optional — omit for a typographic slab
+    image: proton-slab.jpg     # optional — omit to use the default hdr-generic.jpg
     difficulty: 2               # 2–5
     ctaLabel: Make The Switch
     referralUrl: "https://proton.me/mail"   # required

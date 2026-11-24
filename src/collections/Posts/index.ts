@@ -15,6 +15,7 @@ import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { auditTab } from './auditFields'
 import { exitGuideTab, postTypeField } from './exitGuideFields'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -83,7 +84,7 @@ export const Posts: CollectionConfig<'posts'> = {
               type: 'upload',
               admin: {
                 description:
-                  'Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header shows a solid teal panel instead.',
+                  'Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header uses the same default.',
               },
               relationTo: 'media',
             },
@@ -105,7 +106,7 @@ export const Posts: CollectionConfig<'posts'> = {
               label: false,
               validate: (value, { data }) => {
                 const postType = (data as { postType?: string } | undefined)?.postType
-                if (postType === 'exitGuide') return true
+                if (postType === 'exitGuide' || postType === 'audit') return true
                 return value ? true : 'Content is required'
               },
             },
@@ -113,6 +114,7 @@ export const Posts: CollectionConfig<'posts'> = {
           label: 'Content',
         },
         exitGuideTab,
+        auditTab,
         {
           fields: [
             {

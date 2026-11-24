@@ -12,6 +12,7 @@
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "ii": "cross-env NODE_OPTIONS=--no-deprecation pnpm --ignore-workspace install",
+    "import:audits": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/import-audits.ts",
     "import:exit-guides": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/import-exit-guides.ts",
     "import:seo-descriptions": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/sync-seo-descriptions.ts",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",

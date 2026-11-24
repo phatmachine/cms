@@ -18,22 +18,37 @@ type SubjectProps = {
  * inverted-emphasis treatment.
  */
 export const Subject: React.FC<SubjectProps> = ({ subject }) => {
-  const { label, specs, statement } = subject
+  const { label, logoWidth, specs, statement } = subject
+  const logo = typeof subject.logo === 'object' ? subject.logo : null
 
   return (
     <section
       className="grid grid-cols-12 gap-6 bg-rtm-bg px-[8vw] pt-40 pb-[120px]"
       id="subject"
     >
-      <Reveal className="col-span-12 border-t border-rtm-accent pt-3 font-rtm-mono-label text-rtm-label tracking-label text-rtm-accent uppercase md:col-span-3">
-        {label}
-      </Reveal>
+      <div className="col-span-12 md:col-span-3">
+        <Reveal className="border-t border-rtm-accent pt-3 font-rtm-mono-label text-rtm-label tracking-label text-rtm-accent uppercase">
+          {label}
+        </Reveal>
+
+        {logo?.url && (
+          <Reveal className="mt-[60px] flex justify-center" delay={0.1}>
+            {/* Plain <img>: SVGs bypass next/image optimisation; width is capped to the column. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt={logo.alt || ''}
+              src={logo.url}
+              style={{ width: logoWidth || 160, maxWidth: '100%', height: 'auto' }}
+            />
+          </Reveal>
+        )}
+      </div>
 
       <div className="col-span-12 md:col-span-9 md:col-start-5">
         {statement && (
           <Reveal delay={0.1}>
             <RichText
-              className="font-rtm-meshed text-[3.4vw] leading-[1.05] tracking-[0.01em] text-rtm-magenta uppercase max-sm:text-[7vw] [&_p]:m-0 [&_p]:font-black [&_strong]:font-bold"
+              className="font-rtm-meshed text-[3.4vw] leading-[1.05] tracking-[0.01em] text-black uppercase max-sm:text-[7vw] [&_p]:m-0 [&_p]:font-black [&_strong]:font-bold"
               data={statement}
               enableGutter={false}
               enableProse={false}

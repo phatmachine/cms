@@ -16,7 +16,8 @@ export const InitTheme: React.FC = () => {
       var hasImplicitPreference = typeof mql.matches === 'boolean'
 
       if (hasImplicitPreference) {
-        return mql.matches ? 'dark' : 'light'
+        // Brand register has no dark mode (see tokens.css): always light.
+        return 'light'
       }
 
       return null

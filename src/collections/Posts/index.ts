@@ -84,7 +84,7 @@ export const Posts: CollectionConfig<'posts'> = {
               type: 'upload',
               admin: {
                 description:
-                  'Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header shows a solid teal panel instead.',
+                  'Optional. If left empty, carousels, cards and link previews use the SEO tab image, then the site default (/media/hdr-generic.jpg). An exit guide’s own header uses the same default.',
               },
               relationTo: 'media',
             },

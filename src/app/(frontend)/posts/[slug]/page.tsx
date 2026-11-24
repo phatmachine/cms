@@ -104,7 +104,10 @@ export default async function Post({ params: paramsPromise }: Args) {
   }
 
   return (
-    <article className="pt-16 pb-16">
+    // Cream, not <body>'s bg-background (near-black under the dark theme); see the
+    // exit-guide branch above. The --tw-prose overrides cancel RichText's
+    // dark:prose-invert, which would otherwise put light text on the cream.
+    <article className="bg-rtm-bg text-rtm-fg pt-16 pb-16">
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -117,7 +120,11 @@ export default async function Post({ params: paramsPromise }: Args) {
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
           {post.content && (
-            <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
+            <RichText
+              className="max-w-[48rem] mx-auto dark:[--tw-prose-body:var(--rtm-fg)] dark:[--tw-prose-headings:var(--rtm-fg)] dark:[--tw-prose-bold:var(--rtm-fg)] dark:[--tw-prose-links:var(--rtm-fg)] dark:[--tw-prose-bullets:var(--rtm-fg)] dark:[--tw-prose-counters:var(--rtm-fg)] dark:[--tw-prose-quotes:var(--rtm-fg)] dark:[--tw-prose-code:var(--rtm-fg)] dark:[--tw-prose-captions:var(--rtm-fg)]"
+              data={post.content}
+              enableGutter={false}
+            />
           )}
           {post.relatedPosts && post.relatedPosts.length > 0 && (
             <RelatedPosts
